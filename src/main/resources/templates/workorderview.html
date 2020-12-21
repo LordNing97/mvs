@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-CN" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>自定义工单视图</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <link href="../static/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/select2/select2.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-fileinput/css/fileinput.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
+    <link href="../static/global/css/plugins.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet"/>
+    <link href="../static/global/css/components-rounded.css" rel="stylesheet"/>
+    <link href="../static/admin/css/layout.css" rel="stylesheet"/>
+    <link href="../static/admin/css/custom.css" rel="stylesheet"/>
+    <link href="../static/admin/css/themes/default.css" rel="stylesheet" id="style_color">
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+<input id="userID" name="userID" type="hidden" value="30da7b29-700b-4310-adc5-1ee224a5b4a6" />
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-space" id="spaceMenu">
+
+
+
+            <a href="/servicespace/startpage" class="space-logo middle"><img src="../static/admin/img/logo.png" /></a>
+            <div class="btn-group esh-space-sel">
+                <a href="javascript:void(0)" class="back-link name-wrap" data-toggle="dropdown" aria-expanded="false">
+
+                    <span class="username username-hide-on-mobile">北京万维信达科技有限公司</span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu esh-pub-menu" style="width:270px">
+                    <li class="clearfix">
+                        <a href="/organization/servicespace/changeservicespace?serviceSpaceId=fd5c440d-f982-41e5-aa5e-5b86928532ef" class="">
+                            <span class="fa fa-check list-cell-select"></span>
+                            <span class="space-name esh-txtellipsis" title="1">1</span>
+                            <span class="list-cell-expiration">已到期</span>
+                        </a>
+                    </li>
+                    <li class="clearfix">
+                        <a href="/organization/servicespace/changeservicespace?serviceSpaceId=b45dc42c-1abb-4103-b6bf-87dc9bba082c" class="active">
+                            <span class="fa fa-check list-cell-select"></span>
+                            <span class="space-name esh-txtellipsis" title="北京万维信达科技有限公司">北京万维信达科技有限公司</span>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/organization/servicespace" class="text-center">
+                            空间管理
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <div class="pull-right">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-extended dropdown-tasks">
+                        <a href="/home/download" target="_blank" class="dropdown-toggle" title="手机APP">
+                            <i class="icon-screen-smartphone"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown dropdown-extended dropdown-tasks">
+                        <a href="/home/help" target="_blank" class="dropdown-toggle" title="获取帮助">
+                            <i class="icon-question"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+
+
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true" title="未读消息">
+                            <i class="icon-bell"></i>
+                            <span class="badge badge-default">
+            4
+        </span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li class="external">
+                                <h3> 消息通知<span class="bold">(4)</span></h3>
+                            </li>
+                            <li>
+                                <ul class="dropdown-menu-list" data-handle-color="#637283">
+                                    <li>
+                                        <a href="/organization/message?serviceSpaceId=fd5c440d-f982-41e5-aa5e-5b86928532ef">
+                            <span class="details">
+                                1
+                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/organization/message?serviceSpaceId=b45dc42c-1abb-4103-b6bf-87dc9bba082c">
+                                            <span class="badge badge-danger pull-right">4</span>
+                                            <span class="details">
+                                                北京万维信达科技有限公司
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END TODO DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+
+
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" onerror="this.src = '../static/admin/img/def_user_icon.jpg'" src="../static/admin/img/def_user_icon.jpg" />
+                            <span class="username username-hide-on-mobile">郝博闻</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu esh-pub-menu esh-user-menu" style="width:260px">
+                            <li class="user clearfix">
+                                <div class="col-md-4">
+                                    <img alt="" class="img-circle" onerror="this.src = '../static/admin/img/def_user_icon.jpg'" src="../static/admin/img/def_user_icon.jpg" />
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="info">
+                                        <span>郝博闻</span>
+                                        <span class="label label-orange">企业版</span>
+                                        <p>万维信达</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/organization/servicespace">
+                                    <i class="icon-drawer"></i>服务空间
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/organization/organization">
+                                    <i class="icon-layers"></i>企业信息
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/organization/staff">
+                                    <i class="icon-users"></i>员工资料
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/organization/theme/edit">
+                                    <i class="icon-star"></i>
+                                    主题设置
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/organization/servicespace/paidproducts">
+                                    <i class="icon-credit-card"></i>产品付费
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/organization/servicespace/exclusiveconsultant">
+                                    <i class="icon-earphones-alt"></i>
+                                    专属顾问
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/organization/personal">
+                                    <i class="icon-user"></i>个人信息
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/organization/personal/editpassword">
+                                    <i class="icon-lock"></i>修改密码
+                                </a>
+                            </li>
+
+                            <li class="last">
+                                <a href="/account/logout">
+                                    <i class="icon-logout"></i>退出系统
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix"></div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper" id="leftmenue">
+        <div class="page-sidebar navbar-collapse collapse esh-fixed-sidebar">
+            <!-- BEGIN SIDEBAR MENU -->
+            <ul class="page-sidebar-menu page-sidebar-menu-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                <li class="sidebar-toggler-wrapper">
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <div class="sidebar-toggler">
+                    </div>
+                    <!-- END SIDEBAR TOGGLER BUTTON -->
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/index'">
+                        <i class="glyphicon glyphicon-home"></i>
+                        <span class="title">首页</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/workorder'">
+                        <i class="fa fa-file-text"></i>
+                        <span class="title">工单管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/stockmanage'">
+                        <i class="icon-puzzle bold"></i>
+                        <span class="title">备件管理</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/serviceperson'">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span class="title">人员管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="/servicespace/customer">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        <span class="title">客户管理</span>
+                    </a>
+                </li>
+
+                <li class="start active open">
+                    <a href="/servicespace/systemsetting">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        <span class="title">系统设置</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </div>
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row">
+
+
+                <div class="col-md-12">
+
+                    <div class="side-menu-sidebar ">
+                        <div class="scroller">
+                            <div class="portlet portlet-nav">
+                                <div class="portlet-title">
+                                    <div class="caption" data-toggle="collapse" data-target="#lst1">
+                                        <span class="uppercase">工单设置</span>
+                                        <a href="javascript:;" class="caption-helper visible-sm-inline-block visible-xs-inline-block">单击展示列表</a>
+                                    </div>
+                                    <div class="btn-group pull-right esh-set-btn-group">
+                                        <a href="javascript:;" class="esh-set-group" title="返回" data-hover="" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa  fa-reply  back"></i>
+                                        </a>
+                                        <ul class="esh-pub-menu dropdown-menu pull-right">
+                                            <li>
+                                                <a onclick="javascript:location.href='workorder'">
+                                                    返回工单管理
+                                                </a>
+                                                <a href="/servicespace/systemsetting">
+                                                    返回设置主页
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="portlet-body side-menu-project-list-content" id="lst1">
+                                    <div class="side-menu-project-list" data-always-visible="1" data-rail-visible1="1">
+                                        <div class="esh-nav-child">
+                                            <div class="header">
+                                                <span><b>|</b>工单视图</span>
+                                            </div>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li class="active">
+                                                    <a href=/servicespace/workorderview>自定义工单视图</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="esh-nav-child">
+                                            <div class="header">
+                                                <span><b>|</b>工单设置</span>
+                                            </div>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li class="">
+                                                    <a href="/servicespace/servicecategory">工单类型</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="/servicespace/customfield">自定义工单字段</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="/servicespace/workordertemplate">自定义工单模板</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="esh-nav-child">
+                                            <div class="header">
+                                                <span><b>|</b>工单处理</span>
+                                            </div>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li class="">
+                                                    <a href="/servicespace/servicemode">服务模式</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href=/servicespace/workorderflowrule>服务流程与规则</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href=/servicespace/autosetting/acceptrule>服务自动化</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="/servicespace/officehours">工作时间</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="side-menu-content">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="page-title">
+                                    自定义工单视图
+                                    <div class="input-group pull-right">
+                                        <a class="btn btn-default" href="javascript:create();">
+                                            <i class="fa font-12 fa-plus "></i>
+                                            新建视图
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="esh-tabbable-individual tabbable-custom ">
+                                    <div class="tip-info">
+                                        <p>工单视图是满足特定查询条件的工单列表。公有视图是组织范围内公用的工单视图；个人视图是当前用户创建且只有当前用户可用的工单视图。</p>
+                                    </div>
+
+                                    <ul class="nav nav-tabs margin-top-30">
+                                        <li class="active">
+                                            <a href="javascript:void(0)" onclick="changetab('1')" data-toggle="tab" aria-expanded="false">
+                                                公有视图
+                                            </a>
+                                            <input type="hidden" value="1" id="view_type" />
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:void(0)" onclick="changetab('2')" data-toggle="tab" aria-expanded="false">
+                                                个人视图
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content clear-padding-top">
+                                        <div class="esh-field-column-header">
+                                            <span class="col-xs-3">视图名称</span>
+                                            <span class="col-xs-2">可见范围</span>
+                                            <span class="col-xs-3">视图描述</span>
+                                            <span class="self-field">定义类型</span>
+                                            <span class="col-xs-2">操作</span>
+
+                                            <span class="pull-right text-right padding-right-10">
+                                                是否启用
+                                            </span>
+                                        </div>
+                                        <div id="filterlst">
+                                            <ul class="esh-field-list ui-sortable">
+                                                <li>
+                                                    <span class="col-xs-3">
+                                                        <i class="fa fa-bars ui-sortable-handle"></i>
+                                                        所有工单
+                                                    </span>
+                                                    <span class="col-xs-2">所有可见</span>
+                                                    <span class="col-xs-3 esh-txtellipsis des">所有工单</span>
+                                                    <span class="self-field">系统定义</span>
+                                                    <div class="col-md-2 col-xs-2">
+                                                        <button onclick="editRecord('19083')" class="btn btn-default btn-xs black" style="padding: 2px 7px;">
+                                                            编辑
+                                                        </button>
+                                                    </div>
+                                                    <div class="esh-control-bar">
+                                                        <div class="common-row pull-right  margin-left-5">
+                                                            <div class="cell-right">
+                                                                <span data-bind="19083" class="switch-on" style="zoom: 0.8; border-color: rgb(100, 189, 99); box-shadow: rgb(100, 189, 99) 0px 0px 0px 16px inset; background-color: rgb(100, 189, 99);" onclick="changeEnabled(this, '19083')">
+                                                                    <span class="slider"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span class="col-xs-3">
+                                                        <i class="fa fa-bars ui-sortable-handle"></i>
+                                                        今日新建工单
+                                                    </span>
+                                                    <span class="col-xs-2">所有可见</span>
+                                                    <span class="col-xs-3 esh-txtellipsis des">今日新建工单</span>
+                                                    <span class="self-field">系统定义</span>
+                                                    <div class="col-md-2 col-xs-2">
+                                                        <button onclick="editRecord('19083')" class="btn btn-default btn-xs black" style="padding: 2px 7px;">
+                                                            编辑
+                                                        </button>
+                                                    </div>
+                                                    <div class="esh-control-bar">
+                                                        <div class="common-row pull-right  margin-left-5">
+                                                            <div class="cell-right">
+                                                                <span data-bind="19083" class="switch-off" style="zoom: 0.8; border-color: rgb(100, 189, 99); box-shadow: rgb(100, 189, 99) 0px 0px 0px 16px inset; background-color: rgb(100, 189, 99);" onclick="changeEnabled(this, '19083')">
+                                                                    <span class="slider"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                            <!--暂无个人视图-->
+                                            <!--<div class="esh-nodataNote clearfix" style="height: 280px;">-->
+                                                <!--<div class="esh-nodata-tip">-->
+                                                    <!--<i class="fa fa-file-text-o"></i>-->
+                                                    <!--<div class="con">暂无个人视图</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTEN -->
+        </div>
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+<div class="clearfix">
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+</div>
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="../static/global/plugins/respond.min.js"></script>
+<script src="../static/global/plugins/excanvas.min.js"></script>
+<![endif]-->
+<script src="../static/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="../static/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
+<script src="../static/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript" ></script>
+
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script type="text/javascript" src="../static/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/select2/select2_locale_zh-CN.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/location.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/fileinput.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/honeySwitch.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script src="../static/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/layout.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/theme.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/jquery.signalR-2.2.0.js" type="text/javascript"></script>
+<script src="../static/signalr/hubs" type="text/javascript"></script>
+<script type="text/javascript" src="../static/admin/scripts/custom.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        $.ajaxSetup({ cache: false });//设置缓存策略
+        Metronic.init(); // init metronic core componets
+        Layout.init(); // init layout
+
+        if ($(".side-menu-sidebar").length > 0) { initSideMenu(); }
+        if ($(".esh-filter-sidebar").length > 0) { initFlterMenu(); }
+        if ($(".scroll-fixed").length > 0) {
+            $(".scroll-fixed").each(function () {
+                var i = 0;
+                var mouseWheel = document.getElementsByClassName('scroll-fixed')[i];
+                if (mouseWheel.addEventListener) {
+                    mouseWheel.addEventListener('DOMMouseScroll', function (event) {
+                        this.scrollTop = this.scrollTop - (event.wheelDelta ? event.wheelDelta : -event.detail * 10);
+                        return false;
+                    },false)
+                }
+                document.getElementsByClassName('scroll-fixed')[i].onmousewheel = function (event) {
+                    if (!event) event = window.event;
+                    this.scrollTop = this.scrollTop - (event.wheelDelta ? event.wheelDelta : -event.detail * 10);
+                    return false;
+                }
+                i++;
+            })
+        }
+
+        //侧栏收起展开样式保存
+        $('body').on('click', '.sidebar-toggler', function (e) {
+            $.ajax({
+                url: "/organization/personal/savesidebaroption",
+                type: "POST",
+                data: { "Option": $.cookie("sidebar_closed") }
+            });
+        });
+
+        //接收服务端推送的消息
+        var chat = $.connection.messageHub;
+        if (chat) {
+            chat.client.recieveMessage = function (message) {
+                var userID = $("#userID").val();
+                //异步获取提醒消息
+                if (message && message.Content && message.Content.indexOf(userID) >= 0) {
+                    $.ajax({
+                        url: "/organization/message/getmessagemenu",
+                        type: "Get",
+                        success: function (data) {
+                            $("#header_notification_bar").html(data);
+                        },
+                        error: function (data) { showException(data); }
+                    });
+
+                    if ($("#pendwork").length > 0) {
+                        $.ajax({
+                            url: "/servicespace/startpage/pendworkorder",
+                            type: "Get",
+                            success: function (data) {
+                                $("#pendwork").html(data);
+                            },
+                            error: function (data) { showException(data); }
+                        })
+                    }
+
+                }
+            };
+
+            $.connection.hub.stop();//断开连接
+            $.connection.hub.start();//重新连接
+        }
+    });
+</script>
+<!-- BEGIN PAGE SELF SCRIPTS -->
+
+<script type="text/javascript">
+    var view_type = "1";
+    $(document).ready(function () {
+        view_type = $("#view_type").val();
+        //getdata();
+    });
+
+    //改变tab
+    function changetab(tabvalue) {
+        view_type = tabvalue;
+        // window.location.href = replaceParamVal("/servicespace/workorderview?view_type=", "view_type", view_type);
+        window.location.href = "/workorderview";
+    }
+
+    //改变URl地址
+    function replaceParamVal(oldUrl, paramName, replaceWith) {
+        var re = eval('/(' + paramName + '=)([^&]*)/gi');
+        var nUrl = oldUrl.replace(re, paramName + '=' + replaceWith);
+        return nUrl;
+    }
+
+    //新建
+    function create() { window.location = view_type == "1" ? "/servicespace/workorderview/createpublic" : "/servicespace/workorderview/createprivate"; }
+
+    //查询
+    function getdata() {
+        showLoading();
+        $.ajax({
+            url: view_type == "1" ? "/servicespace/workorderview/getpublic" : "/servicespace/workorderview/getprivate",
+            type: "GET",
+            success: function (data) {
+                hideLoading();
+                $("#filterlst").html(data);
+                honeySwitch.init();
+                InitSort();
+            },
+            error: function (data) { hideLoading(); showException(data); }
+        });
+    }
+
+    //编辑
+    function editRecord(id) {
+        if (view_type == "1") {
+            window.location = "/servicespace/workorderview/editpublic/" + id;
+        } else {
+            window.location = "/servicespace/workorderview/editprivate/" + id;
+        }
+    }
+
+    //删除
+    function deleteRecord(id) {
+        botbox.confirm("提示", "您确认删除吗?", function (result) {
+            if (result) {
+                showLoading();
+                $.ajax({
+                    url: view_type == "1" ? "/servicespace/workorderview/deletepublic" : "/servicespace/workorderview/deleteprivate",
+                    type: "POST",
+                    data: { "id": id },
+                    success: function (data) {
+                        hideLoading();
+                        if (data == "ok") {
+                            getdata();
+                            growlAlert.success("操作成功");
+
+                        } else {
+                            growlAlert.danger("操作失败");
+                        }
+                    },
+                    error: function (data) { hideLoading(); showException(data); }
+                });
+            }
+        });
+    }
+
+    //设置是否可用
+    function changeEnabled(obj, id) {
+        var isEnabled = true;
+        if (!$(obj).hasClass("switch-off")) {
+            isEnabled = false;
+        }
+        else {
+            isEnabled = true;
+        }
+
+        showLoading();
+        $.ajax({
+            url: view_type == "1" ? "/servicespace/workorderview/changepublicenabled" : "/servicespace/workorderview/changeprivateenabled",
+            type: "POST",
+            data: { "id": id, "isEnabled": isEnabled },
+            success: function (data) {
+                hideLoading();
+                if (data == "info") {
+                    growlAlert.info("至少启用一个公有视图");
+                    honeySwitch.showOn(obj)
+
+                }
+            },
+            error: function (data) { hideLoading(); showException(data); }
+        });
+    }
+
+    //排序
+    function InitSort() {
+        if (!jQuery().sortable) {
+            return;
+        }
+
+        $("#sort-list").sortable({
+            connectWith: "#sort-list li",
+            opacity: 1.0,
+            handle: '.fa-bars',
+            cursor: 'move',
+            coneHelperSize: true,
+            containment: 'parent',
+            forcePlaceholderSize: true,
+            tolerance: "pointer",
+            helper: "clone",
+            tolerance: "pointer",
+            revert: 250,
+            update: function (b, c) {
+                var ids = new Array();
+                $("#sort-list  li").each(function () {
+                    ids.push($(this).attr("id"));
+                });
+
+                $.ajax({
+                    url: view_type == "1" ? "/servicespace/workorderview/changepublicordernumber" : "/servicespace/workorderview/changeprivateordernumber",
+                    type: "post",
+                    data: { "ids": ids },
+                    success: function () {
+                        getdata();
+                    }
+                });
+            }
+        });
+    }
+</script>
+
+<!-- END PAGE SELF SCRIPTS -->
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

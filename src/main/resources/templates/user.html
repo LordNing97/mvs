@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-CN" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>用户管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <link href="../static/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/select2/select2.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-fileinput/css/fileinput.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
+    <link href="../static/global/css/plugins.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet"/>
+    <link href="../static/global/css/components-rounded.css" rel="stylesheet"/>
+    <link href="../static/admin/css/layout.css" rel="stylesheet"/>
+    <link href="../static/admin/css/custom.css" rel="stylesheet"/>
+    <link href="../static/admin/css/themes/default.css" rel="stylesheet" id="style_color">
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+<input id="userID" name="userID" type="hidden" value="30da7b29-700b-4310-adc5-1ee224a5b4a6" />
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-space" id="spaceMenu">
+
+
+            <a href="/servicespace/startpage" class="space-logo middle"><img src="../static/admin/img/logo.png"/></a>
+            <div class="btn-group esh-space-sel">
+                <a href="javascript:void(0)" class="back-link name-wrap" data-toggle="dropdown" aria-expanded="false">
+                    <span class="username username-hide-on-mobile">CRM后台管理系统</span>
+                </a>
+            </div>
+
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+           data-target=".navbar-collapse"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <div class="pull-right">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true"
+                           title="未读消息">
+                            <i class="icon-bell"></i>
+                            <span class="badge badge-default">
+                                4
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li class="external">
+                                <h3> 消息通知<span class="bold">(4)</span></h3>
+                            </li>
+                            <li>
+                                <ul class="dropdown-menu-list" data-handle-color="#637283">
+                                    <li>
+                                        <a href="/organization/message?serviceSpaceId=fd5c440d-f982-41e5-aa5e-5b86928532ef">
+                                            <span class="details">
+                                                1
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/organization/message?serviceSpaceId=b45dc42c-1abb-4103-b6bf-87dc9bba082c">
+                                            <span class="badge badge-danger pull-right">4</span> <span class="details">
+                                                美乐云购
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END TODO DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+
+
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" onerror="this.src = '../static//admin/img/def_user_icon.jpg'"
+                                 src="../static//admin/img/def_user_icon.jpg"/>
+                            <span class="username username-hide-on-mobile">郝博闻</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu esh-pub-menu esh-user-menu" style="width:260px">
+                            <li class="user clearfix">
+                                <div class="col-md-4">
+                                    <img alt="" class="img-circle"
+                                         onerror="this.src = '../static/admin/img/def_user_icon.jpg'"
+                                         src="../static//admin/img/def_user_icon.jpg"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="info">
+                                        <span>郝博闻</span>
+                                        <span class="label label-orange">企业版</span>
+                                        <p>美乐云购</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/organization/personal">
+                                    <i class="icon-user"></i>个人信息
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/organization/personal/editpassword">
+                                    <i class="icon-lock"></i>修改密码
+                                </a>
+                            </li>
+
+                            <li class="last">
+                                <a href="/account/logout">
+                                    <i class="icon-logout"></i>退出系统
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix"></div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper" id="leftmenue">
+        <div class="page-sidebar navbar-collapse collapse esh-fixed-sidebar">
+            <!-- BEGIN SIDEBAR MENU -->
+            <ul class="page-sidebar-menu page-sidebar-menu-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                <li class="sidebar-toggler-wrapper">
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <div class="sidebar-toggler">
+                    </div>
+                    <!-- END SIDEBAR TOGGLER BUTTON -->
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/index'">
+                        <i class="glyphicon glyphicon-home"></i>
+                        <span class="title">首页</span>
+                    </a>
+                </li>
+
+                <li class="start active open">
+                    <a onclick="javascript:location.href='/user'">
+                        <i class="fa fa-file-text"></i>
+                        <span class="title">用户管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/workorder'">
+                        <i class="fa fa-file-text"></i>
+                        <span class="title">订单管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/stockmanage'">
+                        <i class="icon-puzzle bold"></i>
+                        <span class="title">产品类型管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/serviceperson'">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span class="title">产品管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/customer'">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        <span class="title">客户管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/lotterysettings'">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        <span class="title">抽奖设置</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </div>
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="side-menu-sidebar ">
+                        <div class="scroller">
+                            <div class="portlet portlet-nav">
+                                <div class="portlet-title">
+                                    <div class="caption" data-toggle="collapse" data-target="#lst2">
+                                        <span class="uppercase">用户管理</span>
+                                        <a href="javascript:;" class="caption-helper visible-sm-inline-block visible-xs-inline-block">单击展示列表</a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body side-menu-project-list-content" id="lst2">
+                                    <div class="side-menu-project-list" data-always-visible="1" data-rail-visible1="1">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li class="active">
+                                                <a onclick="javascript:location.href='/serviceperson'">用户管理</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="btn-group pull-right esh-set-btn-group absolute">-->
+                            <!--<a href="javascript:;" title="返回" class="esh-set-group" data-toggle="dropdown" aria-expanded="false">-->
+                            <!--<i class="fa  fa-reply  back"></i>-->
+                            <!--</a>-->
+                            <!--<ul class="esh-pub-menu dropdown-menu pull-right">-->
+                            <!--<li>-->
+                            <!--<a href="/servicespace/systemsetting">-->
+                            <!--返回设置主页-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="esh-filter-sidebar">
+                        <div class="header"><b class="title">服务人员筛选</b> <a class="close" href="javascript:void(0)"></a></div>
+                        <div class="sidebar-wrap">
+                            <section class="content">
+                                <div class="tip clearfix"><i class="fa fa-filter" style="color:#999"></i> 筛选条件<a class="pull-right hidden clear-filter" href="javascript:void(0)" onclick="clearFilter()">清空筛选</a></div>
+                                <div class="form-group">
+                                    <label>所属网点</label>
+                                    <select id="select-network" class="form-control">
+                                        <option value="">请选择网点</option>
+                                        <option value="8ccc5342-5b0d-4ef0-b022-d081d685cf9b">万维信达分部4号</option>
+                                        <option value="d1eec2a7-d02f-4429-bf28-01a39984d7c8">万维信达分部3号</option>
+                                        <option value="5a5c7698-9d42-4fd2-9a03-96498bd2eb4b">万维信达分部2号</option>
+                                        <option value="0ae09199-6d30-491b-afec-c649944a5395">万维信达分部1号</option>
+                                        <option value="a61e0c34-46cc-4244-8aa2-255450ed740b">万维信达</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>网点类型</label>
+                                    <ul class="filter-option two clearfix">
+                                        <li>
+                                            <label>
+                                                <input name="type" type="checkbox" value="1" /><input name="type" type="hidden" value="false" />总部
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input name="type" type="checkbox" value="2" /><input name="type" type="hidden" value="false" />自建网点
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input name="type" type="checkbox" value="3" /><input name="type" type="hidden" value="false" />第三方服务商
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <input type="hidden" id="type_hide" value="" />
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+                    <div class="side-menu-content">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption title">
+                                    用户管理
+                                </div>
+                                <div class="input-group pull-right">
+                                    <div class="input-group input-medium ">
+                                        <input class="form-control" id="userName" maxlength="20" name="userName" placeholder="输入姓名..." type="text" value="" />
+                                        <span class="input-group-btn">
+                                <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="portlet-body">
+                                <div class="table-toolbar">
+                                    <div class="col-xs-8 clear-padding-left">
+                                        <a class="btn green" href="javascript:void(0)" onclick="createRecord()">新建</a>
+                                        <button class="btn green collapse" id="btnFilter">筛选</button>
+                                        <a class="filter-a clear-filter hidden" href="javascript:void(0)" onclick="clearFilter()"><i class="icon fa fa-trash"></i>清空筛选</a>
+
+                                    </div>
+                                    <div class="col-xs-4  clear-padding-right">
+                                        <div class="pull-right">
+                                            <div class="btn-group">
+                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                    更多操作&nbsp;<i class="fa fa-angle-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu pull-right" role="menu">
+                                                    <li>
+                                                        <a data-toggle="modal" href="javascript:void(0)" onclick="exportExcel()">Excel导出 </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="dataTable" class="dataTables_wrapper no-footer">
+                                    <div class="table-scrollable">
+                                        <table class="table table-striped dataTable table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th class="table-checkbox">
+                                                    <input class="magic-checkbox group-checkable" type="checkbox" name="layout" id="c0">
+                                                    <label for="c0"></label>
+                                                </th>
+                                                <th style="width: 25%;">
+                                                    姓名
+                                                </th>
+                                                <th style="min-width: 25%;">
+                                                    权限
+                                                </th>
+                                                <th style="min-width: 25%;">
+                                                    操作
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    <input class="magic-checkbox checkboxes" type="checkbox" name="ids" id="ca0a2433-ec23-4330-9bb2-afaea8bde8c6" value="ca0a2433-ec23-4330-9bb2-afaea8bde8c6">
+                                                    <label for="ca0a2433-ec23-4330-9bb2-afaea8bde8c6"></label>
+                                                </td>
+                                                <td>
+                                                    郝博闻
+                                                </td>
+                                                <td>
+                                                    系统管理员
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-default btn-xs black" onclick="Detail('ca0a2433-ec23-4330-9bb2-afaea8bde8c6')">
+                                                        <i class="fa fa-search"></i>
+                                                        查看
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    <input class="magic-checkbox checkboxes" type="checkbox" name="ids" id="0b42e3e0-b55e-476f-94c7-d497521b6a98" value="0b42e3e0-b55e-476f-94c7-d497521b6a98">
+                                                    <label for="0b42e3e0-b55e-476f-94c7-d497521b6a98"></label>
+                                                </td>
+                                                <td>
+                                                    小兰
+                                                </td>
+                                                <td>
+                                                    抽奖
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-default btn-xs black" onclick="Detail('ca0a2433-ec23-4330-9bb2-afaea8bde8c6')">
+                                                        <i class="fa fa-search"></i>
+                                                        查看
+                                                    </button>
+                                                    <button class="btn btn-default btn-xs black" onclick="Edit('0b42e3e0-b55e-476f-94c7-d497521b6a98')">
+                                                        <i class="fa fa-pencil"></i>
+                                                        编辑
+                                                    </button>
+                                                    <button class="btn btn-default btn-xs black" onclick="deleteRecord('0b42e3e0-b55e-476f-94c7-d497521b6a98')">
+                                                        <i class="fa fa-trash-o"></i>
+                                                        移除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite">
+                                                <label style="vertical-align: middle;">共3条</label>
+                                                <div class="btn-group pagesize dropup">
+                                                    <a href="javascript:void(0)" class="link name-wrap" data-toggle="dropdown" aria-expanded="false">
+                                                        <span data-val="10">10条/页&nbsp;</span>
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu esh-pub-menu">
+                                                        <li class="clearfix active">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="10">10条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="clearfix">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="20">20条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="clearfix">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="30">30条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="clearfix">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="40">40条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="clearfix">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="50">50条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <div class="dataTables_paginate paging_bootstrap_full_number">
+                                                <ul class="pagination">
+                                                    <li class="disabled prev">
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-angle-double-left"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="disabled prev">
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-angle-left"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="active">
+                                                        <a href="#" onclick="changePageIndex(1)">
+                                                            1
+                                                        </a>
+                                                    </li>
+                                                    <li class="disabled next">
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-angle-right"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="disabled next">
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-angle-double-right"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form action="/servicespace/serviceperson/get" data-ajax="true" data-ajax-begin="showLoading" data-ajax-complete="hideLoading" data-ajax-failure="showException" data-ajax-mode="replace" data-ajax-success="initTable" data-ajax-update="#dataTable" id="searchByRequest" method="post"><input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="The PageSize field is required." id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /></form>            </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="editDailog" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-modal-lg" id="editLgDailog" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTEN -->
+        </div>
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+<div class="clearfix">
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+</div>
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="../static/global/plugins/respond.min.js"></script>
+<script src="../static/global/plugins/excanvas.min.js"></script>
+<![endif]-->
+<script src="../static/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="../static/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
+<script src="../static/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript" ></script>
+
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script type="text/javascript" src="../static/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/select2/select2_locale_zh-CN.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/location.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/fileinput.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/honeySwitch.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script src="../static/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/layout.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/theme.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/jquery.signalR-2.2.0.js" type="text/javascript"></script>
+<script src="../static/signalr/hubs" type="text/javascript"></script>
+<script type="text/javascript" src="../static/admin/scripts/custom.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        $.ajaxSetup({ cache: false });//设置缓存策略
+        Metronic.init(); // init metronic core componets
+        Layout.init(); // init layout
+
+        if ($(".side-menu-sidebar").length > 0) { initSideMenu(); }
+        if ($(".esh-filter-sidebar").length > 0) { initFlterMenu(); }
+        if ($(".scroll-fixed").length > 0) {
+            $(".scroll-fixed").each(function () {
+                var i = 0;
+                var mouseWheel = document.getElementsByClassName('scroll-fixed')[i];
+                if (mouseWheel.addEventListener) {
+                    mouseWheel.addEventListener('DOMMouseScroll', function (event) {
+                        this.scrollTop = this.scrollTop - (event.wheelDelta ? event.wheelDelta : -event.detail * 10);
+                        return false;
+                    },false)
+                }
+                document.getElementsByClassName('scroll-fixed')[i].onmousewheel = function (event) {
+                    if (!event) event = window.event;
+                    this.scrollTop = this.scrollTop - (event.wheelDelta ? event.wheelDelta : -event.detail * 10);
+                    return false;
+                }
+                i++;
+            })
+        }
+
+        //侧栏收起展开样式保存
+        $('body').on('click', '.sidebar-toggler', function (e) {
+            $.ajax({
+                url: "/organization/personal/savesidebaroption",
+                type: "POST",
+                data: { "Option": $.cookie("sidebar_closed") }
+            });
+        });
+
+        //接收服务端推送的消息
+        var chat = $.connection.messageHub;
+        if (chat) {
+            chat.client.recieveMessage = function (message) {
+                var userID = $("#userID").val();
+                //异步获取提醒消息
+                if (message && message.Content && message.Content.indexOf(userID) >= 0) {
+                    $.ajax({
+                        url: "/organization/message/getmessagemenu",
+                        type: "Get",
+                        success: function (data) {
+                            $("#header_notification_bar").html(data);
+                        },
+                        error: function (data) { showException(data); }
+                    });
+
+                    if ($("#pendwork").length > 0) {
+                        $.ajax({
+                            url: "/servicespace/startpage/pendworkorder",
+                            type: "Get",
+                            success: function (data) {
+                                $("#pendwork").html(data);
+                            },
+                            error: function (data) { showException(data); }
+                        })
+                    }
+
+                }
+            };
+
+            $.connection.hub.stop();//断开连接
+            $.connection.hub.start();//重新连接
+        }
+    });
+</script>
+<!-- BEGIN PAGE SELF SCRIPTS -->
+
+<script type="text/javascript" src="../static/admin/scripts/selectAccessory.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        initEvent();//事件绑定
+        initPageSize();
+
+        //changeQueryCondition();
+    });
+
+    //事件绑定
+    function initEvent() {
+        //显示或隐藏筛选功能
+        $('body').on('click', '#btnFilter.collapse, #btnFilter.expand', function (e) {
+            if ($(this).hasClass("collapse")) {
+                $(this).removeClass("collapse").addClass("expand").text('取消筛选');
+                $('.esh-filter-sidebar').addClass("open");
+            } else {
+                $(this).removeClass("expand").addClass("collapse").text('筛选');
+                $('.esh-filter-sidebar').removeClass("open");
+            }
+        });
+
+        //Checkbox选择触发表单提交
+        $("ul.filter-option input[type=checkbox]").on("click", function () {
+            var attrName = $(this).attr('name');
+            var subData = $("#" + attrName + "_hide").val();
+            if ($(this).attr('checked')) {
+                subData += $(this).val() + ",";
+            } else {
+                var a = $(this).val() + ",";
+                subData = subData.replace(a, "");
+            }
+            $("#" + attrName + "_hide").val(subData);
+            changeQueryCondition();
+        })
+
+        //选择产品
+        $("#select-network").change(function () { changeQueryCondition(); });
+
+        //输入名称回车查询
+        $("#userName").keypress(function (e) {
+            if (e.which == 13) {
+                changeQueryCondition();
+                $("#btnSearch").focus();
+            }
+        });
+
+        //搜索按钮按下
+        $("#btnSearch").click(function () { changeQueryCondition(); })
+    }
+
+    ///初始化列表
+    function initTable() { OperationTable.init("#tableList", "#Sort", "#Direction", changeSortCondition); }
+
+    //清空筛选
+    function clearFilter() {
+        $("#type_hide,#select-network").val("");
+        $("ul.filter-option input[type=checkbox]").attr("checked", false);
+        $("ul.filter-option input[type=checkbox]").parent().removeClass("checked");
+        changeQueryCondition();
+
+    }
+
+    //初始化每页记录数
+    function initPageSize() {
+        if ($.cookie('system-setting-pagesize'))
+            $("#PageSize").val($.cookie('system-setting-pagesize'));
+    }
+
+    //改变每页记录数
+    function changePageSize(e) {
+        $(e).parent().addClass("active").siblings().removeClass("active");
+        var currItem = $(e).children();
+        var pageSize = $(currItem).attr("data-val");
+        var pageSizeTxt = $(currItem).text();
+
+        $("#currentPageSize").attr("data-val", pageSize).html(pageSizeTxt);
+        $("#PageSize").val(pageSize);
+        $("#PageIndex").val(1);
+
+        if ($.cookie('system-setting-pagesize'))
+            $.cookie('system-setting-pagesize', '', { expires: -1, path: '/' });
+        $.cookie('system-setting-pagesize', pageSize, { expires: 7, path: '/' });
+
+        $("#searchByRequest").submit();
+    }
+
+    //改变索引页
+    function changePageIndex(index) {
+        $("#PageIndex").val(index);
+        $("#searchByRequest").submit();
+    }
+
+    //改变查询条件
+    function changeQueryCondition() {
+        if ($("#select-network").val() == "" && $("#type_hide").val() == "") {
+            $(".clear-filter").addClass("hidden")
+        }
+        else {
+            $(".clear-filter").removeClass("hidden")
+        }
+
+        var userName = $("#userName").val();
+        if (userName.indexOf("输入") >= 0) {
+            userName = "";
+        }
+
+        var networType = $("#type_hide").val(); //组装网点类型
+        var network = $("#select-network").val();
+        var whereData = "{'name':'" + userName + "','servicenetworkid':'" + network + "','type':[" + trimEnd(networType) + "]" + "}";
+
+        $("#Where").val(whereData);
+        $("#PageIndex").val(1);//页索引置为1
+        $("#searchByRequest").submit();
+    }
+
+    //改变排序条件
+    function changeSortCondition(sort, direction) {
+        $("#Sort").val(sort);
+        $("#Direction").val(direction);
+        $("#PageIndex").val(1);//页索引置为1
+        $("#searchByRequest").submit();
+    }
+
+    //启动对话框
+    function startDialog(title) {
+        modalLoadding("#editDailog", title, 400)
+        $("#editDailog").modal();
+    }
+
+    //显示对话框
+    function showDialog(data) {
+        $("#editDailog .modal-content").html(data);//填充对话框
+        $("#editForm").removeData("validator");//删除验证器
+        $.validator.unobtrusive.parse("#editForm");//添加验证器
+
+        //角色选择
+        $("#ServicePersonRoleSel").change(function () {
+            $("#RoleID").val($(this).val()).blur();
+        })
+
+        $("#ServiceNetworkSel").change(function () {
+            var b = $(this).find("option:selected").attr("data-bind");
+            $("#ServiceNetworkID").val($(this).val());
+
+            GetRoleByNetwork(b, "#ServicePersonRoleSel");
+        })
+    }
+
+    //启动large对话框
+    function startLargeDialog(title) {
+        modalLoadding("#editLgDailog", title, 425)
+        $("#editLgDailog").modal();
+    }
+
+    //显示large对话框
+    function showLargeDialog(data) {
+
+        $("#editLgDailog .modal-content").html(data);//填充对话框
+        $("#importForm").removeData("validator");//删除验证器
+        $.validator.unobtrusive.parse("#importForm");//添加验证器
+        Metronic.initSlimScroll('.scroller');//滚动条
+    }
+
+    //新建服务人员
+    function createRecord() {
+        if ($("#limitPerson").val() == "False") {
+            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
+            return false;
+        }
+        startDialog("新建人员");
+        $.ajax({
+            url: "/servicespace/serviceperson/create",
+            type: "GET",
+            data: { "networkId": 'a61e0c34-46cc-4244-8aa2-255450ed740b', "networkType": 'HQ' },
+            success: function (data) {
+                showDialog(data);
+            },
+            error: function (data) { showException(data); }
+        });
+    }
+
+    //新建服务人员
+    function importRecord() {
+        if ($("#limitPerson").val() == "False") {
+            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
+            return false;
+        }
+        startLargeDialog("导入人员");
+        $.ajax({
+            url: "/servicespace/serviceperson/import",
+            type: "GET",
+            data: { "networkId": 'a61e0c34-46cc-4244-8aa2-255450ed740b', "networkType": 'HQ' },
+            success: function (data) {
+                showLargeDialog(data);
+            },
+            error: function (data) { showException(data); }
+        });
+    }
+
+    //编辑服务人员
+    function Edit(personId) {
+        startDialog("编辑人员");
+        $.ajax({
+            url: "/servicespace/serviceperson/edit",
+            type: "get",
+            data: { "id": personId },
+            success: function (data) {
+                showDialog(data);
+            },
+            error: function (data) { hideLoading(); showException(data); }
+        });
+    }
+
+    //查看服务人员
+    function Detail(personId) {
+        startDialog("查看服务人员");
+        $.ajax({
+            url: "/servicespace/serviceperson/detail",
+            type: "get",
+            data: { "id": personId },
+            success: function (data) {
+                showDialog(data);
+            },
+            error: function (data) { hideLoading(); showException(data); }
+        });
+    }
+
+    //批量删除
+    function deleteRecords() {
+        //获取选择的id
+        var ids = new Array();
+        $("#tableList tbody input[type='checkbox']").each(function () {
+            if ($(this).attr("checked")) ids.push($(this).val());
+        });
+        if (ids.length == 0) { botbox.alert("提示", "您还没有选择要移除的记录!"); return; }//判断选中的记录数
+        deleteRecord(ids);
+    }
+
+    //删除指定记录
+    function deleteRecord(id) {
+        botbox.confirm("提示", "您确认移除吗?", function (result) {
+            if (result) {
+                showLoading();
+                $.ajax({
+                    url: "/servicespace/serviceperson/delete",
+                    type: "POST",
+                    data: { "id": id },
+                    success: function (data) {
+                        hideLoading();
+                        if (data == "ok") {
+                            growlAlert.success("移除成功");
+                            changeQueryCondition();
+                        }
+                        else { growlAlert.danger("移除失败"); }
+
+                    },
+                    error: function (data) { hideLoading(); showException(data); }
+                });
+            }
+        });
+    }
+
+    //导入页面，选择要导入服务人员
+    function SelStaff(e) {
+        var selLi = $(e);
+
+        //获取人员数据
+        var staffId = selLi.attr("data-bind");
+        var staffName = selLi.find("input[name=perName]").val();
+        var staffTel = selLi.find("input[name=perTel]").val();
+        var staffName = selLi.find("input[name=perName]").val();
+        var roleList = selLi.find("select[name=perRoleSel]").html();
+        var networkList = selLi.find("select[name=perNetworkSel]").html();
+
+        if (selLi.hasClass("active")) {
+            selLi.removeClass("active");
+            var a = $("#servicePersonTable").find("tr[data-bind='" + staffId + "']");
+            a.remove();
+        } else {
+            selLi.addClass("active");
+            var tableTr = "<tr data-bind='" + staffId + "'><td>" + staffName + "</td><td>" + staffTel + "</td><td><select name='networkSel' class='form-control'>" + networkList + "</select></td><td><select name='roleSel' class='form-control'>" + roleList + "</select></td></tr>";
+
+            $("#servicePersonTable").append(tableTr);
+        }
+
+        $("#servicePersonTable tr select[name=networkSel]").change(function () {
+            var b = $(this).find("option:selected").attr("data-bind");
+            var roleSel = $(this).parent().parent().find("select[name=roleSel]");
+            GetRoleByNetwork(b, roleSel);
+        })
+    }
+
+    //提交导入表单
+    function submitform() {
+        //判断表格是否为空
+        if ($("#servicePersonTable tr").length <= 0) {
+            growlAlert.info("请选择要导入的服务人员");
+            return false;
+        }
+
+        //判断未分配角色的人员
+        $("#servicePersonTable tr select[name=roleSel]").each(function () {
+            if ($(this).val() == "") {
+                var a = $(this).parent().parent().find("td:first").html();
+                growlAlert.info("请对服务人员【" + a + "】分配角色");
+                $("#IsExitRole").val("1");
+                return false;
+            } else {
+                $("#IsExitRole").val("");
+            }
+        })
+
+        if ($("#IsExitRole").val().length > 0) {
+            return false;
+        }
+
+        var details = new Array();
+        $("#servicePersonTable tr").each(function () {
+            var detail = "{'ServiceNetworkID':'" + $(this).find("select[name=networkSel]").val() + "','StaffID':'" + $(this).attr("data-bind") + "','RoleID':'" + $(this).find("select[name=roleSel]").val() + "'}";
+            details.push(detail);
+        });
+
+        $("#servicePersons").val(JSON.stringify(details));
+
+        $("#importForm").submit();
+    }
+
+    //根据网点类型获取角色
+    function GetRoleByNetwork(networkType, selRole) {
+        $.ajax({
+            url: "/servicespace/serviceperson/getroles",
+            type: "get",
+            data: { "networkType": networkType },
+            success: function (data) {
+
+                $(selRole).empty();
+                $("#RoleID").val("");
+                var option = "<option value=''>请选择服务角色</option>";
+                if (data != "") {
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].Name == 'networkAdmin') {
+                            option += "<option value='" + data[i].ID + "'>网点管理员</option>";
+                        } else {
+                            option += "<option value='" + data[i].ID + "'>" + data[i].Name + "</option>";
+                        }
+                    }
+                }
+                $(selRole).append(option);
+            },
+            error: function (data) { showException(data); }
+        });
+    }
+
+    //导出excel
+    function exportExcel() { window.location = "/servicespace/serviceperson/exportexcel?Where=" + $("#Where").val(); }
+
+    function editSucess(data) {
+        if (data == "ok") {
+            growlAlert.success("保存成功");
+            $("#editDailog,#editLgDailog").modal('hide');
+            changeQueryCondition();
+        } else if (data == "faile") {
+            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
+        } else { growlAlert.danger("操作失败。"); }
+    }
+</script>
+
+<!-- END PAGE SELF SCRIPTS -->
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

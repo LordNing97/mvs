@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-CN" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8"/>
+    <title>首页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="" name="description"/>
+    <link href="../static/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/select2/select2.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-fileinput/css/fileinput.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
+    <link href="../static/global/css/plugins.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet"/>
+    <link href="../static/global/css/components-rounded.css" rel="stylesheet"/>
+    <link href="../static/admin/css/layout.css" rel="stylesheet"/>
+    <link href="../static/admin/css/custom.css" rel="stylesheet"/>
+    <link href="../static/admin/css/themes/default.css" rel="stylesheet" id="style_color">
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+<input id="userID" name="userID" type="hidden" value="30da7b29-700b-4310-adc5-1ee224a5b4a6"/>
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-space" id="spaceMenu">
+
+
+            <a href="/servicespace/startpage" class="space-logo middle"><img src="../static/admin/img/logo.png"/></a>
+            <div class="btn-group esh-space-sel">
+                <a href="javascript:void(0)" class="back-link name-wrap" data-toggle="dropdown" aria-expanded="false">
+                    <span class="username username-hide-on-mobile">CRM后台管理系统</span>
+                </a>
+            </div>
+
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+           data-target=".navbar-collapse"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <div class="pull-right">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true"
+                           title="未读消息">
+                            <i class="icon-bell"></i>
+                            <span class="badge badge-default">
+                                4
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li class="external">
+                                <h3> 消息通知<span class="bold">(4)</span></h3>
+                            </li>
+                            <li>
+                                <ul class="dropdown-menu-list" data-handle-color="#637283">
+                                    <li>
+                                        <a href="/organization/message?serviceSpaceId=fd5c440d-f982-41e5-aa5e-5b86928532ef">
+                                            <span class="details">
+                                                1
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/organization/message?serviceSpaceId=b45dc42c-1abb-4103-b6bf-87dc9bba082c">
+                                            <span class="badge badge-danger pull-right">4</span> <span class="details">
+                                                美乐云购
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END TODO DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+
+
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" onerror="this.src = '../static//admin/img/def_user_icon.jpg'"
+                                 src="../static//admin/img/def_user_icon.jpg"/>
+                            <span class="username username-hide-on-mobile">郝博闻</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu esh-pub-menu esh-user-menu" style="width:260px">
+                            <li class="user clearfix">
+                                <div class="col-md-4">
+                                    <img alt="" class="img-circle"
+                                         onerror="this.src = '../static/admin/img/def_user_icon.jpg'"
+                                         src="../static//admin/img/def_user_icon.jpg"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="info">
+                                        <span>郝博闻</span>
+                                        <span class="label label-orange">企业版</span>
+                                        <p>美乐云购</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/organization/personal">
+                                    <i class="icon-user"></i>个人信息
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/organization/personal/editpassword">
+                                    <i class="icon-lock"></i>修改密码
+                                </a>
+                            </li>
+
+                            <li class="last">
+                                <a href="/account/logout">
+                                    <i class="icon-logout"></i>退出系统
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix"></div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper" id="leftmenue">
+        <div class="page-sidebar navbar-collapse collapse esh-fixed-sidebar">
+            <!-- BEGIN SIDEBAR MENU -->
+            <ul class="page-sidebar-menu page-sidebar-menu-fixed " data-keep-expanded="false" data-auto-scroll="true"
+                data-slide-speed="200">
+                <li class="sidebar-toggler-wrapper">
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <div class="sidebar-toggler">
+                    </div>
+                    <!-- END SIDEBAR TOGGLER BUTTON -->
+                </li>
+                <li class="start active open">
+                    <a onclick="javascript:location.href='/index'">
+                        <i class="glyphicon glyphicon-home"></i>
+                        <span class="title">首页</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/user'">
+                        <i class="fa fa-file-text"></i>
+                        <span class="title">用户管理</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/workorder'">
+                        <i class="fa fa-file-text"></i>
+                        <span class="title">订单管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/stockmanage'">
+                        <i class="icon-puzzle bold"></i>
+                        <span class="title">产品类型管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/serviceperson'">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span class="title">产品管理</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/customer'">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        <span class="title">客户管理</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/lotterysettings'">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        <span class="title">抽奖设置</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </div>
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="esh-bg-wrap grey">
+                        <div class="esh-page-title ehs-page-title-light">
+                            首页
+                        </div>
+                        <div class="esh-index-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="portlet light panel-block index-block" style="padding-right:13px;">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <span class="caption-subject uppercase">客户充值动态</span>
+                                            </div>
+                                            <div class="actions" style="margin-top:4px;margin-right:13px">
+                                                <a href="/home/news?cid=3" target="_blank" title="查看更多">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body esh-dashboard">
+                                            <ul class="feeds" style="margin-top:-3px">
+                                                <li>
+                                                    <a href="http://www.eshouhou.cn/home/newsdetail/11" target="_blank"
+                                                       style="cursor:pointer">
+                                                        <div class="col1">
+                                                            <div class="cont">
+                                                                <div class="cont-col1">
+                                                                    <div class="label label-sm label-info">
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cont-col2">
+                                                                    <div class="desc esh-txtellipsis">
+                                                                        用户****充值100元
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col2">
+                                                            <div class="date">
+                                                                12-09 17:00
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.eshouhou.cn/home/newsdetail/10" target="_blank"
+                                                       style="cursor:pointer">
+                                                        <div class="col1">
+                                                            <div class="cont">
+                                                                <div class="cont-col1">
+                                                                    <div class="label label-sm label-info">
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cont-col2">
+                                                                    <div class="desc esh-txtellipsis">
+                                                                        用户****充值100元
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col2">
+                                                            <div class="date">
+                                                                12-09 17:00
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.eshouhou.cn/home/newsdetail/9" target="_blank"
+                                                       style="cursor:pointer">
+                                                        <div class="col1">
+                                                            <div class="cont">
+                                                                <div class="cont-col1">
+                                                                    <div class="label label-sm label-info">
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cont-col2">
+                                                                    <div class="desc esh-txtellipsis">
+                                                                        用户****充值100元
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col2">
+                                                            <div class="date">
+                                                                12-09 17:00
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="portlet light panel-block index-block" style="padding-right:13px;">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <span class="caption-subject uppercase">客户消费动态</span>
+                                            </div>
+                                            <div class="actions" style="margin-top:4px;margin-right:13px">
+                                                <a href="/home/news?cid=3" target="_blank" title="查看更多">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body esh-dashboard">
+                                            <ul class="feeds" style="margin-top:-3px">
+                                                <li>
+                                                    <a href="http://www.eshouhou.cn/home/newsdetail/11" target="_blank"
+                                                       style="cursor:pointer">
+                                                        <div class="col1">
+                                                            <div class="cont">
+                                                                <div class="cont-col1">
+                                                                    <div class="label label-sm label-info">
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cont-col2">
+                                                                    <div class="desc esh-txtellipsis">
+                                                                        用户****消费100元
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col2">
+                                                            <div class="date">
+                                                                12-09 17:00
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.eshouhou.cn/home/newsdetail/10" target="_blank"
+                                                       style="cursor:pointer">
+                                                        <div class="col1">
+                                                            <div class="cont">
+                                                                <div class="cont-col1">
+                                                                    <div class="label label-sm label-info">
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cont-col2">
+                                                                    <div class="desc esh-txtellipsis">
+                                                                        用户****消费100元
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col2">
+                                                            <div class="date">
+                                                                12-09 17:00
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.eshouhou.cn/home/newsdetail/9" target="_blank"
+                                                       style="cursor:pointer">
+                                                        <div class="col1">
+                                                            <div class="cont">
+                                                                <div class="cont-col1">
+                                                                    <div class="label label-sm label-info">
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cont-col2">
+                                                                    <div class="desc esh-txtellipsis">
+                                                                        用户****消费100元
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col2">
+                                                            <div class="date">
+                                                                12-09 17:00
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div>
+                                        <div class="portlet light panel-block index-block" style="padding-right:13px;">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <span class="caption-subject uppercase">抽奖订单动态（2）</span>
+                                                </div>
+                                                <div class="actions" style="margin-top:4px;margin-right:13px">
+                                                    <a href="/servicespace/workorder" title="查看更多">
+                                                        <i class="fa fa-chevron-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body esh-index-block" style="padding-top:5px">
+                                                <div class="scroller" style="height: 300px;" data-always-visible="1"
+                                                     data-rail-visible="0">
+
+                                                    <ul class="feeds esh-work">
+                                                        <li>
+                                                            <a href="/servicespace/workorder/details/b8b946ac-4fb7-4100-8aaf-372cbad7b581">
+                                                                <div class="con">
+                                    <span class="tit">
+                                       订单*****
+                                    </span>
+                                                                    <div class="pull-right" style="margin-top:2px">
+                                                                        <span class="label label-purple">未开奖</span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="con">
+                                    <span>
+                                        用户***
+                                    </span>
+                                                                    <span class="pull-right time">10-23 09:48</span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/servicespace/workorder/details/1c3f563c-197b-4651-9d5f-80e25330c90e">
+                                                                <div class="con">
+                                    <span class="tit">
+                                        订单*****
+                                    </span>
+                                                                    <div class="pull-right" style="margin-top:2px">
+                                                                        <span class="label label-newly">进行中</span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="con">
+                                    <span>
+                                        用户***
+                                    </span>
+                                                                    <span class="pull-right time">10-23 09:47</span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div id="pendwork">
+                                        <div class="portlet light panel-block index-block" style="padding-right:13px;">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <span class="caption-subject uppercase">商城订单动态（2）</span>
+                                                </div>
+                                                <div class="actions" style="margin-top:4px;margin-right:13px">
+                                                    <a href="/servicespace/workorder" title="查看更多">
+                                                        <i class="fa fa-chevron-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body esh-index-block" style="padding-top:5px">
+                                                <div class="scroller" style="height: 300px;" data-always-visible="1"
+                                                     data-rail-visible="0">
+
+                                                    <ul class="feeds esh-work">
+                                                        <li>
+                                                            <a href="/servicespace/workorder/details/b8b946ac-4fb7-4100-8aaf-372cbad7b581">
+                                                                <div class="con">
+                                    <span class="tit">
+                                       订单*****
+                                    </span>
+                                                                    <div class="pull-right" style="margin-top:2px">
+                                                                        <span class="label label-purple">待发货</span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="con">
+                                    <span>
+                                        用户***
+                                    </span>
+                                                                    <span class="pull-right time">10-23 09:48</span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/servicespace/workorder/details/1c3f563c-197b-4651-9d5f-80e25330c90e">
+                                                                <div class="con">
+                                    <span class="tit">
+                                        订单*****
+                                    </span>
+                                                                    <div class="pull-right" style="margin-top:2px">
+                                                                        <span class="label label-purple">待付款</span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="con">
+                                    <span>
+                                        用户***
+                                    </span>
+                                                                    <span class="pull-right time">10-23 09:47</span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="editDailog" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="emailDailog" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END PAGE CONTEN -->
+        </div>
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+<div class="clearfix">
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+</div>
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="../static//global/plugins/respond.min.js"></script>
+<script src="../static//global/plugins/excanvas.min.js"></script>
+<![endif]-->
+<script src="../static/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="../static/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
+<script src="../static/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script type="text/javascript" src="../static/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/select2/select2_locale_zh-CN.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/location.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/fileinput.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript" src="../static/admin/scripts/honeySwitch.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script src="../static/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/layout.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/theme.js" type="text/javascript"></script>
+<script src="../static/admin/scripts/jquery.signalR-2.2.0.js" type="text/javascript"></script>
+<script src="../static/signalr/hubs" type="text/javascript"></script>
+<script type="text/javascript" src="../static/admin/scripts/custom.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        $.ajaxSetup({cache: false});//设置缓存策略
+        Metronic.init(); // init metronic core componets
+        Layout.init(); // init layout
+
+        if ($(".side-menu-sidebar").length > 0) {
+            initSideMenu();
+        }
+        if ($(".esh-filter-sidebar").length > 0) {
+            initFlterMenu();
+        }
+        if ($(".scroll-fixed").length > 0) {
+            $(".scroll-fixed").each(function () {
+                var i = 0;
+                var mouseWheel = document.getElementsByClassName('scroll-fixed')[i];
+                if (mouseWheel.addEventListener) {
+                    mouseWheel.addEventListener('DOMMouseScroll', function (event) {
+                        this.scrollTop = this.scrollTop - (event.wheelDelta ? event.wheelDelta : -event.detail * 10);
+                        return false;
+                    }, false)
+                }
+                document.getElementsByClassName('scroll-fixed')[i].onmousewheel = function (event) {
+                    if (!event) event = window.event;
+                    this.scrollTop = this.scrollTop - (event.wheelDelta ? event.wheelDelta : -event.detail * 10);
+                    return false;
+                }
+                i++;
+            })
+        }
+
+        //侧栏收起展开样式保存
+        $('body').on('click', '.sidebar-toggler', function (e) {
+            $.ajax({
+                url: "/organization/personal/savesidebaroption",
+                type: "POST",
+                data: {"Option": $.cookie("sidebar_closed")}
+            });
+        });
+    });
+</script>
+<!-- BEGIN PAGE SELF SCRIPTS -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("body").addClass("page-container-bg-solid");
+    });
+
+    //初始化排序
+    function InitSort(sortwrap, control) {
+        if (!jQuery().sortable) {
+            return;
+        }
+
+        $("#" + sortwrap).sortable({
+            connectWith: "#" + sortwrap + " li",
+            opacity: 0.8,
+            //handle: '.oper-icon',
+            cursor: 'move',
+            coneHelperSize: true,
+            forcePlaceholderSize: true,
+            containment: 'parent',
+            tolerance: "pointer",
+            helper: "clone",
+            tolerance: "pointer",
+            revert: 250,
+            update: function (b, c) {
+                var ids = new Array();
+                $("#" + sortwrap + " li").each(function () {
+                    if ($(this).attr("data-card")) {
+                        ids.push($(this).attr("data-card"));
+                    }
+                });
+
+                if (control == "operate") {
+                    saveOperate(ids);
+                } else {
+                    saveDashboard(ids);
+                }
+
+            }
+        });
+    }
+
+    //启动对话框
+    function startDialog(title) {
+        modalLoadding("#editDailog", title, 460)
+        $("#editDailog").modal();
+    }
+
+    //启动邮件对话框
+    function startemailDialog(title) {
+        modalLoadding("#emailDailog", title, 400)
+        $("#emailDailog").modal();
+    }
+
+    //==============快捷操作==================//
+    //编辑快捷操作
+    function editOperate() {
+        $("#show_operate").addClass("hidden");
+        $("#btn_edit").addClass("hidden");
+        $(".esh-operate-no").addClass("hidden");
+
+        $("#edit_operate").removeClass("hidden");
+        $("#operate-helper").removeClass("hidden");
+        $("#btn_show").removeClass("hidden");
+    }
+
+    //显示
+    function showOperate() {
+        $("#show_operate").removeClass("hidden");
+        $("#btn_edit").removeClass("hidden");
+        $(".esh-operate-no").removeClass("hidden");
+        $("#edit_operate").addClass("hidden");
+        $("#operate-helper").addClass("hidden");
+        $("#btn_show").addClass("hidden");
+    }
+
+    //选择常见操作
+    function selectoperate() {
+        var ids = new Array();
+        $("#edit_operate  li").each(function () {
+            if ($(this).attr("data-card")) {
+                ids.push($(this).attr("data-card"));
+            }
+        });
+
+        var addids = new Array();
+        var removeids = new Array();
+        $("#editDailog input[type=checkbox]").each(function () {
+            if ($(this).attr("checked")) {
+                addids.push($(this).val());
+            }
+            else {
+                removeids.push($(this).val());
+            }
+        });
+
+        //选择不能超过9个
+        if (addids.length > 9) {
+            $("#span-condition-error").removeClass("hidden");
+            return;
+        }
+
+
+        //末尾添加选择的操作
+        $.each(addids, function (i, o) {
+            if (ids.indexOf(o) < 0) {
+                ids.push(o);
+            }
+        });
+
+        //删除未选择的操作
+        $.each(removeids, function (i, o) {
+            if (ids.indexOf(o) > -1) {
+                ids.splice(ids.indexOf(o), 1);
+            }
+        });
+
+        $("#editDailog").modal("hide");
+        saveOperate(ids);
+    }
+
+    //删除操作
+    function delelteoperate(operate) {
+        var ids = new Array();
+        $("#edit_operate  li").each(function () {
+            ids.push($(this).attr("data-card"));
+        });
+        if (ids.indexOf(operate) > -1) {
+            ids.splice(ids.indexOf(operate), 1);
+        }
+
+        saveOperate(ids);
+    }
+
+    //===========仪表盘操作=========//
+    //编辑仪表盘
+    function editDashboard() {
+        $("#show_dashboard").addClass("hidden");
+        $("#btn_dash_edit").addClass("hidden");
+        $(".esh-dashboard-no").addClass("hidden");
+        $("#edit_dashboard").removeClass("hidden");
+        $("#dashboard-helper").removeClass("hidden");
+        $("#btn_dash_show").removeClass("hidden");
+    }
+
+    //显示
+    function showDashboard() {
+        $("#show_dashboard").removeClass("hidden");
+        $("#btn_dash_edit").removeClass("hidden");
+        $(".esh-dashboard-no").removeClass("hidden");
+        $("#edit_dashboard").addClass("hidden");
+        $("#dashboard-helper").addClass("hidden");
+        $("#btn_dash_show").addClass("hidden");
+    }
+
+    //选择常见操作
+    function selectDashboard() {
+        var ids = new Array();
+        $("#edit_dashboard  li").each(function () {
+            if ($(this).attr("data-card")) {
+                ids.push($(this).attr("data-card"));
+            }
+        });
+
+        var addids = new Array();
+        var removeids = new Array();
+        $("#editDailog input[type=checkbox]").each(function () {
+            if ($(this).attr("checked")) {
+                addids.push($(this).val());
+            }
+            else {
+                removeids.push($(this).val());
+            }
+        });
+
+        //选择不能超过5个
+        if (addids.length > 5) {
+            $("#span-dashboard-error").removeClass("hidden");
+            return;
+        }
+
+
+        //末尾添加选择的操作
+        $.each(addids, function (i, o) {
+            if (ids.indexOf(o) < 0) {
+                ids.push(o);
+            }
+        });
+
+        //删除未选择的操作
+        $.each(removeids, function (i, o) {
+            if (ids.indexOf(o) > -1) {
+                ids.splice(ids.indexOf(o), 1);
+            }
+        });
+
+        $("#editDailog").modal("hide");
+        saveDashboard(ids);
+    }
+
+    //删除操作
+    function delelteDashboard(obj) {
+        var ids = new Array();
+        $("#edit_dashboard  li").each(function () {
+            ids.push($(this).attr("data-card"));
+        });
+        if (ids.indexOf(obj) > -1) {
+            ids.splice(ids.indexOf(obj), 1);
+        }
+
+        saveDashboard(ids);
+    }
+
+    function editSucess(data) {
+        if (data == "ok") {
+            growlAlert.success("邀请发送成功");
+            $("#emailDailog").modal("hide");
+        } else {
+            growlAlert.danger("邀请发送失败");
+        }
+    }
+</script>
+
+<!-- END PAGE SELF SCRIPTS -->
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
