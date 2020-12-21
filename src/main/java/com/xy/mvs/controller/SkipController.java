@@ -115,6 +115,14 @@ public class SkipController {
         return "user";
     }
 
+    /**
+     * 跳转到抽奖订单页面
+     */
+    @RequestMapping("/lottery")
+    public String lottery(){
+        return "lottery";
+    }
+
 }
 
 
