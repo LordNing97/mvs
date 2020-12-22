@@ -8,7 +8,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>工单列表</title>
+    <title>抽奖设置</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -179,22 +179,28 @@
                         <span class="title">用户管理</span>
                     </a>
                 </li>
-                <li class="start active open">
-                    <a onclick="javascript:location.href='/workorder'">
+                <li class="">
+                    <a onclick="javascript:location.href='/mallOrder'">
                         <i class="fa fa-file-text"></i>
-                        <span class="title">订单管理</span>
+                        <span class="title">商城订单管理</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a onclick="javascript:location.href='/lotteryOrder'">
+                        <i class="fa fa-file-text"></i>
+                        <span class="title">抽奖订单管理</span>
                     </a>
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/stockmanage'">
+                    <a onclick="javascript:location.href='/mailProductType'">
                         <i class="icon-puzzle bold"></i>
                         <span class="title">产品类型管理</span>
                     </a>
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/serviceperson'">
+                    <a onclick="javascript:location.href='/mailProduct'">
                         <i class="glyphicon glyphicon-user"></i>
                         <span class="title">产品管理</span>
                     </a>
@@ -207,8 +213,8 @@
                     </a>
                 </li>
 
-                <li class="">
-                    <a onclick="javascript:location.href='/lotterysettings'">
+                <li class="start active open">
+                    <a onclick="javascript:location.href='/lotterySettings'">
                         <i class="glyphicon glyphicon-cog"></i>
                         <span class="title">抽奖设置</span>
                     </a>
@@ -225,33 +231,13 @@
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
 
-
                 <div class="col-md-12">
                     <div class="side-menu-sidebar ">
                         <div class="scroller">
                             <div class="portlet portlet-nav">
                                 <div class="portlet-title">
                                     <div class="caption" data-toggle="collapse" data-target=".side-menu-project-list-content">
-                                        <span class="uppercase">订单视图</span>
-                                        <a href="javascript:;" class="caption-helper visible-sm-inline-block visible-xs-inline-block">单击展示列表</a>
-                                    </div>
-                                    <div class="btn-group pull-right esh-set-btn-group">
-                                        <a href="javascript:;" class="esh-set-group" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa  fa-angle-down"></i>
-                                        </a>
-                                        <ul class="esh-pub-menu dropdown-menu pull-right">
-                                            <li>
-                                                <a onclick="javascript:location.href='/processlist'">
-                                                    订单统计
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a onclick="javascript:location.href='/workorderview'">
-                                                    订单设置
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        <span class="uppercase">抽奖设置</span>
                                     </div>
                                 </div>
                             </div>
@@ -259,25 +245,16 @@
                                 <div class="side-menu-project-list" data-always-visible="1" data-rail-visible1="1" id="workView">
                                     <ul class="nav nav-pills nav-stacked esh-nav-pills">
                                         <li class=" active">
-                                            <a onclick="javascript:location.href='/workorder'"><span>所有订单</span> <span class="badge badge-success">3</span></a>
+                                            <a onclick="javascript:location.href='/lotterysettings'"><span>所有抽奖</span> <span class="badge badge-success">3</span></a>
                                         </li>
                                         <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19086&amp;viewtype=1"><span>待付款的订单</span> <span class="badge badge-success">0</span></a>
+                                            <a onclick="javascript:location.href='/noprize'"><span>未开奖</span> <span class="badge badge-success">0</span></a>
                                         </li>
                                         <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19088&amp;viewtype=1"><span>待发货的订单</span> <span class="badge badge-success">2</span></a>
+                                            <a onclick="javascript:location.href='/isongoing'"><span>进行中</span> <span class="badge badge-success">2</span></a>
                                         </li>
                                         <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19089&amp;viewtype=1"><span>待收货的订单</span> <span class="badge badge-success">0</span></a>
-                                        </li>
-                                        <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19090&amp;viewtype=1"><span>待评价的订单</span> <span class="badge badge-success">0</span></a>
-                                        </li>
-                                        <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19091&amp;viewtype=1"><span>已完成的订单</span> <span class="badge badge-success">1</span></a>
-                                        </li>
-                                        <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19092&amp;viewtype=1"><span>已取消的订单</span> <span class="badge badge-success">0</span></a>
+                                            <a onclick="javascript:location.href='/finished'"><span>已结束</span> <span class="badge badge-success">0</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -470,11 +447,11 @@
                         <div class="portlet light">
                             <div class="portlet-title">
                                 <div class="caption title">
-                                    订单列表
+                                    所有抽奖
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium " style= "width: 280px !important">
-                                        <input class="form-control" id="workOrderNumber" maxlength="50" name="workOrderNumber" placeholder="输入订单编号/客户名称/联系电话" type="text" value="" />
+                                        <input class="form-control" id="workOrderNumber" maxlength="50" name="workOrderNumber" placeholder="输入订单编号" type="text" value="" />
                                         <span class="input-group-btn">
                                 <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
                             </span>
@@ -485,22 +462,12 @@
                             <div class="portlet-body">
                                 <div class="table-toolbar">
                                     <div class="col-md-8 col-xs-8  clear-padding-left">
-                                        <a href="javascript:void(0)" onclick="createWorkOder('2417','维修单','2417')" class="btn green">新建</a>
                                         <button class="btn green collapse" id="btnFilter">筛选</button>
                                         <a class="filter-a clear-filter hidden" href="javascript:void(0)" onclick="clearFilter()"><i class="icon fa fa-trash"></i>清空筛选</a>
                                     </div>
                                     <div class="col-md-4 col-xs-4 clear-padding-right">
                                         <div class="pull-right">
-                                            <div class="btn-group">
-                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                                    更多操作&nbsp;<i class="fa fa-angle-down"></i>
-                                                </button>
-                                                <ul class="dropdown-menu pull-right" role="menu">
-                                                    <li>
-                                                        <a data-toggle="modal" href="javascript:void(0)" onclick="exportExcel()">Excel导出 </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -510,38 +477,36 @@
                                         <table class="table table-striped dataTable table-bordered table-hover table-pointer" id="tableList">
                                             <thead>
                                             <tr>
-                                                <th class="table-checkbox">
-                                                    <input class="magic-checkbox group-checkable" type="checkbox" name="layout" id="c0" data-set="#tableList .checkboxes">
-                                                    <label for="c0"></label>
-                                                </th>
-                                                <th class="sorting" aria-label="Number" aria-data>
+                                                <th style="width: 14%;">
                                                     订单编号
                                                 </th>
-                                                <th class aria-label aria-data>
-                                                    用户名称
+                                                <th style="width: 14%;">
+                                                    产品编号
                                                 </th>
-                                                <th class aria-label aria-data>
+                                                <th style="width: 14%;">
                                                     产品名称
                                                 </th>
-                                                <th class aria-label aria-data>
-                                                    产品型号
+                                                <th style="width: 6%;">
+                                                    参与人数
                                                 </th>
-                                                <th class aria-label aria-data>
-                                                    产品数量
+                                                <th style="width: 6%;">
+                                                    进度
                                                 </th>
-                                                <th class="sorting" aria-label="State" aria-data>
-                                                    订单状态
+                                                <th style="width: 8%;">
+                                                    抽奖状态
                                                 </th>
-                                                <th class="sorting" aria-label="CreateTime" aria-data>
+                                                <th style="width: 14%;">
                                                     创建时间
+                                                </th>
+                                                <th style="width: 14%;">
+                                                    操作
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX">
                                                 <td>
-                                                    <input class="magic-checkbox checkboxes" type="checkbox" name="ids" id="b8b946ac-4fb7-4100-8aaf-372cbad7b581" value="b8b946ac-4fb7-4100-8aaf-372cbad7b581">
-                                                    <label for="b8b946ac-4fb7-4100-8aaf-372cbad7b581"></label>
+                                                    W201810230002
                                                 </td>
                                                 <td>
                                                     W201810230002
@@ -550,25 +515,60 @@
                                                     测试用
                                                 </td>
                                                 <td>
-                                                    Integrit
+                                                    33
                                                 </td>
                                                 <td>
-                                                    rx9800
+                                                    99%
                                                 </td>
                                                 <td>
-                                                    7
+                                                    <span class="label label-purple">未开奖</span>
                                                 </td>
                                                 <td>
-                                                    <span class="label label-purple">待发货</span>
+                                                    2020-10-23 09:48:44
                                                 </td>
                                                 <td>
-                                                    2018-10-23 09:48:44
+                                                    <button class="btn btn-default btn-xs black" onclick="see()">
+                                                        <i class="fa fa-search"></i>
+                                                        查看
+                                                    </button>
+                                                    <button class="btn btn-default btn-xs black" onclick="modify()">
+                                                        <i class="fa fa-search"></i>
+                                                        修改进度
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr class="odd gradeX">
                                                 <td>
-                                                    <input class="magic-checkbox checkboxes" type="checkbox" name="ids" id="edf5b636-b571-4176-94f5-e845f67cb287" value="edf5b636-b571-4176-94f5-e845f67cb287">
-                                                    <label for="edf5b636-b571-4176-94f5-e845f67cb287"></label>
+                                                    W201810230002
+                                                </td>
+                                                <td>
+                                                    W201810230002
+                                                </td>
+                                                <td>
+                                                    测试用
+                                                </td>
+                                                <td>
+                                                    33
+                                                </td>
+                                                <td>
+                                                    99%
+                                                </td>
+                                                <td>
+                                                    <span class="label label-newly">进行中</span>
+                                                </td>
+                                                <td>
+                                                    2020-10-23 09:48:44
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-default btn-xs black" onclick="see()">
+                                                        <i class="fa fa-search"></i>
+                                                        查看
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    W201807100001
                                                 </td>
                                                 <td>
                                                     W201807100001
@@ -577,19 +577,22 @@
                                                     [示例]张小西
                                                 </td>
                                                 <td>
-                                                    HP服务器
+                                                    22
                                                 </td>
                                                 <td>
-                                                    CN-231
+                                                    50%
                                                 </td>
                                                 <td>
-                                                    5
+                                                    <span class="label label-success">已结束</span>
                                                 </td>
                                                 <td>
-                                                    <span class="label label-success">已关闭</span>
+                                                    2020-07-10 15:07:49
                                                 </td>
                                                 <td>
-                                                    2018-07-10 15:07:49
+                                                    <button class="btn btn-default btn-xs black" onclick="see()">
+                                                        <i class="fa fa-search"></i>
+                                                        查看
+                                                    </button>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -674,16 +677,215 @@
                                 <input type="hidden" id="serviceNetworkId" value="" />
                                 <input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /><input id="viewId" name="viewId" type="hidden" value="19083" /><input id="viewtype" name="viewtype" type="hidden" value="1" /></form>            </div>
                     </div>
-                    <div class="modal fade bs-modal-lg" id="createworkDailog" tabindex="-1" aria-hidden="true">
+
+                    <!--查看详情模态框-->
+                    <div class="modal fade bs-modal-lg" id="seeDailog" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">查看详情</h4>
+                                </div>
+                                <div class="modal-body padding-bottom-10 clearfix" style="min-height:420px;width: 100%">
+                                    <div class="table-scrollable">
+                                        <table class="table table-striped dataTable table-bordered table-hover table-pointer">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 14%;">
+                                                    客户名称
+                                                </th>
+                                                <th style="width: 14%;">
+                                                    总积分
+                                                </th>
+                                                <th style="width: 14%;">
+                                                    该抽奖投入积分
+                                                </th>
+                                                <th style="width: 14%;">
+                                                    中奖次数
+                                                </th>
+                                                <th style="width: 14%;">
+                                                    是否被内定
+                                                </th>
+                                                <th style="width: 14%;">
+                                                    操作
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    刘梦丽
+                                                </td>
+                                                <td>
+                                                    10000
+                                                </td>
+                                                <td>
+                                                    33
+                                                </td>
+                                                <td>
+                                                    1
+                                                </td>
+                                                <td>
+                                                    是
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-default btn-xs black" onclick="internalization()">
+                                                        <i class="fa fa-search"></i>
+                                                        内定
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    陈璇
+                                                </td>
+                                                <td>
+                                                    10
+                                                </td>
+                                                <td>
+                                                    1
+                                                </td>
+                                                <td>
+                                                    0
+                                                </td>
+                                                <td>
+                                                    否
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-default btn-xs black" onclick="internalization()">
+                                                        <i class="fa fa-search"></i>
+                                                        内定
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite">
+                                                <label style="vertical-align: middle;">共3条</label>
+                                                <div class="btn-group pagesize dropup">
+                                                    <a href="javascript:void(0)" class="link name-wrap" data-toggle="dropdown" aria-expanded="false">
+                                                        <span data-val="10">10条/页&nbsp;</span>
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu esh-pub-menu">
+                                                        <li class="clearfix active">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="10">10条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="clearfix">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="20">20条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="clearfix">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="30">30条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="clearfix">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="40">40条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="clearfix">
+                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis" data-val="50">50条/页&nbsp;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <div class="dataTables_paginate paging_bootstrap_full_number">
+                                                <ul class="pagination">
+                                                    <li class="disabled prev">
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-angle-double-left"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="disabled prev">
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-angle-left"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="active">
+                                                        <a href="#" onclick="changePageIndex(1)">
+                                                            1
+                                                        </a>
+                                                    </li>
+                                                    <li class="disabled next">
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-angle-right"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="disabled next">
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-angle-double-right"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="createcustomerDailog" tabindex="-1" aria-hidden="true">
+
+                    <!--修改进度模态框-->
+                    <div class="modal fade" id="modifyDailog" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">修改进度</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                添加人数<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input id="name" class="form-control"
+                                                       placeholder="请输入添加人数">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+                                    <button type="button" class="btn green" onclick="saveBrand()">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--内定模态框-->
+                    <div class="modal fade" id="internalizationDailog" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true"></button>
+                                    <h4 class="modal-title">提示</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="bootbox-body">您确认内定该用户吗?</div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" id="brandId">
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+                                    <button type="button" class="btn green" onclick="deleteBrand()">确定</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -944,74 +1146,6 @@
 
     }
 
-    //获取url参数
-    function GetQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); return null;
-    }
-
-    //重新加载筛选条件
-    function changeQueryReLoad() {
-        //为IE浏览器加载查询条件
-        if (!!window.ActiveXObject || "ActiveXObject" in window) {
-            loadConditionForIE();
-        }
-
-        //为chrome浏览器加载查询条件
-        if (navigator.userAgent.indexOf("Chrome") >= 0) {
-            loadConditionForChrome();
-        }
-
-        //判断是否显示清除筛选
-        if ($("#select-serviceNetwork").val() == "" && $("#select-servicePerson").val() == "" && $("#select-product").val() == "" && $("#state_hide").val() == "" && $("#channel_hide").val() == "" && $("#select-serviceCategory").val() == "" && $("#select-serviceMode").val() == "" && $("#startDate").val() == "" && $("#endDate").val() == "") {
-            $(".clear-filter").addClass("hidden")
-        }
-        else {
-            $(".clear-filter").removeClass("hidden")
-        }
-
-        //组装查询条件
-        var publicfilter = $("#viewtype").val() == 1 ? $("#viewId").val() : "";//公有视图
-        var privatefilter = $("#viewtype").val() == 2 ? $("#viewId").val() : "";//个人视图
-        var workOrderNumber = $("#workOrderNumber").val();//搜索关键字
-        if (workOrderNumber.indexOf("输入") >= 0) {
-            workOrderNumber = "";
-        }
-        var productId = $("#select-product").val();//产品id
-        var serviceCategoryId = $("#select-serviceCategory").val();//工单类型
-        var serviceModeId = $("#select-serviceMode").val();//服务模式
-        var state = $("#state_hide").val();//状态
-        var channel = $("#channel_hide").val();//渠道
-        var startDate = $("#startDate").val();//开始时间
-        var endDate = $("#endDate").val();//结束时间
-        var serviceSpaceId = $("#serviceSpaceId").val();//服务空间id
-        var serviceNetworkId = $("#serviceNetworkId").val();//服务网点id
-        var selNetworkId = $("#select-serviceNetwork").val();//筛选的服务网点Id
-        var servicePersonId = $("#select-servicePerson").val();//服务人员
-        if (selNetworkId) {
-            serviceNetworkId = selNetworkId;
-        }
-
-        var whereData;
-        whereData = "{'servicespaceid':'" + serviceSpaceId + "','servicenetworkid':'" + serviceNetworkId + "','publicfilter':'" + publicfilter + "','privatefilter':'" + privatefilter + "','searchkey':'" + workOrderNumber + "','servicestaffid':'" + servicePersonId + "','productid':'" + productId + "','servicecategoryid':'" + serviceCategoryId + "','servicemodeid':'" + serviceModeId + "','channel':[" + trimEnd(channel) + "],'pendstate':[" + trimEnd(state) + "],'startdate':'" + startDate + "','enddate':'" + endDate + "'}";
-        $("#Where").val(whereData);
-
-        //将查询条件存储隐藏域中
-        saveCondition();
-
-        //提交查询表单
-        $("#searchByRequest").submit();
-    }
-
-    //改变排序条件
-    function changeSortCondition(sort, direction) {
-        $("#Sort, #sort_hid").val(sort);
-        $("#Direction, #direction_hid").val(direction);
-        $("#PageIndex, #pageIndex_hid").val(1);//页索引置为1
-        $("#searchByRequest").submit();
-    }
-
     //将查询条件存储隐藏域中
     function saveCondition() {
         $("#product_hid").val($("#select-product").val());
@@ -1084,145 +1218,19 @@
         $("#Direction").val($("#direction_hid").val());
     }
 
-    //导出工单
-    function exportExcel() { window.location = "/servicespace/workorder/exportexcel?viewtype=" +1 +"&viewid=" +19083 +"&Where=" + $("#Where").val(); }
-
-    //创建工单
-    function createWorkOder(id, name, workOrderTemplateID) {
-        if ('True' == 'False') {
-            growlAlert.info("已超过单日可创工单工数，建议您升级后再进行创建");
-            return false;
-        }
-
-        startWorkOrderDialog('新建工单');
-        $.ajax({
-            url: "/servicespace/workorder/create",
-            type: "Get",
-            data: { "id": id, "Name": name, "WorkOrderTemplateID": workOrderTemplateID },
-            success: function (data) {
-                showWorkOrderDialog(data);
-            },
-            error: function (data) { showException(data); }
-        });
+    //查看详情
+    function see() {
+        $("#seeDailog").modal();
     }
 
-    //启动新建工单对话框
-    function startWorkOrderDialog(title) {
-        modalLoadding("#createworkDailog", title, 460)
-        $("#createworkDailog").modal();
+    //修改进度条
+    function modify() {
+        $("#modifyDailog").modal();
     }
 
-    //弹出新建工单对话框
-    function showWorkOrderDialog(data) {
-        $("#createworkDailog .modal-content").html(data);//填充对话框
-        WorkOrder.init();//初始化对话框
-    }
-
-    //创建工单成功
-    function editWorkOrderSucess(data) {
-        if (data == "ok") {
-            $("#createworkDailog").modal("hide");
-            growlAlert.success("新建工单成功!");
-            setTimeout('window.location.reload()', 1000);
-        }
-        else if (data == "faile") {
-            growlAlert.info("已超过单日可创工单工数，建议您升级后再进行创建")
-        }
-        else {
-            growlAlert.danger("新建工单失败。");
-        }
-    }
-
-    //创建客户
-    function createCustomer() {
-        var name =encodeURI($("#popCustomer_hidden").attr("data-bind"));
-        startcustomerDialog("新建客户");
-        $.ajax({
-            url: "/servicespace/customer/create?name=" + name,
-            type: "Get",
-            success: function (data) {
-                showcustomerDialog(data);
-            },
-            error: function (data) { showException(data); }
-        });
-    }
-
-    //启动新建客户对话框
-    function startcustomerDialog(title) {
-        modalLoadding("#createcustomerDailog", title, 460)
-        $("#createcustomerDailog").modal();
-    }
-
-    //弹出新建客户对话框
-    function showcustomerDialog(data) {
-        $("#createcustomerDailog .modal-content").html(data);//填充对话框
-        $("#createcustomerDailog form").attr("data-ajax-success", "createCustomerSucess");//改变表单提交成功回调函数
-        Customer.init();//初始化对话框
-
-    }
-
-    //客户名改变则联系人随之改变
-    function changeName(obj) {
-        if (!$("#Contact").val()) {
-            $("#Contact").val($(obj).val().replace(" ", ""));
-        }
-    }
-
-    //设置工单中客户信息
-    // function setCusToWork(data) {
-    //     $("#popCustomer_hidden,#popCustomer").val(data.Name).blur();
-    //     $("#Customer_ID").val(data.ID);
-    //
-    //     var customerId = $("#Customer_ID").val();
-    //     $("#SelContact").empty();
-    //     if (customerId) {
-    //         $.ajax({
-    //             url: "/ServiceSpace/Customer/GetContacts",
-    //             type: "Get",
-    //             data: { "customerId": customerId },
-    //             success: function (data) {
-    //                 if (data) {
-    //                     $.each(data, function (i, item) {
-    //                         if (i==0) {
-    //                             $("#SelContact").append("<option value=\"" + item.ID + "\" data-phone=\"" + item.Telephone + "\" data-mail=\"" + item.Mail + "\" data-area=\"" + item.Area + "\" data-address=\"" + item.Address + "\" selected=\"selected\">" + item.Name + "</option>");
-    //
-    //                             $("#popContact").val(item.Name).focus().blur();
-    //                             $("#popContactNumber").val(item.Telephone).focus().blur();
-    //                             $("#popContactMail").val(item.Mail);
-    //                             $("#popContactArea").val(item.Area);
-    //                             $("#popContactAddress").val(item.Address);
-    //                         }
-    //                         else {
-    //                             $("#SelContact").append("<option value=\"" + item.ID + "\" data-phone=\"" + item.Telephone + "\" data-mail=\"" + item.Mail + "\" data-area=\"" + item.Area + "\" data-address=\"" + item.Address + "\">" + item.Name + "</option>");
-    //                         }
-    //                     });
-    //                 }
-    //             },
-    //             error: function (data) { showException(data); }
-    //         });
-    //     }
-    // }
-
-    //提交编辑客户
-    function submitCustomer() {
-        //如果选择了区域，确保填写完整
-        if ($("#sel_pro").val() != "" && $("#sel_distr").val() == "") {
-            $("#span-error-area").removeClass("hidden");
-            return;
-        }
-
-        $("#editCustomerForm").submit();
-    }
-
-    //创建客户成功
-    function createCustomerSucess(data) {
-        if (data != null && data.ID != "") {
-            $("#createcustomerDailog").modal("hide");
-            growlAlert.success("操作成功!");
-            setCusToWork(data)
-        } else {
-            growlAlert.danger("操作失败！");
-        }
+    //内定
+    function internalization() {
+        $("#internalizationDailog").modal();
     }
 </script>
 

@@ -28,35 +28,75 @@ public class SkipController {
 //    }
 
     /**
-     * 跳转到产品类型管理页面
+     * 跳转到用户管理页面
      */
-    @RequestMapping("/stockmanage")
-    public String stockmanage(){
-        return "stockmanage";
+    @RequestMapping("/user")
+    public String user(){
+        return "user";
     }
 
     /**
-     * 跳转到仓库设置页面
+     * 跳转到商城订单管理页面
      */
-    @RequestMapping("/warehouselist")
-    public String warehouselist(){
-        return "warehouselist";
+    @RequestMapping("/mallOrder")
+    public String mallOrder(){
+        return "mall_order";
     }
 
     /**
-     * 跳转到订单管理页面
+     * 跳转到抽奖订单管理页面
      */
-    @RequestMapping("/workorder")
-    public String workorder(){
-        return "workorder";
+    @RequestMapping("/lotteryOrder")
+    public String lotteryOrder(){
+        return "lottery_order";
+    }
+
+    /**
+     * 跳转到商城产品类型管理页面
+     */
+    @RequestMapping("/mailProductType")
+    public String mailProductType(){
+        return "mail_product_type";
+    }
+
+    /**
+     * 跳转到抽奖产品类型管理页面
+     */
+    @RequestMapping("/lotteryProductType")
+    public String lotteryProductType(){
+        return "lottery_product_type";
+    }
+
+    /**
+     * 跳转到商城产品管理页面
+     */
+    @RequestMapping("/mailProduct")
+    public String mailProduct(){
+        return "mail_product";
+    }
+
+    /**
+     * 跳转到抽奖产品管理页面
+     */
+    @RequestMapping("/lotteryProduct")
+    public String lotteryProduct(){
+        return "lottery_product";
+    }
+
+    /**
+     * 跳转到客户管理页面
+     */
+    @RequestMapping("/customer")
+    public String customer(){
+        return "customer";
     }
 
     /**
      * 跳转到抽奖设置页面
      */
-    @RequestMapping("/lotterysettings")
-    public String lotterysettings(){
-        return "lotterysettings";
+    @RequestMapping("/lotterySettings")
+    public String lotterySettings(){
+        return "lottery_settings";
     }
 
     /**
@@ -81,46 +121,6 @@ public class SkipController {
     @RequestMapping("/finished")
     public String finished(){
         return "finished";
-    }
-
-    /**
-     * 跳转到工单设置页面
-     */
-    @RequestMapping("/workorderview")
-    public String workorderview(){
-        return "workorderview";
-    }
-
-    /**
-     * 跳转到产品管理页面
-     */
-    @RequestMapping("/serviceperson")
-    public String serviceperson(){
-        return "serviceperson";
-    }
-
-    /**
-     * 跳转到客户管理页面
-     */
-    @RequestMapping("/customer")
-    public String customer(){
-        return "customer";
-    }
-
-    /**
-     * 跳转到用户管理页面
-     */
-    @RequestMapping("/user")
-    public String user(){
-        return "user";
-    }
-
-    /**
-     * 跳转到抽奖订单页面
-     */
-    @RequestMapping("/lottery")
-    public String lottery(){
-        return "lottery";
     }
 
 }

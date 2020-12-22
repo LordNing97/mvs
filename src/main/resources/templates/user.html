@@ -182,21 +182,28 @@
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/workorder'">
+                    <a onclick="javascript:location.href='/mallOrder'">
                         <i class="fa fa-file-text"></i>
-                        <span class="title">订单管理</span>
+                        <span class="title">商城订单管理</span>
                     </a>
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/stockmanage'">
+                    <a onclick="javascript:location.href='/lottery'">
+                        <i class="fa fa-file-text"></i>
+                        <span class="title">抽奖订单管理</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a onclick="javascript:location.href='/mailProductType'">
                         <i class="icon-puzzle bold"></i>
                         <span class="title">产品类型管理</span>
                     </a>
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/serviceperson'">
+                    <a onclick="javascript:location.href='/mailProduct'">
                         <i class="glyphicon glyphicon-user"></i>
                         <span class="title">产品管理</span>
                     </a>
@@ -210,7 +217,7 @@
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/lotterysettings'">
+                    <a onclick="javascript:location.href='/lotterySettings'">
                         <i class="glyphicon glyphicon-cog"></i>
                         <span class="title">抽奖设置</span>
                     </a>
@@ -324,22 +331,14 @@
                             <div class="portlet-body">
                                 <div class="table-toolbar">
                                     <div class="col-xs-8 clear-padding-left">
-                                        <a class="btn green" href="javascript:void(0)" onclick="createRecord()">新建</a>
+                                        <a class="btn green" href="javascript:void(0)" onclick="create()">新建</a>
                                         <button class="btn green collapse" id="btnFilter">筛选</button>
                                         <a class="filter-a clear-filter hidden" href="javascript:void(0)" onclick="clearFilter()"><i class="icon fa fa-trash"></i>清空筛选</a>
-
                                     </div>
                                     <div class="col-xs-4  clear-padding-right">
                                         <div class="pull-right">
                                             <div class="btn-group">
-                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                                    更多操作&nbsp;<i class="fa fa-angle-down"></i>
-                                                </button>
-                                                <ul class="dropdown-menu pull-right" role="menu">
-                                                    <li>
-                                                        <a data-toggle="modal" href="javascript:void(0)" onclick="exportExcel()">Excel导出 </a>
-                                                    </li>
-                                                </ul>
+
                                             </div>
 
                                         </div>
@@ -379,7 +378,7 @@
                                                     系统管理员
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="Detail('ca0a2433-ec23-4330-9bb2-afaea8bde8c6')">
+                                                    <button class="btn btn-default btn-xs black" onclick="see()">
                                                         <i class="fa fa-search"></i>
                                                         查看
                                                     </button>
@@ -397,15 +396,15 @@
                                                     抽奖
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="Detail('ca0a2433-ec23-4330-9bb2-afaea8bde8c6')">
+                                                    <button class="btn btn-default btn-xs black" onclick="see()">
                                                         <i class="fa fa-search"></i>
                                                         查看
                                                     </button>
-                                                    <button class="btn btn-default btn-xs black" onclick="Edit('0b42e3e0-b55e-476f-94c7-d497521b6a98')">
+                                                    <button class="btn btn-default btn-xs black" onclick="create()">
                                                         <i class="fa fa-pencil"></i>
                                                         编辑
                                                     </button>
-                                                    <button class="btn btn-default btn-xs black" onclick="deleteRecord('0b42e3e0-b55e-476f-94c7-d497521b6a98')">
+                                                    <button class="btn btn-default btn-xs black" onclick="deleteDailog()">
                                                         <i class="fa fa-trash-o"></i>
                                                         移除
                                                     </button>
@@ -487,23 +486,128 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="/servicespace/serviceperson/get" data-ajax="true" data-ajax-begin="showLoading" data-ajax-complete="hideLoading" data-ajax-failure="showException" data-ajax-mode="replace" data-ajax-success="initTable" data-ajax-update="#dataTable" id="searchByRequest" method="post"><input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="The PageSize field is required." id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /></form>            </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="editDailog" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade bs-modal-lg" id="editLgDailog" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                        </div>
                     </div>
                 </div>
 
             </div>
+
+                <!--查看详情模态框-->
+                <div class="modal fade bs-modal-lg" id="seeDailog" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">查看</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            姓名<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-7">
+                                            <input id="name" class="form-control" value="郝博闻" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            密码<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-7">
+                                            <input class="form-control" type="password" value="121212" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            权限<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-7">
+                                            <select class="form-control" disabled>
+                                                <option>系统管理员</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--新建/编辑详情模态框-->
+                <div class="modal fade bs-modal-lg" id="createDailog" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">新建</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            姓名<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-7">
+                                            <input class="form-control" placeholder="请输入姓名">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            密码<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-7">
+                                            <input class="form-control" type="password" placeholder="请输入密码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            权限<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-7">
+                                            <select class="form-control">
+                                                <option>系统管理员</option>
+                                                <option>抽奖+抽奖设置</option>
+                                                <option>抽奖+商城</option>
+                                                <option>抽奖</option>
+                                                <option>商城</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden">
+                                <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+                                <button type="button" class="btn green" onclick="deleteBrand()">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--删除模态框-->
+                <div class="modal fade" id="deleteDailog" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true"></button>
+                                <h4 class="modal-title">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="bootbox-body">您确认删除该用户吗?</div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden">
+                                <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+                                <button type="button" class="btn green">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             <!-- END PAGE CONTEN -->
         </div>
     </div>
@@ -754,248 +858,21 @@
         $("#searchByRequest").submit();
     }
 
-    //启动对话框
-    function startDialog(title) {
-        modalLoadding("#editDailog", title, 400)
-        $("#editDailog").modal();
+    //查看详情
+    function see() {
+        $("#seeDailog").modal();
     }
 
-    //显示对话框
-    function showDialog(data) {
-        $("#editDailog .modal-content").html(data);//填充对话框
-        $("#editForm").removeData("validator");//删除验证器
-        $.validator.unobtrusive.parse("#editForm");//添加验证器
-
-        //角色选择
-        $("#ServicePersonRoleSel").change(function () {
-            $("#RoleID").val($(this).val()).blur();
-        })
-
-        $("#ServiceNetworkSel").change(function () {
-            var b = $(this).find("option:selected").attr("data-bind");
-            $("#ServiceNetworkID").val($(this).val());
-
-            GetRoleByNetwork(b, "#ServicePersonRoleSel");
-        })
+    //新建/编辑
+    function create() {
+        $("#createDailog").modal();
     }
 
-    //启动large对话框
-    function startLargeDialog(title) {
-        modalLoadding("#editLgDailog", title, 425)
-        $("#editLgDailog").modal();
+    //删除
+    function deleteDailog() {
+        $("#deleteDailog").modal();
     }
 
-    //显示large对话框
-    function showLargeDialog(data) {
-
-        $("#editLgDailog .modal-content").html(data);//填充对话框
-        $("#importForm").removeData("validator");//删除验证器
-        $.validator.unobtrusive.parse("#importForm");//添加验证器
-        Metronic.initSlimScroll('.scroller');//滚动条
-    }
-
-    //新建服务人员
-    function createRecord() {
-        if ($("#limitPerson").val() == "False") {
-            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
-            return false;
-        }
-        startDialog("新建人员");
-        $.ajax({
-            url: "/servicespace/serviceperson/create",
-            type: "GET",
-            data: { "networkId": 'a61e0c34-46cc-4244-8aa2-255450ed740b', "networkType": 'HQ' },
-            success: function (data) {
-                showDialog(data);
-            },
-            error: function (data) { showException(data); }
-        });
-    }
-
-    //新建服务人员
-    function importRecord() {
-        if ($("#limitPerson").val() == "False") {
-            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
-            return false;
-        }
-        startLargeDialog("导入人员");
-        $.ajax({
-            url: "/servicespace/serviceperson/import",
-            type: "GET",
-            data: { "networkId": 'a61e0c34-46cc-4244-8aa2-255450ed740b', "networkType": 'HQ' },
-            success: function (data) {
-                showLargeDialog(data);
-            },
-            error: function (data) { showException(data); }
-        });
-    }
-
-    //编辑服务人员
-    function Edit(personId) {
-        startDialog("编辑人员");
-        $.ajax({
-            url: "/servicespace/serviceperson/edit",
-            type: "get",
-            data: { "id": personId },
-            success: function (data) {
-                showDialog(data);
-            },
-            error: function (data) { hideLoading(); showException(data); }
-        });
-    }
-
-    //查看服务人员
-    function Detail(personId) {
-        startDialog("查看服务人员");
-        $.ajax({
-            url: "/servicespace/serviceperson/detail",
-            type: "get",
-            data: { "id": personId },
-            success: function (data) {
-                showDialog(data);
-            },
-            error: function (data) { hideLoading(); showException(data); }
-        });
-    }
-
-    //批量删除
-    function deleteRecords() {
-        //获取选择的id
-        var ids = new Array();
-        $("#tableList tbody input[type='checkbox']").each(function () {
-            if ($(this).attr("checked")) ids.push($(this).val());
-        });
-        if (ids.length == 0) { botbox.alert("提示", "您还没有选择要移除的记录!"); return; }//判断选中的记录数
-        deleteRecord(ids);
-    }
-
-    //删除指定记录
-    function deleteRecord(id) {
-        botbox.confirm("提示", "您确认移除吗?", function (result) {
-            if (result) {
-                showLoading();
-                $.ajax({
-                    url: "/servicespace/serviceperson/delete",
-                    type: "POST",
-                    data: { "id": id },
-                    success: function (data) {
-                        hideLoading();
-                        if (data == "ok") {
-                            growlAlert.success("移除成功");
-                            changeQueryCondition();
-                        }
-                        else { growlAlert.danger("移除失败"); }
-
-                    },
-                    error: function (data) { hideLoading(); showException(data); }
-                });
-            }
-        });
-    }
-
-    //导入页面，选择要导入服务人员
-    function SelStaff(e) {
-        var selLi = $(e);
-
-        //获取人员数据
-        var staffId = selLi.attr("data-bind");
-        var staffName = selLi.find("input[name=perName]").val();
-        var staffTel = selLi.find("input[name=perTel]").val();
-        var staffName = selLi.find("input[name=perName]").val();
-        var roleList = selLi.find("select[name=perRoleSel]").html();
-        var networkList = selLi.find("select[name=perNetworkSel]").html();
-
-        if (selLi.hasClass("active")) {
-            selLi.removeClass("active");
-            var a = $("#servicePersonTable").find("tr[data-bind='" + staffId + "']");
-            a.remove();
-        } else {
-            selLi.addClass("active");
-            var tableTr = "<tr data-bind='" + staffId + "'><td>" + staffName + "</td><td>" + staffTel + "</td><td><select name='networkSel' class='form-control'>" + networkList + "</select></td><td><select name='roleSel' class='form-control'>" + roleList + "</select></td></tr>";
-
-            $("#servicePersonTable").append(tableTr);
-        }
-
-        $("#servicePersonTable tr select[name=networkSel]").change(function () {
-            var b = $(this).find("option:selected").attr("data-bind");
-            var roleSel = $(this).parent().parent().find("select[name=roleSel]");
-            GetRoleByNetwork(b, roleSel);
-        })
-    }
-
-    //提交导入表单
-    function submitform() {
-        //判断表格是否为空
-        if ($("#servicePersonTable tr").length <= 0) {
-            growlAlert.info("请选择要导入的服务人员");
-            return false;
-        }
-
-        //判断未分配角色的人员
-        $("#servicePersonTable tr select[name=roleSel]").each(function () {
-            if ($(this).val() == "") {
-                var a = $(this).parent().parent().find("td:first").html();
-                growlAlert.info("请对服务人员【" + a + "】分配角色");
-                $("#IsExitRole").val("1");
-                return false;
-            } else {
-                $("#IsExitRole").val("");
-            }
-        })
-
-        if ($("#IsExitRole").val().length > 0) {
-            return false;
-        }
-
-        var details = new Array();
-        $("#servicePersonTable tr").each(function () {
-            var detail = "{'ServiceNetworkID':'" + $(this).find("select[name=networkSel]").val() + "','StaffID':'" + $(this).attr("data-bind") + "','RoleID':'" + $(this).find("select[name=roleSel]").val() + "'}";
-            details.push(detail);
-        });
-
-        $("#servicePersons").val(JSON.stringify(details));
-
-        $("#importForm").submit();
-    }
-
-    //根据网点类型获取角色
-    function GetRoleByNetwork(networkType, selRole) {
-        $.ajax({
-            url: "/servicespace/serviceperson/getroles",
-            type: "get",
-            data: { "networkType": networkType },
-            success: function (data) {
-
-                $(selRole).empty();
-                $("#RoleID").val("");
-                var option = "<option value=''>请选择服务角色</option>";
-                if (data != "") {
-                    for (var i = 0; i < data.length; i++) {
-                        if (data[i].Name == 'networkAdmin') {
-                            option += "<option value='" + data[i].ID + "'>网点管理员</option>";
-                        } else {
-                            option += "<option value='" + data[i].ID + "'>" + data[i].Name + "</option>";
-                        }
-                    }
-                }
-                $(selRole).append(option);
-            },
-            error: function (data) { showException(data); }
-        });
-    }
-
-    //导出excel
-    function exportExcel() { window.location = "/servicespace/serviceperson/exportexcel?Where=" + $("#Where").val(); }
-
-    function editSucess(data) {
-        if (data == "ok") {
-            growlAlert.success("保存成功");
-            $("#editDailog,#editLgDailog").modal('hide');
-            changeQueryCondition();
-        } else if (data == "faile") {
-            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
-        } else { growlAlert.danger("操作失败。"); }
-    }
 </script>
 
 <!-- END PAGE SELF SCRIPTS -->

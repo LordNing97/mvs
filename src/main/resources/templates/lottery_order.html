@@ -179,22 +179,28 @@
                         <span class="title">用户管理</span>
                     </a>
                 </li>
-                <li class="start active open">
-                    <a onclick="javascript:location.href='/workorder'">
+                <li class="">
+                    <a onclick="javascript:location.href='/mallOrder'">
                         <i class="fa fa-file-text"></i>
-                        <span class="title">订单管理</span>
+                        <span class="title">商城订单管理</span>
+                    </a>
+                </li>
+                <li class="start active open">
+                    <a onclick="javascript:location.href='/lotteryOrder'">
+                        <i class="fa fa-file-text"></i>
+                        <span class="title">抽奖订单管理</span>
                     </a>
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/stockmanage'">
+                    <a onclick="javascript:location.href='/mailProductType'">
                         <i class="icon-puzzle bold"></i>
                         <span class="title">产品类型管理</span>
                     </a>
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/serviceperson'">
+                    <a onclick="javascript:location.href='/mailProduct'">
                         <i class="glyphicon glyphicon-user"></i>
                         <span class="title">产品管理</span>
                     </a>
@@ -208,7 +214,7 @@
                 </li>
 
                 <li class="">
-                    <a onclick="javascript:location.href='/lotterysettings'">
+                    <a onclick="javascript:location.href='/lotterySettings'">
                         <i class="glyphicon glyphicon-cog"></i>
                         <span class="title">抽奖设置</span>
                     </a>
@@ -224,15 +230,13 @@
         <div class="page-content">
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
-
-
                 <div class="col-md-12">
                     <div class="side-menu-sidebar ">
                         <div class="scroller">
                             <div class="portlet portlet-nav">
                                 <div class="portlet-title">
                                     <div class="caption" data-toggle="collapse" data-target=".side-menu-project-list-content">
-                                        <span class="uppercase">订单视图</span>
+                                        <span class="uppercase">抽奖订单</span>
                                         <a href="javascript:;" class="caption-helper visible-sm-inline-block visible-xs-inline-block">单击展示列表</a>
                                     </div>
                                     <div class="btn-group pull-right esh-set-btn-group">
@@ -262,16 +266,10 @@
                                             <a onclick="javascript:location.href='/workorder'"><span>所有订单</span> <span class="badge badge-success">3</span></a>
                                         </li>
                                         <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19086&amp;viewtype=1"><span>待付款的订单</span> <span class="badge badge-success">0</span></a>
-                                        </li>
-                                        <li class="">
                                             <a href="/servicespace/workorder/views?viewId=19088&amp;viewtype=1"><span>待发货的订单</span> <span class="badge badge-success">2</span></a>
                                         </li>
                                         <li class="">
                                             <a href="/servicespace/workorder/views?viewId=19089&amp;viewtype=1"><span>待收货的订单</span> <span class="badge badge-success">0</span></a>
-                                        </li>
-                                        <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19090&amp;viewtype=1"><span>待评价的订单</span> <span class="badge badge-success">0</span></a>
                                         </li>
                                         <li class="">
                                             <a href="/servicespace/workorder/views?viewId=19091&amp;viewtype=1"><span>已完成的订单</span> <span class="badge badge-success">1</span></a>
@@ -526,9 +524,6 @@
                                                 <th class aria-label aria-data>
                                                     产品型号
                                                 </th>
-                                                <th class aria-label aria-data>
-                                                    产品数量
-                                                </th>
                                                 <th class="sorting" aria-label="State" aria-data>
                                                     订单状态
                                                 </th>
@@ -556,9 +551,6 @@
                                                     rx9800
                                                 </td>
                                                 <td>
-                                                    7
-                                                </td>
-                                                <td>
                                                     <span class="label label-purple">待发货</span>
                                                 </td>
                                                 <td>
@@ -581,9 +573,6 @@
                                                 </td>
                                                 <td>
                                                     CN-231
-                                                </td>
-                                                <td>
-                                                    5
                                                 </td>
                                                 <td>
                                                     <span class="label label-success">已关闭</span>
