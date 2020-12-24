@@ -92,6 +92,22 @@ public class SkipController {
     }
 
     /**
+     * 跳转到商城客户管理页面
+     */
+    @RequestMapping("/mailCustomer")
+    public String mailCustomer(){
+        return "mail_customer";
+    }
+
+    /**
+     * 跳转到抽奖客户管理页面
+     */
+    @RequestMapping("/lotteryCustomer")
+    public String lotteryCustomer(){
+        return "lottery_customer";
+    }
+
+    /**
      * 跳转到抽奖设置页面
      */
     @RequestMapping("/lotterySettings")

@@ -8,7 +8,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>商城产品</title>
+    <title>抽奖客户</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -199,14 +199,14 @@
                     </a>
                 </li>
 
-                <li class="start active open">
+                <li class="">
                     <a onclick="javascript:location.href='/mailProduct'">
                         <i class="glyphicon glyphicon-user"></i>
                         <span class="title">产品管理</span>
                     </a>
                 </li>
 
-                <li class="">
+                <li class="start active open">
                     <a onclick="javascript:location.href='/customer'">
                         <i class="glyphicon glyphicon-calendar"></i>
                         <span class="title">客户管理</span>
@@ -237,18 +237,21 @@
                             <div class="portlet portlet-nav">
                                 <div class="portlet-title">
                                     <div class="caption" data-toggle="collapse" data-target="#lst2">
-                                        <span class="uppercase">产品管理</span>
+                                        <span class="uppercase">客户管理</span>
                                         <a href="javascript:;" class="caption-helper visible-sm-inline-block visible-xs-inline-block">单击展示列表</a>
                                     </div>
                                 </div>
                                 <div class="portlet-body side-menu-project-list-content" id="lst2">
                                     <div class="side-menu-project-list" data-always-visible="1" data-rail-visible1="1">
                                         <ul class="nav nav-pills nav-stacked">
-                                            <li class="active">
-                                                <a onclick="javascript:location.href='/mailProduct'">商城产品</a>
+                                            <li class="">
+                                                <a onclick="javascript:location.href='/customer'">所有客户</a>
                                             </li>
                                             <li class="">
-                                                <a onclick="javascript:location.href='/lotteryProduct'">抽奖产品</a>
+                                                <a onclick="javascript:location.href='/mailCustomer'">商城客户</a>
+                                            </li>
+                                            <li class="active">
+                                                <a onclick="javascript:location.href='/lotteryCustomer'">抽奖客户</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -256,16 +259,16 @@
                             </div>
 
                             <!--<div class="btn-group pull-right esh-set-btn-group absolute">-->
-                                <!--<a href="javascript:;" title="返回" class="esh-set-group" data-toggle="dropdown" aria-expanded="false">-->
-                                    <!--<i class="fa  fa-reply  back"></i>-->
-                                <!--</a>-->
-                                <!--<ul class="esh-pub-menu dropdown-menu pull-right">-->
-                                    <!--<li>-->
-                                        <!--<a href="/servicespace/systemsetting">-->
-                                            <!--返回设置主页-->
-                                        <!--</a>-->
-                                    <!--</li>-->
-                                <!--</ul>-->
+                            <!--<a href="javascript:;" title="返回" class="esh-set-group" data-toggle="dropdown" aria-expanded="false">-->
+                            <!--<i class="fa  fa-reply  back"></i>-->
+                            <!--</a>-->
+                            <!--<ul class="esh-pub-menu dropdown-menu pull-right">-->
+                            <!--<li>-->
+                            <!--<a href="/servicespace/systemsetting">-->
+                            <!--返回设置主页-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
                             <!--</div>-->
                         </div>
                     </div>
@@ -316,14 +319,14 @@
                         <div class="portlet light">
                             <div class="portlet-title">
                                 <div class="caption title">
-                                    商城产品
+                                    抽奖客户
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium ">
                                         <input class="form-control" id="userName" maxlength="20" name="userName" placeholder="输入姓名..." type="text" value="" />
                                         <span class="input-group-btn">
-                                            <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
-                                        </span>
+                                <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
+                            </span>
                                     </div>
                                 </div>
                             </div>
@@ -331,7 +334,6 @@
                             <div class="portlet-body">
                                 <div class="table-toolbar">
                                     <div class="col-xs-8 clear-padding-left">
-                                        <a class="btn green" href="javascript:void(0)" onclick="create()">新建</a>
                                         <button class="btn green collapse" id="btnFilter">筛选</button>
                                         <a class="filter-a clear-filter hidden" href="javascript:void(0)" onclick="clearFilter()"><i class="icon fa fa-trash"></i>清空筛选</a>
 
@@ -350,108 +352,68 @@
                                     <div class="table-scrollable">
                                         <table class="table table-striped dataTable table-bordered table-hover">
                                             <thead>
-                                                <tr>
-                                                    <th style="width: 7%;">
-                                                        编号
-                                                    </th>
-                                                    <th style="width: 10%;">
-                                                        类型
-                                                    </th>
-                                                    <th style="width: 12.5%;">
-                                                        名称
-                                                    </th>
-                                                    <th style="width: 10%;">
-                                                        图片
-                                                    </th>
-                                                    <th style="width: 20%;">
-                                                        详情
-                                                    </th>
-                                                    <th style="width: 9%;">
-                                                        数量
-                                                    </th>
-                                                    <th style="width: 9%;">
-                                                        状态
-                                                    </th>
-                                                    <th style="width: 16%;">
-                                                        操作
-                                                    </th>
-                                                </tr>
+                                            <tr>
+                                                <th style="width: 16%;">
+                                                    姓名
+                                                </th>
+                                                <th style="width: 16%;">
+                                                    手机号
+                                                </th>
+                                                <th style="width: 16%;">
+                                                    中奖量
+                                                </th>
+                                                <th style="width: 16%;">
+                                                    充值积分
+                                                </th>
+                                                <th style="width: 16%;">
+                                                    消费积分
+                                                </th>
+                                                <th style="width: 16%;">
+                                                    剩余积分
+                                                </th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        1
-                                                    </td>
-                                                    <td>
-                                                        女用
-                                                    </td>
-                                                    <td>
-                                                        用品
-                                                    </td>
-                                                    <td>
-                                                        <img src="../static/admin/img/iphone.png" width="20px" height="20px">
-                                                    </td>
-                                                    <td>
-                                                        这是用品
-                                                    </td>
-                                                    <td>
-                                                        10
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-success">上架</span>
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-default btn-xs black" onclick="see()">
-                                                            <i class="fa fa-search"></i>
-                                                            查看
-                                                        </button>
-                                                        <button class="btn btn-default btn-xs black" onclick="create()">
-                                                            <i class="fa fa-pencil"></i>
-                                                            编辑
-                                                        </button>
-                                                        <button class="btn btn-default btn-xs black" onclick="deleteDailog()">
-                                                            <i class="fa fa-trash-o"></i>
-                                                            移除
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        2
-                                                    </td>
-                                                    <td>
-                                                        男用
-                                                    </td>
-                                                    <td>
-                                                        用品
-                                                    </td>
-                                                    <td>
-                                                        <img src="../static/admin/img/iphone.png" width="20px" height="20px">
-                                                    </td>
-                                                    <td>
-                                                        这是用品
-                                                    </td>
-                                                    <td>
-                                                        10
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-gray">下架</span>
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-default btn-xs black" onclick="see()">
-                                                            <i class="fa fa-search"></i>
-                                                            查看
-                                                        </button>
-                                                        <button class="btn btn-default btn-xs black" onclick="create()">
-                                                            <i class="fa fa-pencil"></i>
-                                                            编辑
-                                                        </button>
-                                                        <button class="btn btn-default btn-xs black" onclick="deleteDailog()">
-                                                            <i class="fa fa-trash-o"></i>
-                                                            移除
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    郝博闻
+                                                </td>
+                                                <td>
+                                                    13000000000
+                                                </td>
+                                                <td>
+                                                    0
+                                                </td>
+                                                <td>
+                                                    0
+                                                </td>
+                                                <td>
+                                                    0
+                                                </td>
+                                                <td>
+                                                    0
+                                                </td>
+                                            </tr>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    小兰
+                                                </td>
+                                                <td>
+                                                    14723929929
+                                                </td>
+                                                <td>
+                                                    10
+                                                </td>
+                                                <td>
+                                                    1000
+                                                </td>
+                                                <td>
+                                                    1000
+                                                </td>
+                                                <td>
+                                                    0
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -528,187 +490,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <form action="/servicespace/serviceperson/get" data-ajax="true" data-ajax-begin="showLoading" data-ajax-complete="hideLoading" data-ajax-failure="showException" data-ajax-mode="replace" data-ajax-success="initTable" data-ajax-update="#dataTable" id="searchByRequest" method="post"><input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="The PageSize field is required." id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /></form>            </div>
                     </div>
                 </div>
 
-                    <!--查看详情模态框-->
-                    <div class="modal fade bs-modal-lg" id="seeDailog" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                    <h4 class="modal-title">查看</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                产品类型编码<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="W201810230002" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                类型<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <select class="form-control" disabled>
-                                                    <option>女用</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                名称<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="用品" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                图片<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <img src="../static/admin/img/iphone.png" width="150px" height="150px">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                详情<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="这是用品" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                数量<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="10" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                状态<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <select class="form-control" disabled>
-                                                    <option>上架</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!--新建/编辑详情模态框-->
-                    <div class="modal fade bs-modal-lg" id="createDailog" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                    <h4 class="modal-title">新建</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                类型<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <select class="form-control">
-                                                    <option>请选择</option>
-                                                    <option>女用</option>
-                                                    <option>男用</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                名称<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" placeholder="请输入名称">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                图片<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" type="file">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                详情<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" placeholder="请输入详情">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                数量<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" placeholder="请输入数量">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                状态<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <select class="form-control">
-                                                    <option>上架</option>
-                                                    <option>下架</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="hidden">
-                                    <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                    <button type="button" class="btn green" onclick="deleteBrand()">确定</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--删除模态框-->
-                    <div class="modal fade" id="deleteDailog" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"
-                                            aria-hidden="true"></button>
-                                    <h4 class="modal-title">提示</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="bootbox-body">您确认删除该产品吗?</div>
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="hidden">
-                                    <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                    <button type="button" class="btn green">确定</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+            </div>
             <!-- END PAGE CONTEN -->
         </div>
     </div>
@@ -999,20 +786,6 @@
         Metronic.initSlimScroll('.scroller');//滚动条
     }
 
-    //查看详情
-    function see() {
-        $("#seeDailog").modal();
-    }
-
-    //新建/编辑
-    function create() {
-        $("#createDailog").modal();
-    }
-
-    //删除
-    function deleteDailog() {
-        $("#deleteDailog").modal();
-    }
 </script>
 
 <!-- END PAGE SELF SCRIPTS -->

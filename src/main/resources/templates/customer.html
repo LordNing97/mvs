@@ -245,13 +245,13 @@
                                     <div class="side-menu-project-list" data-always-visible="1" data-rail-visible1="1">
                                         <ul class="nav nav-pills nav-stacked">
                                             <li class="active">
-                                                <a onclick="javascript:location.href='/serviceperson'">所有客户</a>
+                                                <a onclick="javascript:location.href='/customer'">所有客户</a>
                                             </li>
                                             <li class="">
-                                                <a onclick="javascript:location.href='/serviceperson'">商城客户</a>
+                                                <a onclick="javascript:location.href='/mailCustomer'">商城客户</a>
                                             </li>
                                             <li class="">
-                                                <a onclick="javascript:location.href='/serviceperson'">抽奖客户</a>
+                                                <a onclick="javascript:location.href='/lotteryCustomer'">抽奖客户</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -334,7 +334,6 @@
                             <div class="portlet-body">
                                 <div class="table-toolbar">
                                     <div class="col-xs-8 clear-padding-left">
-                                        <a class="btn green" href="javascript:void(0)" onclick="createRecord()">新建</a>
                                         <button class="btn green collapse" id="btnFilter">筛选</button>
                                         <a class="filter-a clear-filter hidden" href="javascript:void(0)" onclick="clearFilter()"><i class="icon fa fa-trash"></i>清空筛选</a>
 
@@ -342,14 +341,7 @@
                                     <div class="col-xs-4  clear-padding-right">
                                         <div class="pull-right">
                                             <div class="btn-group">
-                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                                    更多操作&nbsp;<i class="fa fa-angle-down"></i>
-                                                </button>
-                                                <ul class="dropdown-menu pull-right" role="menu">
-                                                    <li>
-                                                        <a data-toggle="modal" href="javascript:void(0)" onclick="exportExcel()">Excel导出 </a>
-                                                    </li>
-                                                </ul>
+
                                             </div>
 
                                         </div>
@@ -361,51 +353,30 @@
                                         <table class="table table-striped dataTable table-bordered table-hover">
                                             <thead>
                                             <tr>
-                                                <th class="table-checkbox">
-                                                    <input class="magic-checkbox group-checkable" type="checkbox" name="layout" id="c0">
-                                                    <label for="c0"></label>
+                                                <th style="width: 33%;">
+                                                    姓名
                                                 </th>
-                                                <th style="width: 25%;">
-                                                    名称
+                                                <th style="width: 33%;">
+                                                    手机号
                                                 </th>
-                                                <th style="min-width: 25%;">
+                                                <th style="width: 33%;">
                                                     类型
-                                                </th>
-                                                <th style="min-width: 25%;">
-                                                    数量
-                                                </th>
-                                                <th style="min-width: 25%;">
-                                                    操作
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX">
                                                 <td>
-                                                    <input class="magic-checkbox checkboxes" type="checkbox" name="ids" id="ca0a2433-ec23-4330-9bb2-afaea8bde8c6" value="ca0a2433-ec23-4330-9bb2-afaea8bde8c6">
-                                                    <label for="ca0a2433-ec23-4330-9bb2-afaea8bde8c6"></label>
-                                                </td>
-                                                <td>
                                                     郝博闻
                                                 </td>
                                                 <td>
-                                                    万维信达
+                                                    13000000000
                                                 </td>
                                                 <td>
-                                                    系统管理员
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="Detail('ca0a2433-ec23-4330-9bb2-afaea8bde8c6')">
-                                                        <i class="fa fa-search"></i>
-                                                        查看
-                                                    </button>
+                                                    所有
                                                 </td>
                                             </tr>
                                             <tr class="odd gradeX">
-                                                <td>
-                                                    <input class="magic-checkbox checkboxes" type="checkbox" name="ids" id="0b42e3e0-b55e-476f-94c7-d497521b6a98" value="0b42e3e0-b55e-476f-94c7-d497521b6a98">
-                                                    <label for="0b42e3e0-b55e-476f-94c7-d497521b6a98"></label>
-                                                </td>
                                                 <td>
                                                     小兰
                                                 </td>
@@ -413,17 +384,18 @@
                                                     14723929929
                                                 </td>
                                                 <td>
-                                                    万维信达分部1号
+                                                    抽奖
+                                                </td>
+                                            </tr>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    小兰
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="Edit('0b42e3e0-b55e-476f-94c7-d497521b6a98')">
-                                                        <i class="fa fa-pencil"></i>
-                                                        编辑
-                                                    </button>
-                                                    <button class="btn btn-default btn-xs black" onclick="deleteRecord('0b42e3e0-b55e-476f-94c7-d497521b6a98')">
-                                                        <i class="fa fa-trash-o"></i>
-                                                        移除
-                                                    </button>
+                                                    14723929929
+                                                </td>
+                                                <td>
+                                                    商城
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -505,18 +477,7 @@
                             <form action="/servicespace/serviceperson/get" data-ajax="true" data-ajax-begin="showLoading" data-ajax-complete="hideLoading" data-ajax-failure="showException" data-ajax-mode="replace" data-ajax-success="initTable" data-ajax-update="#dataTable" id="searchByRequest" method="post"><input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="The PageSize field is required." id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /></form>            </div>
                     </div>
                 </div>
-                <div class="modal fade" id="editDailog" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade bs-modal-lg" id="editLgDailog" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                        </div>
-                    </div>
-                </div>
+
 
             </div>
             <!-- END PAGE CONTEN -->
@@ -809,208 +770,6 @@
         Metronic.initSlimScroll('.scroller');//滚动条
     }
 
-    //新建服务人员
-    function createRecord() {
-        if ($("#limitPerson").val() == "False") {
-            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
-            return false;
-        }
-        startDialog("新建人员");
-        $.ajax({
-            url: "/servicespace/serviceperson/create",
-            type: "GET",
-            data: { "networkId": 'a61e0c34-46cc-4244-8aa2-255450ed740b', "networkType": 'HQ' },
-            success: function (data) {
-                showDialog(data);
-            },
-            error: function (data) { showException(data); }
-        });
-    }
-
-    //新建服务人员
-    function importRecord() {
-        if ($("#limitPerson").val() == "False") {
-            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
-            return false;
-        }
-        startLargeDialog("导入人员");
-        $.ajax({
-            url: "/servicespace/serviceperson/import",
-            type: "GET",
-            data: { "networkId": 'a61e0c34-46cc-4244-8aa2-255450ed740b', "networkType": 'HQ' },
-            success: function (data) {
-                showLargeDialog(data);
-            },
-            error: function (data) { showException(data); }
-        });
-    }
-
-    //编辑服务人员
-    function Edit(personId) {
-        startDialog("编辑人员");
-        $.ajax({
-            url: "/servicespace/serviceperson/edit",
-            type: "get",
-            data: { "id": personId },
-            success: function (data) {
-                showDialog(data);
-            },
-            error: function (data) { hideLoading(); showException(data); }
-        });
-    }
-
-    //查看服务人员
-    function Detail(personId) {
-        startDialog("查看服务人员");
-        $.ajax({
-            url: "/servicespace/serviceperson/detail",
-            type: "get",
-            data: { "id": personId },
-            success: function (data) {
-                showDialog(data);
-            },
-            error: function (data) { hideLoading(); showException(data); }
-        });
-    }
-
-    //批量删除
-    function deleteRecords() {
-        //获取选择的id
-        var ids = new Array();
-        $("#tableList tbody input[type='checkbox']").each(function () {
-            if ($(this).attr("checked")) ids.push($(this).val());
-        });
-        if (ids.length == 0) { botbox.alert("提示", "您还没有选择要移除的记录!"); return; }//判断选中的记录数
-        deleteRecord(ids);
-    }
-
-    //删除指定记录
-    function deleteRecord(id) {
-        botbox.confirm("提示", "您确认移除吗?", function (result) {
-            if (result) {
-                showLoading();
-                $.ajax({
-                    url: "/servicespace/serviceperson/delete",
-                    type: "POST",
-                    data: { "id": id },
-                    success: function (data) {
-                        hideLoading();
-                        if (data == "ok") {
-                            growlAlert.success("移除成功");
-                            changeQueryCondition();
-                        }
-                        else { growlAlert.danger("移除失败"); }
-
-                    },
-                    error: function (data) { hideLoading(); showException(data); }
-                });
-            }
-        });
-    }
-
-    //导入页面，选择要导入服务人员
-    function SelStaff(e) {
-        var selLi = $(e);
-
-        //获取人员数据
-        var staffId = selLi.attr("data-bind");
-        var staffName = selLi.find("input[name=perName]").val();
-        var staffTel = selLi.find("input[name=perTel]").val();
-        var staffName = selLi.find("input[name=perName]").val();
-        var roleList = selLi.find("select[name=perRoleSel]").html();
-        var networkList = selLi.find("select[name=perNetworkSel]").html();
-
-        if (selLi.hasClass("active")) {
-            selLi.removeClass("active");
-            var a = $("#servicePersonTable").find("tr[data-bind='" + staffId + "']");
-            a.remove();
-        } else {
-            selLi.addClass("active");
-            var tableTr = "<tr data-bind='" + staffId + "'><td>" + staffName + "</td><td>" + staffTel + "</td><td><select name='networkSel' class='form-control'>" + networkList + "</select></td><td><select name='roleSel' class='form-control'>" + roleList + "</select></td></tr>";
-
-            $("#servicePersonTable").append(tableTr);
-        }
-
-        $("#servicePersonTable tr select[name=networkSel]").change(function () {
-            var b = $(this).find("option:selected").attr("data-bind");
-            var roleSel = $(this).parent().parent().find("select[name=roleSel]");
-            GetRoleByNetwork(b, roleSel);
-        })
-    }
-
-    //提交导入表单
-    function submitform() {
-        //判断表格是否为空
-        if ($("#servicePersonTable tr").length <= 0) {
-            growlAlert.info("请选择要导入的服务人员");
-            return false;
-        }
-
-        //判断未分配角色的人员
-        $("#servicePersonTable tr select[name=roleSel]").each(function () {
-            if ($(this).val() == "") {
-                var a = $(this).parent().parent().find("td:first").html();
-                growlAlert.info("请对服务人员【" + a + "】分配角色");
-                $("#IsExitRole").val("1");
-                return false;
-            } else {
-                $("#IsExitRole").val("");
-            }
-        })
-
-        if ($("#IsExitRole").val().length > 0) {
-            return false;
-        }
-
-        var details = new Array();
-        $("#servicePersonTable tr").each(function () {
-            var detail = "{'ServiceNetworkID':'" + $(this).find("select[name=networkSel]").val() + "','StaffID':'" + $(this).attr("data-bind") + "','RoleID':'" + $(this).find("select[name=roleSel]").val() + "'}";
-            details.push(detail);
-        });
-
-        $("#servicePersons").val(JSON.stringify(details));
-
-        $("#importForm").submit();
-    }
-
-    //根据网点类型获取角色
-    function GetRoleByNetwork(networkType, selRole) {
-        $.ajax({
-            url: "/servicespace/serviceperson/getroles",
-            type: "get",
-            data: { "networkType": networkType },
-            success: function (data) {
-
-                $(selRole).empty();
-                $("#RoleID").val("");
-                var option = "<option value=''>请选择服务角色</option>";
-                if (data != "") {
-                    for (var i = 0; i < data.length; i++) {
-                        if (data[i].Name == 'networkAdmin') {
-                            option += "<option value='" + data[i].ID + "'>网点管理员</option>";
-                        } else {
-                            option += "<option value='" + data[i].ID + "'>" + data[i].Name + "</option>";
-                        }
-                    }
-                }
-                $(selRole).append(option);
-            },
-            error: function (data) { showException(data); }
-        });
-    }
-
-    //导出excel
-    function exportExcel() { window.location = "/servicespace/serviceperson/exportexcel?Where=" + $("#Where").val(); }
-
-    function editSucess(data) {
-        if (data == "ok") {
-            growlAlert.success("保存成功");
-            $("#editDailog,#editLgDailog").modal('hide');
-            changeQueryCondition();
-        } else if (data == "faile") {
-            growlAlert.info("已超过可加入员工数，建议您升级后再进行操作");
-        } else { growlAlert.danger("操作失败。"); }
-    }
 </script>
 
 <!-- END PAGE SELF SCRIPTS -->
