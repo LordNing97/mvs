@@ -44,6 +44,14 @@ public class SkipController {
     }
 
     /**
+     * 跳转到商城待付款订单页面
+     */
+    @RequestMapping("/mallPaidOrder")
+    public String mallPaidOrder(){
+        return "mall_paid_order";
+    }
+
+    /**
      * 跳转到抽奖订单管理页面
      */
     @RequestMapping("/lotteryOrder")
