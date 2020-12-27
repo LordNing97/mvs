@@ -8,7 +8,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>待付款的订单</title>
+    <title>待付款订单</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -256,19 +256,16 @@
                                             <a onclick="javascript:location.href='/mallPaidOrder'"><span>待付款的订单</span> <span class="badge badge-success">0</span></a>
                                         </li>
                                         <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19088&amp;viewtype=1"><span>待发货的订单</span> <span class="badge badge-success">2</span></a>
+                                            <a onclick="javascript:location.href='/mallDeliverOrder'"><span>待发货的订单</span> <span class="badge badge-success">2</span></a>
                                         </li>
                                         <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19089&amp;viewtype=1"><span>待收货的订单</span> <span class="badge badge-success">0</span></a>
+                                            <a onclick="javascript:location.href='/mallReceivingOrder'"><span>待收货的订单</span> <span class="badge badge-success">0</span></a>
                                         </li>
                                         <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19090&amp;viewtype=1"><span>待评价的订单</span> <span class="badge badge-success">0</span></a>
+                                            <a onclick="javascript:location.href='/mallEvaluateOrder'"><span>待评价的订单</span> <span class="badge badge-success">0</span></a>
                                         </li>
                                         <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19091&amp;viewtype=1"><span>已完成的订单</span> <span class="badge badge-success">1</span></a>
-                                        </li>
-                                        <li class="">
-                                            <a href="/servicespace/workorder/views?viewId=19092&amp;viewtype=1"><span>已取消的订单</span> <span class="badge badge-success">0</span></a>
+                                            <a onclick="javascript:location.href='/mallCompleteOrder'"><span>已完成的订单</span> <span class="badge badge-success">1</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -461,7 +458,7 @@
                         <div class="portlet light">
                             <div class="portlet-title">
                                 <div class="caption title">
-                                    待付款的订单
+                                    待付款订单
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium " style= "width: 280px !important">
@@ -509,7 +506,7 @@
                                                     产品数量
                                                 </th>
                                                 <th class="sorting" aria-label="State" aria-data>
-                                                    订单状态
+                                                    付款金额
                                                 </th>
                                                 <th class="sorting" aria-label="CreateTime" aria-data>
                                                     创建时间
@@ -537,7 +534,7 @@
                                                     7
                                                 </td>
                                                 <td>
-                                                    <span class="label label-purple">待发货</span>
+                                                    100.22
                                                 </td>
                                                 <td>
                                                     2018-10-23 09:48:44
@@ -566,7 +563,7 @@
                                                     5
                                                 </td>
                                                 <td>
-                                                    <span class="label label-success">已关闭</span>
+                                                    500
                                                 </td>
                                                 <td>
                                                     2018-07-10 15:07:49
@@ -660,20 +657,76 @@
                                 <input type="hidden" id="serviceNetworkId" value="" />
                                 <input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /><input id="viewId" name="viewId" type="hidden" value="19083" /><input id="viewtype" name="viewtype" type="hidden" value="1" /></form>            </div>
                     </div>
-                    <div class="modal fade bs-modal-lg" id="createworkDailog" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="createcustomerDailog" tabindex="-1" aria-hidden="true">
+                    <!--查看详情模态框-->
+                    <div class="modal fade bs-modal-lg" id="seeDailog" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">查看</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                订单编号<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input id="name" class="form-control" value="W201810230002" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                用户名称<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="测试用" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                产品名称<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="HP服务器" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                产品型号<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="小米" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                产品数量<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="10" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                付款金额<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="100" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
+
 
             </div>
             <!-- END PAGE CONTEN -->
@@ -1070,146 +1123,11 @@
         $("#Direction").val($("#direction_hid").val());
     }
 
-    //导出工单
-    function exportExcel() { window.location = "/servicespace/workorder/exportexcel?viewtype=" +1 +"&viewid=" +19083 +"&Where=" + $("#Where").val(); }
-
-    //创建工单
-    function createWorkOder(id, name, workOrderTemplateID) {
-        if ('True' == 'False') {
-            growlAlert.info("已超过单日可创工单工数，建议您升级后再进行创建");
-            return false;
-        }
-
-        startWorkOrderDialog('新建工单');
-        $.ajax({
-            url: "/servicespace/workorder/create",
-            type: "Get",
-            data: { "id": id, "Name": name, "WorkOrderTemplateID": workOrderTemplateID },
-            success: function (data) {
-                showWorkOrderDialog(data);
-            },
-            error: function (data) { showException(data); }
-        });
+    //查看详情
+    function see() {
+        $("#seeDailog").modal();
     }
 
-    //启动新建工单对话框
-    function startWorkOrderDialog(title) {
-        modalLoadding("#createworkDailog", title, 460)
-        $("#createworkDailog").modal();
-    }
-
-    //弹出新建工单对话框
-    function showWorkOrderDialog(data) {
-        $("#createworkDailog .modal-content").html(data);//填充对话框
-        WorkOrder.init();//初始化对话框
-    }
-
-    //创建工单成功
-    function editWorkOrderSucess(data) {
-        if (data == "ok") {
-            $("#createworkDailog").modal("hide");
-            growlAlert.success("新建工单成功!");
-            setTimeout('window.location.reload()', 1000);
-        }
-        else if (data == "faile") {
-            growlAlert.info("已超过单日可创工单工数，建议您升级后再进行创建")
-        }
-        else {
-            growlAlert.danger("新建工单失败。");
-        }
-    }
-
-    //创建客户
-    function createCustomer() {
-        var name =encodeURI($("#popCustomer_hidden").attr("data-bind"));
-        startcustomerDialog("新建客户");
-        $.ajax({
-            url: "/servicespace/customer/create?name=" + name,
-            type: "Get",
-            success: function (data) {
-                showcustomerDialog(data);
-            },
-            error: function (data) { showException(data); }
-        });
-    }
-
-    //启动新建客户对话框
-    function startcustomerDialog(title) {
-        modalLoadding("#createcustomerDailog", title, 460)
-        $("#createcustomerDailog").modal();
-    }
-
-    //弹出新建客户对话框
-    function showcustomerDialog(data) {
-        $("#createcustomerDailog .modal-content").html(data);//填充对话框
-        $("#createcustomerDailog form").attr("data-ajax-success", "createCustomerSucess");//改变表单提交成功回调函数
-        Customer.init();//初始化对话框
-
-    }
-
-    //客户名改变则联系人随之改变
-    function changeName(obj) {
-        if (!$("#Contact").val()) {
-            $("#Contact").val($(obj).val().replace(" ", ""));
-        }
-    }
-
-    //设置工单中客户信息
-    // function setCusToWork(data) {
-    //     $("#popCustomer_hidden,#popCustomer").val(data.Name).blur();
-    //     $("#Customer_ID").val(data.ID);
-    //
-    //     var customerId = $("#Customer_ID").val();
-    //     $("#SelContact").empty();
-    //     if (customerId) {
-    //         $.ajax({
-    //             url: "/ServiceSpace/Customer/GetContacts",
-    //             type: "Get",
-    //             data: { "customerId": customerId },
-    //             success: function (data) {
-    //                 if (data) {
-    //                     $.each(data, function (i, item) {
-    //                         if (i==0) {
-    //                             $("#SelContact").append("<option value=\"" + item.ID + "\" data-phone=\"" + item.Telephone + "\" data-mail=\"" + item.Mail + "\" data-area=\"" + item.Area + "\" data-address=\"" + item.Address + "\" selected=\"selected\">" + item.Name + "</option>");
-    //
-    //                             $("#popContact").val(item.Name).focus().blur();
-    //                             $("#popContactNumber").val(item.Telephone).focus().blur();
-    //                             $("#popContactMail").val(item.Mail);
-    //                             $("#popContactArea").val(item.Area);
-    //                             $("#popContactAddress").val(item.Address);
-    //                         }
-    //                         else {
-    //                             $("#SelContact").append("<option value=\"" + item.ID + "\" data-phone=\"" + item.Telephone + "\" data-mail=\"" + item.Mail + "\" data-area=\"" + item.Area + "\" data-address=\"" + item.Address + "\">" + item.Name + "</option>");
-    //                         }
-    //                     });
-    //                 }
-    //             },
-    //             error: function (data) { showException(data); }
-    //         });
-    //     }
-    // }
-
-    //提交编辑客户
-    function submitCustomer() {
-        //如果选择了区域，确保填写完整
-        if ($("#sel_pro").val() != "" && $("#sel_distr").val() == "") {
-            $("#span-error-area").removeClass("hidden");
-            return;
-        }
-
-        $("#editCustomerForm").submit();
-    }
-
-    //创建客户成功
-    function createCustomerSucess(data) {
-        if (data != null && data.ID != "") {
-            $("#createcustomerDailog").modal("hide");
-            growlAlert.success("操作成功!");
-            setCusToWork(data)
-        } else {
-            growlAlert.danger("操作失败！");
-        }
-    }
 </script>
 
 <!-- END PAGE SELF SCRIPTS -->

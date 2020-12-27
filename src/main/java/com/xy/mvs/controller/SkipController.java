@@ -52,11 +52,51 @@ public class SkipController {
     }
 
     /**
+     * 跳转到商城待发货订单页面
+     */
+    @RequestMapping("/mallDeliverOrder")
+    public String mallDeliverOrder(){
+        return "mall_deliver_order";
+    }
+
+    /**
+     * 跳转到商城待收货订单页面
+     */
+    @RequestMapping("/mallReceivingOrder")
+    public String mallReceivingOrder(){
+        return "mall_receiving_order";
+    }
+
+    /**
+     * 跳转到商城待评价订单页面
+     */
+    @RequestMapping("/mallEvaluateOrder")
+    public String mallEvaluateOrder(){
+        return "mall_evaluate_order";
+    }
+
+    /**
+     * 跳转到商城待评价订单页面
+     */
+    @RequestMapping("/mallCompleteOrder")
+    public String mallCompleteOrder(){
+        return "mall_complete_order";
+    }
+
+    /**
      * 跳转到抽奖订单管理页面
      */
     @RequestMapping("/lotteryOrder")
     public String lotteryOrder(){
         return "lottery_order";
+    }
+
+    /**
+     * 跳转到抽奖待发货订单页面
+     */
+    @RequestMapping("/lotteryDeliverOrder")
+    public String lotteryDeliverOrder(){
+        return "lottery_deliver_order";
     }
 
     /**

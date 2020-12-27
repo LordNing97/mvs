@@ -8,7 +8,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>商城订单</title>
+    <title>待发货订单</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -249,13 +249,13 @@
                             <div class="portlet-body side-menu-project-list-content" id="lst1">
                                 <div class="side-menu-project-list" data-always-visible="1" data-rail-visible1="1" id="workView">
                                     <ul class="nav nav-pills nav-stacked esh-nav-pills">
-                                        <li class=" active">
+                                        <li class="">
                                             <a onclick="javascript:location.href='/mallOrder'"><span>所有订单</span> <span class="badge badge-success">3</span></a>
                                         </li>
                                         <li class="">
                                             <a onclick="javascript:location.href='/mallPaidOrder'"><span>待付款的订单</span> <span class="badge badge-success">0</span></a>
                                         </li>
-                                        <li class="">
+                                        <li class="active">
                                             <a onclick="javascript:location.href='/mallDeliverOrder'"><span>待发货的订单</span> <span class="badge badge-success">2</span></a>
                                         </li>
                                         <li class="">
@@ -458,7 +458,7 @@
                         <div class="portlet light">
                             <div class="portlet-title">
                                 <div class="caption title">
-                                    订单列表
+                                    待发货订单
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium " style= "width: 280px !important">
@@ -506,10 +506,10 @@
                                                     产品数量
                                                 </th>
                                                 <th class="sorting" aria-label="State" aria-data>
-                                                    订单状态
+                                                    付款金额
                                                 </th>
                                                 <th class="sorting" aria-label="CreateTime" aria-data>
-                                                    创建时间
+                                                    付款时间
                                                 </th>
                                                 <th class aria-label aria-data>
                                                     操作
@@ -534,7 +534,7 @@
                                                     7
                                                 </td>
                                                 <td>
-                                                    <span class="label label-purple">待发货</span>
+                                                    100.22
                                                 </td>
                                                 <td>
                                                     2018-10-23 09:48:44
@@ -543,6 +543,10 @@
                                                     <button class="btn btn-default btn-xs black" onclick="see()">
                                                         <i class="fa fa-search"></i>
                                                         查看
+                                                    </button>
+                                                    <button class="btn btn-default btn-xs black" onclick="deliver()">
+                                                        <i class="fa fa-send"></i>
+                                                        发货
                                                     </button>
                                                 </td>
                                             </tr>
@@ -563,7 +567,7 @@
                                                     5
                                                 </td>
                                                 <td>
-                                                    <span class="label label-success">已关闭</span>
+                                                    500
                                                 </td>
                                                 <td>
                                                     2018-07-10 15:07:49
@@ -572,6 +576,10 @@
                                                     <button class="btn btn-default btn-xs black" onclick="see()">
                                                         <i class="fa fa-search"></i>
                                                         查看
+                                                    </button>
+                                                    <button class="btn btn-default btn-xs black" onclick="deliver()">
+                                                        <i class="fa fa-send"></i>
+                                                        发货
                                                     </button>
                                                 </td>
                                             </tr>
@@ -652,10 +660,6 @@
                                 </div>
                             </div>
 
-                            <form action="/servicespace/workorder/getlist?viewId=19083&amp;viewtype=1" data-ajax="true" data-ajax-begin="showLoading" data-ajax-complete="hideLoading" data-ajax-failure="showException" data-ajax-mode="replace" data-ajax-success="initTable" data-ajax-update="#dataTable" id="searchByRequest" method="post">                    <input type="hidden" id="serviceStaffId" value="30da7b29-700b-4310-adc5-1ee224a5b4a6" />
-                                <input type="hidden" id="serviceSpaceId" value="b45dc42c-1abb-4103-b6bf-87dc9bba082c" />
-                                <input type="hidden" id="serviceNetworkId" value="" />
-                                <input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /><input id="viewId" name="viewId" type="hidden" value="19083" /><input id="viewtype" name="viewtype" type="hidden" value="1" /></form>            </div>
                     </div>
 
                     <!--查看详情模态框-->
@@ -710,16 +714,76 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3">
-                                                订单状态<span class="required">*</span>
+                                                付款金额<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" value="待发货" disabled>
+                                                <input class="form-control" value="100" disabled>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--发货模态框-->
+                    <div class="modal fade bs-modal-lg" id="deliverDailog" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">查看</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                收件人姓名<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="收件人" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                收件人手机号<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="15233336666" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                收件人地址<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="上海市xxx区xxx弄" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                快递公司<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="顺丰">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                快递编号<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="DAF323FAFWA">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+                                    <button type="button" class="btn green">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -1126,6 +1190,11 @@
     //查看详情
     function see() {
         $("#seeDailog").modal();
+    }
+
+    //发货
+    function deliver() {
+        $("#deliverDailog").modal();
     }
 
 </script>
