@@ -100,6 +100,22 @@ public class SkipController {
     }
 
     /**
+     * 跳转到抽奖待收货订单页面
+     */
+    @RequestMapping("/lotteryReceivingOrder")
+    public String lotteryReceivingOrder(){
+        return "lottery_receiving_order";
+    }
+
+    /**
+     * 跳转到抽奖已完成订单页面
+     */
+    @RequestMapping("/lotteryCompleteOrder")
+    public String lotteryCompleteOrder(){
+        return "lottery_complete_order";
+    }
+
+    /**
      * 跳转到商城产品类型管理页面
      */
     @RequestMapping("/mailProductType")

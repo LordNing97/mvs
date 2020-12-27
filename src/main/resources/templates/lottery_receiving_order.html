@@ -8,7 +8,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>待发货订单</title>
+    <title>待收货订单</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -252,10 +252,10 @@
                                         <li class="">
                                             <a onclick="javascript:location.href='/lotteryOrder'"><span>所有订单</span> <span class="badge badge-success">3</span></a>
                                         </li>
-                                        <li class="active">
+                                        <li class="">
                                             <a onclick="javascript:location.href='/lotteryDeliverOrder'"><span>待发货的订单</span> <span class="badge badge-success">2</span></a>
                                         </li>
-                                        <li class="">
+                                        <li class="active">
                                             <a onclick="javascript:location.href='/lotteryReceivingOrder'"><span>待收货的订单</span> <span class="badge badge-success">0</span></a>
                                         </li>
                                         <li class="">
@@ -452,7 +452,7 @@
                         <div class="portlet light">
                             <div class="portlet-title">
                                 <div class="caption title">
-                                    待发货订单
+                                    待收货订单
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium " style= "width: 280px !important">
@@ -497,16 +497,13 @@
                                                     产品型号
                                                 </th>
                                                 <th class aria-label aria-data>
-                                                    收件人姓名
+                                                    物流公司
                                                 </th>
-                                                <th class aria-label aria-data>
-                                                    收件人手机号
+                                                <th class="sorting" aria-label="State" aria-data>
+                                                    快递单号
                                                 </th>
-                                                <th class aria-label aria-data>
-                                                    收件人地址
-                                                </th>
-                                                <th class aria-label aria-data>
-                                                    操作
+                                                <th class="sorting" aria-label="CreateTime" aria-data>
+                                                    发货时间
                                                 </th>
                                             </tr>
                                             </thead>
@@ -525,19 +522,13 @@
                                                     rx9800
                                                 </td>
                                                 <td>
-                                                    收件人
+                                                    顺丰
                                                 </td>
                                                 <td>
-                                                    15200002222
+                                                    AFAW31651
                                                 </td>
                                                 <td>
-                                                    上海市
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="deliver()">
-                                                        <i class="fa fa-send"></i>
-                                                        发货
-                                                    </button>
+                                                    2018-10-23 09:48:44
                                                 </td>
                                             </tr>
                                             <tr class="odd gradeX">
@@ -554,19 +545,13 @@
                                                     CN-231
                                                 </td>
                                                 <td>
-                                                    收件人
+                                                    顺丰
                                                 </td>
                                                 <td>
-                                                    15200002222
+                                                    AFAW31651
                                                 </td>
                                                 <td>
-                                                    上海市
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="deliver()">
-                                                        <i class="fa fa-send"></i>
-                                                        发货
-                                                    </button>
+                                                    2018-07-10 15:07:49
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -700,76 +685,32 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3">
-                                                付款金额<span class="required">*</span>
+                                                物流公司<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" value="100" disabled>
+                                                <input class="form-control" value="顺丰" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                快递单号<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="DAW16565" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                发货时间<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input class="form-control" value="2018-10-23 09:48:44" disabled>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--发货模态框-->
-                    <div class="modal fade bs-modal-lg" id="deliverDailog" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                    <h4 class="modal-title">发货</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                收件人姓名<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="收件人" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                收件人手机号<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="15233336666" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                收件人地址<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="上海市xxx区xxx弄" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                快递公司<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="顺丰">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                快递编号<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="DAF323FAFWA">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                    <button type="button" class="btn green">确定</button>
                                 </div>
                             </div>
                         </div>
