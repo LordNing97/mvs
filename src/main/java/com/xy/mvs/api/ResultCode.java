@@ -58,7 +58,7 @@ public enum ResultCode {
 
     UN_USER(HttpServletResponse.SC_BAD_REQUEST, "未找到该用户"),
 
-    PHONE_IS_EXISTENCE(HttpServletResponse.SC_BAD_REQUEST, "手机号已存在"),
+    USER_IS_EXISTENCE(HttpServletResponse.SC_BAD_REQUEST, "用户已存在"),
 
     PHONE_IS_RELATED(HttpServletResponse.SC_BAD_REQUEST, "手机号已关联"),
 

@@ -8,6 +8,13 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
 
     /**
+     * 保存用户
+     * @param user
+     * @return
+     */
+    int saveUser(User user);
+
+    /**
      * 根据用户名和密码获取用户
      * @param name
      * @param password
@@ -20,6 +27,20 @@ public interface UserMapper {
      * @param id
      * @return
      */
-    User selectById(Integer id);
+    User getById(Integer id);
+
+    /**
+     * 编辑用户
+     * @param user
+     * @return
+     */
+    int modifyUser(User user);
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    int deleteUser(Integer id);
 
 }

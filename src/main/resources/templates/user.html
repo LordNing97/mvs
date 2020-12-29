@@ -269,51 +269,33 @@
                             <!--</div>-->
                         </div>
                     </div>
+
                     <div class="esh-filter-sidebar">
-                        <div class="header"><b class="title">服务人员筛选</b> <a class="close" href="javascript:void(0)"></a></div>
+                        <div class="header"><b class="title">用户筛选</b> <a class="close" href="javascript:void(0)"></a></div>
                         <div class="sidebar-wrap">
                             <section class="content">
                                 <div class="tip clearfix"><i class="fa fa-filter" style="color:#999"></i> 筛选条件<a class="pull-right hidden clear-filter" href="javascript:void(0)" onclick="clearFilter()">清空筛选</a></div>
                                 <div class="form-group">
-                                    <label>所属网点</label>
+                                    <label>权限</label>
                                     <select id="select-network" class="form-control">
-                                        <option value="">请选择网点</option>
-                                        <option value="8ccc5342-5b0d-4ef0-b022-d081d685cf9b">万维信达分部4号</option>
-                                        <option value="d1eec2a7-d02f-4429-bf28-01a39984d7c8">万维信达分部3号</option>
-                                        <option value="5a5c7698-9d42-4fd2-9a03-96498bd2eb4b">万维信达分部2号</option>
-                                        <option value="0ae09199-6d30-491b-afec-c649944a5395">万维信达分部1号</option>
-                                        <option value="a61e0c34-46cc-4244-8aa2-255450ed740b">万维信达</option>
+                                        <option value="-1">请选择权限</option>
+                                        <option value="0">系统管理员</option>
+                                        <option value="1">抽奖</option>
+                                        <option value="2">商城</option>
+                                        <option value="3">抽奖+抽奖设置</option>
+                                        <option value="4">抽奖+商城</option>
                                     </select>
                                 </div>
 
-
-                                <div class="form-group">
-                                    <label>网点类型</label>
-                                    <ul class="filter-option two clearfix">
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="1" /><input name="type" type="hidden" value="false" />总部
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="2" /><input name="type" type="hidden" value="false" />自建网点
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="3" /><input name="type" type="hidden" value="false" />第三方服务商
-                                            </label>
-                                        </li>
-                                    </ul>
-                                    <input type="hidden" id="type_hide" value="" />
-                                </div>
                             </section>
                         </div>
 
                     </div>
+
                     <div class="side-menu-content">
+
                         <div class="portlet light">
+
                             <div class="portlet-title">
                                 <div class="caption title">
                                     用户管理
@@ -329,6 +311,7 @@
                             </div>
 
                             <div class="portlet-body">
+
                                 <div class="table-toolbar">
                                     <div class="col-xs-8 clear-padding-left">
                                         <a class="btn green" href="javascript:void(0)" onclick="create()">新建</a>
@@ -485,6 +468,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                     </div>
                 </div>
@@ -506,7 +490,7 @@
                                             姓名<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <input id="name" class="form-control" value="郝博闻" disabled>
+                                            <input class="form-control" value="郝博闻" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -551,7 +535,7 @@
                                             姓名<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <input class="form-control" placeholder="请输入姓名">
+                                            <input id="name" class="form-control" placeholder="请输入姓名">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -559,7 +543,7 @@
                                             密码<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <input class="form-control" type="password" placeholder="请输入密码">
+                                            <input id="password" class="form-control" type="password" placeholder="请输入密码">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -567,12 +551,12 @@
                                             权限<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <select class="form-control">
-                                                <option>系统管理员</option>
-                                                <option>抽奖+抽奖设置</option>
-                                                <option>抽奖+商城</option>
-                                                <option>抽奖</option>
-                                                <option>商城</option>
+                                            <select id="role" class="form-control">
+                                                <option value="0">系统管理员</option>
+                                                <option value="1">抽奖</option>
+                                                <option value="2">商城</option>
+                                                <option value="3">抽奖+抽奖设置</option>
+                                                <option value="4">抽奖+商城</option>
                                             </select>
                                         </div>
                                     </div>
@@ -581,7 +565,7 @@
                             <div class="modal-footer">
                                 <input type="hidden">
                                 <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                <button type="button" class="btn green" onclick="deleteBrand()">确定</button>
+                                <button type="button" class="btn green" onclick="saveUser()">确定</button>
                             </div>
                         </div>
                     </div>
@@ -734,13 +718,10 @@
 </script>
 <!-- BEGIN PAGE SELF SCRIPTS -->
 
-<script type="text/javascript" src="../static/admin/scripts/selectAccessory.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         initEvent();//事件绑定
         initPageSize();
-
-        //changeQueryCondition();
     });
 
     //事件绑定
@@ -856,6 +837,21 @@
         $("#Direction").val(direction);
         $("#PageIndex").val(1);//页索引置为1
         $("#searchByRequest").submit();
+    }
+
+    //保存用户
+    function saveUser(){
+        let username = $("#name").val();
+        let password = $("#password").val();
+        let role = $("#role").val();
+        $.post("user/saveUser",{name:username, password:password, role:role},function(result){
+            if(result.code == 200){
+                growlAlert.success("保存成功");
+                $("#createDailog").model("hide");
+            }else{
+                growlAlert.danger(result.msg);
+            }
+        });
     }
 
     //查看详情

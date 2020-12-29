@@ -337,7 +337,7 @@
                                     <div class="portlet light panel-block index-block" style="padding-right:13px;">
                                         <div class="portlet-title">
                                             <div class="caption">
-                                                <span class="caption-subject uppercase">客户消费动态</span>
+                                                <span class="caption-subject uppercase">客户充值动态</span>
                                             </div>
                                             <div class="actions" style="margin-top:4px;margin-right:13px">
                                                 <a href="/home/news?cid=3" target="_blank" title="查看更多">
@@ -359,7 +359,7 @@
                                                                 </div>
                                                                 <div class="cont-col2">
                                                                     <div class="desc esh-txtellipsis">
-                                                                        用户****消费100元
+                                                                        用户****充值100元
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -385,7 +385,7 @@
                                                                 </div>
                                                                 <div class="cont-col2">
                                                                     <div class="desc esh-txtellipsis">
-                                                                        用户****消费100元
+                                                                        用户****充值100元
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -777,221 +777,6 @@
         $("body").addClass("page-container-bg-solid");
     });
 
-    //初始化排序
-    function InitSort(sortwrap, control) {
-        if (!jQuery().sortable) {
-            return;
-        }
-
-        $("#" + sortwrap).sortable({
-            connectWith: "#" + sortwrap + " li",
-            opacity: 0.8,
-            //handle: '.oper-icon',
-            cursor: 'move',
-            coneHelperSize: true,
-            forcePlaceholderSize: true,
-            containment: 'parent',
-            tolerance: "pointer",
-            helper: "clone",
-            tolerance: "pointer",
-            revert: 250,
-            update: function (b, c) {
-                var ids = new Array();
-                $("#" + sortwrap + " li").each(function () {
-                    if ($(this).attr("data-card")) {
-                        ids.push($(this).attr("data-card"));
-                    }
-                });
-
-                if (control == "operate") {
-                    saveOperate(ids);
-                } else {
-                    saveDashboard(ids);
-                }
-
-            }
-        });
-    }
-
-    //启动对话框
-    function startDialog(title) {
-        modalLoadding("#editDailog", title, 460)
-        $("#editDailog").modal();
-    }
-
-    //启动邮件对话框
-    function startemailDialog(title) {
-        modalLoadding("#emailDailog", title, 400)
-        $("#emailDailog").modal();
-    }
-
-    //==============快捷操作==================//
-    //编辑快捷操作
-    function editOperate() {
-        $("#show_operate").addClass("hidden");
-        $("#btn_edit").addClass("hidden");
-        $(".esh-operate-no").addClass("hidden");
-
-        $("#edit_operate").removeClass("hidden");
-        $("#operate-helper").removeClass("hidden");
-        $("#btn_show").removeClass("hidden");
-    }
-
-    //显示
-    function showOperate() {
-        $("#show_operate").removeClass("hidden");
-        $("#btn_edit").removeClass("hidden");
-        $(".esh-operate-no").removeClass("hidden");
-        $("#edit_operate").addClass("hidden");
-        $("#operate-helper").addClass("hidden");
-        $("#btn_show").addClass("hidden");
-    }
-
-    //选择常见操作
-    function selectoperate() {
-        var ids = new Array();
-        $("#edit_operate  li").each(function () {
-            if ($(this).attr("data-card")) {
-                ids.push($(this).attr("data-card"));
-            }
-        });
-
-        var addids = new Array();
-        var removeids = new Array();
-        $("#editDailog input[type=checkbox]").each(function () {
-            if ($(this).attr("checked")) {
-                addids.push($(this).val());
-            }
-            else {
-                removeids.push($(this).val());
-            }
-        });
-
-        //选择不能超过9个
-        if (addids.length > 9) {
-            $("#span-condition-error").removeClass("hidden");
-            return;
-        }
-
-
-        //末尾添加选择的操作
-        $.each(addids, function (i, o) {
-            if (ids.indexOf(o) < 0) {
-                ids.push(o);
-            }
-        });
-
-        //删除未选择的操作
-        $.each(removeids, function (i, o) {
-            if (ids.indexOf(o) > -1) {
-                ids.splice(ids.indexOf(o), 1);
-            }
-        });
-
-        $("#editDailog").modal("hide");
-        saveOperate(ids);
-    }
-
-    //删除操作
-    function delelteoperate(operate) {
-        var ids = new Array();
-        $("#edit_operate  li").each(function () {
-            ids.push($(this).attr("data-card"));
-        });
-        if (ids.indexOf(operate) > -1) {
-            ids.splice(ids.indexOf(operate), 1);
-        }
-
-        saveOperate(ids);
-    }
-
-    //===========仪表盘操作=========//
-    //编辑仪表盘
-    function editDashboard() {
-        $("#show_dashboard").addClass("hidden");
-        $("#btn_dash_edit").addClass("hidden");
-        $(".esh-dashboard-no").addClass("hidden");
-        $("#edit_dashboard").removeClass("hidden");
-        $("#dashboard-helper").removeClass("hidden");
-        $("#btn_dash_show").removeClass("hidden");
-    }
-
-    //显示
-    function showDashboard() {
-        $("#show_dashboard").removeClass("hidden");
-        $("#btn_dash_edit").removeClass("hidden");
-        $(".esh-dashboard-no").removeClass("hidden");
-        $("#edit_dashboard").addClass("hidden");
-        $("#dashboard-helper").addClass("hidden");
-        $("#btn_dash_show").addClass("hidden");
-    }
-
-    //选择常见操作
-    function selectDashboard() {
-        var ids = new Array();
-        $("#edit_dashboard  li").each(function () {
-            if ($(this).attr("data-card")) {
-                ids.push($(this).attr("data-card"));
-            }
-        });
-
-        var addids = new Array();
-        var removeids = new Array();
-        $("#editDailog input[type=checkbox]").each(function () {
-            if ($(this).attr("checked")) {
-                addids.push($(this).val());
-            }
-            else {
-                removeids.push($(this).val());
-            }
-        });
-
-        //选择不能超过5个
-        if (addids.length > 5) {
-            $("#span-dashboard-error").removeClass("hidden");
-            return;
-        }
-
-
-        //末尾添加选择的操作
-        $.each(addids, function (i, o) {
-            if (ids.indexOf(o) < 0) {
-                ids.push(o);
-            }
-        });
-
-        //删除未选择的操作
-        $.each(removeids, function (i, o) {
-            if (ids.indexOf(o) > -1) {
-                ids.splice(ids.indexOf(o), 1);
-            }
-        });
-
-        $("#editDailog").modal("hide");
-        saveDashboard(ids);
-    }
-
-    //删除操作
-    function delelteDashboard(obj) {
-        var ids = new Array();
-        $("#edit_dashboard  li").each(function () {
-            ids.push($(this).attr("data-card"));
-        });
-        if (ids.indexOf(obj) > -1) {
-            ids.splice(ids.indexOf(obj), 1);
-        }
-
-        saveDashboard(ids);
-    }
-
-    function editSucess(data) {
-        if (data == "ok") {
-            growlAlert.success("邀请发送成功");
-            $("#emailDailog").modal("hide");
-        } else {
-            growlAlert.danger("邀请发送失败");
-        }
-    }
 </script>
 
 <!-- END PAGE SELF SCRIPTS -->
