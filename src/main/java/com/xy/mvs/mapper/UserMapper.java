@@ -4,6 +4,8 @@ import com.xy.mvs.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
@@ -42,5 +44,18 @@ public interface UserMapper {
      * @return
      */
     int deleteUser(Integer id);
+
+    int countUser(@Param("name") String name, @Param("role") Integer role);
+
+    /**
+     * 分页获取用户
+     * @param name
+     * @param role
+     * @param page
+     * @param size
+     * @return
+     */
+    List<User> getUserList(@Param("name") String name, @Param("role") Integer role,
+                           @Param("page") Integer page, @Param("size") Integer size);
 
 }

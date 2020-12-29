@@ -38,4 +38,30 @@
         where id = #{id}
     </update>
 
+    <select id="countUser" resultType="java.lang.Integer">
+        select count(1)
+        from user
+        where is_del = 0
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="role != -1">
+            and role = #{role}
+        </if>
+    </select>
+
+    <!--  分页获取用户  -->
+    <select id="getUserList" resultType="com.xy.mvs.model.User">
+        select * from user
+        where is_del = 0
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="role != -1">
+            and role = #{role}
+        </if>
+        order by role
+        limit #{page},#{size}
+    </select>
+
 </mapper>

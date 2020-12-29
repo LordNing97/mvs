@@ -76,4 +76,18 @@ public class UserController {
         return Result.builder(ResultCode.OPERATION_ERROR).build();
     }
 
+    @ApiOperation(value = "分页获取用户", httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名",dataType = "string", paramType = "query", required = true),
+            @ApiImplicitParam(name = "role", value = "权限(-1:全部 0:系统管理员 1:抽奖 2:商城 3:抽奖+抽奖设置 4:抽奖+商城)",dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "page", value = "page",dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "size", value = "size",dataType = "int", paramType = "query", required = true)
+    })
+    @GetMapping("getUserList")
+    public Result getUserList(String name, Integer role, Integer page, Integer size){
+        return Result.builder()
+                .data(userService.getUserList(name, role, page, size))
+                .build();
+    }
+
 }

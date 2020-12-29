@@ -4,8 +4,10 @@ import com.xy.mvs.api.Result;
 import com.xy.mvs.api.ResultCode;
 import com.xy.mvs.mapper.UserMapper;
 import com.xy.mvs.model.User;
+import com.xy.mvs.request.UserList;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author 陈璇
@@ -68,6 +70,23 @@ public class UserService {
      */
     public boolean deleteUser(Integer id){
         return userMapper.deleteUser(id) > 0;
+    }
+
+    /**
+     * 分页获取用户
+     * @param name
+     * @param role
+     * @param page
+     * @param size
+     * @return
+     */
+    public UserList getUserList(String name, Integer role, Integer page, Integer size){
+        List<User> userList = userMapper.getUserList(name, role, (page - 1) * size, size);
+        return UserList.builder()
+                .userList(userList)
+                .total(userMapper.countUser(name, role))
+                .page(page)
+                .build();
     }
 
 }
