@@ -68,15 +68,7 @@ public class SkipController {
     }
 
     /**
-     * 跳转到商城待评价订单页面
-     */
-    @RequestMapping("/mallEvaluateOrder")
-    public String mallEvaluateOrder(){
-        return "mall_evaluate_order";
-    }
-
-    /**
-     * 跳转到商城待评价订单页面
+     * 跳转到商城已完成订单页面
      */
     @RequestMapping("/mallCompleteOrder")
     public String mallCompleteOrder(){

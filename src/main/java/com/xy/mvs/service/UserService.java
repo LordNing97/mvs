@@ -1,18 +1,24 @@
 package com.xy.mvs.service;
 
+import com.xy.mvs.mapper.UserMapper;
+import com.xy.mvs.model.User;
+import org.springframework.stereotype.Service;
+import javax.annotation.Resource;
 
-import com.xy.mvs.util.ResultMap;
+/**
+ * @Author 陈璇
+ * @Date 2020/12/29 11:24
+ * @Version 1.0
+ */
+@Service
+public class UserService {
 
-public interface UserService {
+    @Resource
+    private UserMapper userMapper;
 
-    /**
-     * 根据用户名和密码获取用户
-     */
-    ResultMap selectByNameAndPwd(String username, String password);
-
-    /**
-     * 根据ID获取用户
-     */
-    ResultMap selectById(Integer id);
+    public User selectById(Integer id) {
+        User user = userMapper.selectById(id);
+        return user;
+    }
 
 }

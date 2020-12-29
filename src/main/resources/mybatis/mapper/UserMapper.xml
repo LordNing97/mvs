@@ -3,11 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xy.mvs.mapper.UserMapper">
 
-    <select id="selectByNameAndPwd" resultType="User">
+    <select id="selectByNameAndPwd" resultType="com.xy.mvs.model.User">
         select * from user where name = #{name} and password = #{password}
     </select>
 
-    <select id="selectById" resultType="User">
+    <select id="selectById" resultType="com.xy.mvs.model.User">
         select * from `user` where id = #{id}
     </select>
 
