@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+    <div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-space" id="spaceMenu">
+
+
+            <a href="/servicespace/startpage" class="space-logo middle"><img src="../static/admin/img/logo.png"/></a>
+            <div class="btn-group esh-space-sel">
+                <a href="javascript:void(0)" class="back-link name-wrap" data-toggle="dropdown" aria-expanded="false">
+                    <span class="username username-hide-on-mobile">CRM后台管理系统</span>
+                </a>
+            </div>
+
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+           data-target=".navbar-collapse"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <div class="pull-right">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true"
+                           title="未读消息">
+                            <i class="icon-bell"></i>
+                            <span class="badge badge-default">
+                                4
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li class="external">
+                                <h3> 消息通知<span class="bold">(4)</span></h3>
+                            </li>
+                            <li>
+                                <ul class="dropdown-menu-list" data-handle-color="#637283">
+                                    <li>
+                                        <a href="/organization/message?serviceSpaceId=fd5c440d-f982-41e5-aa5e-5b86928532ef">
+                                            <span class="details">
+                                                1
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/organization/message?serviceSpaceId=b45dc42c-1abb-4103-b6bf-87dc9bba082c">
+                                            <span class="badge badge-danger pull-right">4</span> <span class="details">
+                                                美乐云购
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END TODO DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+
+
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" onerror="this.src = '../static//admin/img/def_user_icon.jpg'"
+                                 src="../static//admin/img/def_user_icon.jpg"/>
+                            <span class="username username-hide-on-mobile">郝博闻</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu esh-pub-menu esh-user-menu" style="width:260px">
+                            <li class="user clearfix">
+                                <div class="col-md-4">
+                                    <img alt="" class="img-circle"
+                                         onerror="this.src = '../static/admin/img/def_user_icon.jpg'"
+                                         src="../static//admin/img/def_user_icon.jpg"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="info">
+                                        <span>郝博闻</span>
+                                        <span class="label label-orange">企业版</span>
+                                        <p>美乐云购</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/organization/personal">
+                                    <i class="icon-user"></i>个人信息
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/organization/personal/editpassword">
+                                    <i class="icon-lock"></i>修改密码
+                                </a>
+                            </li>
+
+                            <li class="last">
+                                <a href="/account/logout">
+                                    <i class="icon-logout"></i>退出系统
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+</body>
+<script src="../static/js/jquery.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/js.cookie.js"></script>
+<script th:inline="javascript">
+
+</script>
+</html>

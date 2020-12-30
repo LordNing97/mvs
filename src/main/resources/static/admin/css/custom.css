@@ -48,9 +48,9 @@ table tr > td {
 	padding: 2px 8px;
 }
 
-table.table-pointer td {
+/*table.table-pointer td {
 	cursor: pointer;
-}
+}*/
 
 .table-condensed tr>td{
     font-size:13px
@@ -253,6 +253,10 @@ select.form-control::-ms-expand { display: none;}
 
 .label-brown {
 	background-color: #795548;
+}
+
+.label-5{
+	background-color: #89C4F4;
 }
 
 /*定义1/8等份宽度域*/
@@ -658,7 +662,7 @@ select.form-control::-ms-expand { display: none;}
 	position: fixed;
 	z-index: 3;
 	margin: -25px 0 0 -20px;
-	width: 240px;
+	width: 180px;
 	height: 100%;
 	background-color: #f2f2f9;
 	/*-webkit-transition: all 0.3s ease;
@@ -668,7 +672,7 @@ select.form-control::-ms-expand { display: none;}
 }
 
 .side-menu-content {
-	padding-left: 235px;
+	padding-left: 175px;
 }
 
 .side-menu-sidebar .portlet-nav {
@@ -724,7 +728,6 @@ select.form-control::-ms-expand { display: none;}
 	border-radius: 0px;
 	background: #e9ecef;
 }
-
 .side-menu-sidebar .portlet > .portlet-title > .caption > span.current {
 	cursor: pointer;
 }
@@ -4834,6 +4837,9 @@ position: absolute;
 .esh-setting-list .setting-ico.guzhang-type {
 	background-position: -1499px 0px;
 }
+.esh-setting-list .setting-ico.fault {
+	background-position: -818px 0px;
+}
 
     /*=======收费项目======*/
 .esh-setting-list .setting-ico.charge-item {
@@ -7265,7 +7271,7 @@ position: absolute;
 .esh-select-form.open .dropdown-menu{display:block}
 
 /*筛选功能样式*/
-.esh-filter-sidebar{width:335px;position:fixed;height:100%; right:-340px;z-index:1001;background-color:rgb(247, 247, 247);box-shadow:-3px 0 3px rgba(0,0,0,.15);margin-top:-10px;padding:15px 6px 0px 18px;-webkit-transition: all 0.3s ease; 
+.esh-filter-sidebar{width:335px;position:fixed;height:100%; right:-340px;z-index:1001;background-color:rgb(247, 247, 247);box-shadow:-3px 0 3px rgba(0,0,0,.15);margin-top:-10px;padding:15px 6px 0px 18px;-webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
      transition: all 0.3s ease;}
 
@@ -7275,6 +7281,7 @@ position: absolute;
 .esh-filter-sidebar .header{padding-bottom:20px;padding-top:10px;margin-right:9px;border-bottom:1px solid #ddd;text-align:center;font-size:15px}
 .esh-filter-sidebar .header .close{top:6px;right:5px;position:relative}
 .esh-filter-sidebar .content{padding-bottom:18px}
+.esh-filter-sidebar .content :last-child{min-height: 20px}
 .esh-filter-sidebar .content .tip{
     font-size: 14px;
     margin-bottom: 20px;

@@ -1,17 +1,18 @@
-
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if IE 8]>
+<html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="zh-CN" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="zh-CN" class="no-js">
+<html lang="zh-CN" class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
     <title>客户管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="" name="description" />
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="" name="description"/>
     <link href="../static/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="../static/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet"/>
     <link href="../static/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -22,7 +23,8 @@
     <link href="../static/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
     <link href="../static/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet"/>
     <link href="../static/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
-    <link href="../static/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet"/>
     <link href="../static/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
     <link href="../static/global/plugins/bootstrap-fileinput/css/fileinput.css" rel="stylesheet"/>
     <link href="../static/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
@@ -30,8 +32,11 @@
     <link href="../static/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet"/>
     <link href="../static/global/css/components-rounded.css" rel="stylesheet"/>
     <link href="../static/admin/css/layout.css" rel="stylesheet"/>
+    <link href="../static/layui/css/layui.css" rel="stylesheet"/>
     <link href="../static/admin/css/custom.css" rel="stylesheet"/>
     <link href="../static/admin/css/themes/default.css" rel="stylesheet" id="style_color">
+    <link rel="icon" href="../static/img/icon_16.ico" mce_href="../static/img/icon_16.ico">
+    <link rel="shortcut icon" href="../static/img/icon_16.ico" mce_href="../static/img/icon_16.ico">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -497,50 +502,32 @@
 <script src="../static/global/plugins/respond.min.js"></script>
 <script src="../static/global/plugins/excanvas.min.js"></script>
 <![endif]-->
+<script type="text/javascript" src="../static/js/vue.js"></script>
+<script type="text/javascript" src="../static/js/vue-resource.js"></script>
 <script src="../static/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="../static/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
 <script src="../static/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"
+        type="text/javascript"></script>
 <script src="../static/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <script src="../static/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
-<script src="../static/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-<script src="../static/admin/scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript" ></script>
-
-<!-- END CORE PLUGINS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="../static/global/plugins/select2/select2.min.js"></script>
-<script type="text/javascript" src="../static/global/plugins/select2/select2_locale_zh-CN.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="../static/admin/scripts/location.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/fileinput.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js"></script>
-<script type="text/javascript" src="../static/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="../static/admin/scripts/jquery.validate.unobtrusive.min.js"></script>
-<script type="text/javascript" src="../static/admin/scripts/honeySwitch.js"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-
 <script src="../static/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="../static/admin/scripts/layout.js" type="text/javascript"></script>
 <script src="../static/admin/scripts/theme.js" type="text/javascript"></script>
-<script src="../static/admin/scripts/jquery.signalR-2.2.0.js" type="text/javascript"></script>
-<script src="../static/signalr/hubs" type="text/javascript"></script>
+<script src="../static/layui/layui.js" type="text/javascript"></script>
 <script type="text/javascript" src="../static/admin/scripts/custom.js"></script>
 <script>
     jQuery(document).ready(function () {
-        $.ajaxSetup({ cache: false });//设置缓存策略
+        $.ajaxSetup({cache: false});//设置缓存策略
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
 
-        if ($(".side-menu-sidebar").length > 0) { initSideMenu(); }
-        if ($(".esh-filter-sidebar").length > 0) { initFlterMenu(); }
+        if ($(".side-menu-sidebar").length > 0) {
+            initSideMenu();
+        }
+        if ($(".esh-filter-sidebar").length > 0) {
+            initFlterMenu();
+        }
         if ($(".scroll-fixed").length > 0) {
             $(".scroll-fixed").each(function () {
                 var i = 0;
@@ -549,7 +536,7 @@
                     mouseWheel.addEventListener('DOMMouseScroll', function (event) {
                         this.scrollTop = this.scrollTop - (event.wheelDelta ? event.wheelDelta : -event.detail * 10);
                         return false;
-                    },false)
+                    }, false)
                 }
                 document.getElementsByClassName('scroll-fixed')[i].onmousewheel = function (event) {
                     if (!event) event = window.event;
@@ -559,54 +546,9 @@
                 i++;
             })
         }
-
-        //侧栏收起展开样式保存
-        $('body').on('click', '.sidebar-toggler', function (e) {
-            $.ajax({
-                url: "/organization/personal/savesidebaroption",
-                type: "POST",
-                data: { "Option": $.cookie("sidebar_closed") }
-            });
-        });
-
-        //接收服务端推送的消息
-        var chat = $.connection.messageHub;
-        if (chat) {
-            chat.client.recieveMessage = function (message) {
-                var userID = $("#userID").val();
-                //异步获取提醒消息
-                if (message && message.Content && message.Content.indexOf(userID) >= 0) {
-                    $.ajax({
-                        url: "/organization/message/getmessagemenu",
-                        type: "Get",
-                        success: function (data) {
-                            $("#header_notification_bar").html(data);
-                        },
-                        error: function (data) { showException(data); }
-                    });
-
-                    if ($("#pendwork").length > 0) {
-                        $.ajax({
-                            url: "/servicespace/startpage/pendworkorder",
-                            type: "Get",
-                            success: function (data) {
-                                $("#pendwork").html(data);
-                            },
-                            error: function (data) { showException(data); }
-                        })
-                    }
-
-                }
-            };
-
-            $.connection.hub.stop();//断开连接
-            $.connection.hub.start();//重新连接
-        }
     });
 </script>
 <!-- BEGIN PAGE SELF SCRIPTS -->
-
-<script type="text/javascript" src="../static/admin/scripts/selectAccessory.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         initEvent();//事件绑定

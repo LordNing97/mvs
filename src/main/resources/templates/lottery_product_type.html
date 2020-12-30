@@ -1,17 +1,18 @@
-
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
+<!--[if IE 8]>
+<html lang="zh-CN" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="zh-CN" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="zh-CN" class="no-js">
+<html lang="zh-CN" class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
     <title>抽奖产品类型管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="" name="description" />
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="" name="description"/>
     <link href="../static/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="../static/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet"/>
     <link href="../static/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -22,7 +23,8 @@
     <link href="../static/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
     <link href="../static/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet"/>
     <link href="../static/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
-    <link href="../static/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="../static/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet"/>
     <link href="../static/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
     <link href="../static/global/plugins/bootstrap-fileinput/css/fileinput.css" rel="stylesheet"/>
     <link href="../static/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
@@ -30,8 +32,11 @@
     <link href="../static/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet"/>
     <link href="../static/global/css/components-rounded.css" rel="stylesheet"/>
     <link href="../static/admin/css/layout.css" rel="stylesheet"/>
+    <link href="../static/layui/css/layui.css" rel="stylesheet"/>
     <link href="../static/admin/css/custom.css" rel="stylesheet"/>
     <link href="../static/admin/css/themes/default.css" rel="stylesheet" id="style_color">
+    <link rel="icon" href="../static/img/icon_16.ico" mce_href="../static/img/icon_16.ico">
+    <link rel="shortcut icon" href="../static/img/icon_16.ico" mce_href="../static/img/icon_16.ico">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -41,115 +46,7 @@
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
     <!-- BEGIN HEADER INNER -->
-    <div class="page-header-inner">
-        <!-- BEGIN LOGO -->
-        <div class="page-space" id="spaceMenu">
-
-
-            <a href="/servicespace/startpage" class="space-logo middle"><img src="../static/admin/img/logo.png"/></a>
-            <div class="btn-group esh-space-sel">
-                <a href="javascript:void(0)" class="back-link name-wrap" data-toggle="dropdown" aria-expanded="false">
-                    <span class="username username-hide-on-mobile">CRM后台管理系统</span>
-                </a>
-            </div>
-
-        </div>
-        <!-- END LOGO -->
-        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
-           data-target=".navbar-collapse"></a>
-        <!-- END RESPONSIVE MENU TOGGLER -->
-        <div class="pull-right">
-            <!-- BEGIN TOP NAVIGATION MENU -->
-            <div class="top-menu">
-                <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true"
-                           title="未读消息">
-                            <i class="icon-bell"></i>
-                            <span class="badge badge-default">
-                                4
-                            </span>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li class="external">
-                                <h3> 消息通知<span class="bold">(4)</span></h3>
-                            </li>
-                            <li>
-                                <ul class="dropdown-menu-list" data-handle-color="#637283">
-                                    <li>
-                                        <a href="/organization/message?serviceSpaceId=fd5c440d-f982-41e5-aa5e-5b86928532ef">
-                                            <span class="details">
-                                                1
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/organization/message?serviceSpaceId=b45dc42c-1abb-4103-b6bf-87dc9bba082c">
-                                            <span class="badge badge-danger pull-right">4</span> <span class="details">
-                                                美乐云购
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- END TODO DROPDOWN -->
-                    <!-- BEGIN USER LOGIN DROPDOWN -->
-
-
-                    <li class="dropdown dropdown-user">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-                            <img alt="" class="img-circle" onerror="this.src = '../static//admin/img/def_user_icon.jpg'"
-                                 src="../static//admin/img/def_user_icon.jpg"/>
-                            <span class="username username-hide-on-mobile">郝博闻</span>
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu esh-pub-menu esh-user-menu" style="width:260px">
-                            <li class="user clearfix">
-                                <div class="col-md-4">
-                                    <img alt="" class="img-circle"
-                                         onerror="this.src = '../static/admin/img/def_user_icon.jpg'"
-                                         src="../static//admin/img/def_user_icon.jpg"/>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="info">
-                                        <span>郝博闻</span>
-                                        <span class="label label-orange">企业版</span>
-                                        <p>美乐云购</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="/organization/personal">
-                                    <i class="icon-user"></i>个人信息
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="/organization/personal/editpassword">
-                                    <i class="icon-lock"></i>修改密码
-                                </a>
-                            </li>
-
-                            <li class="last">
-                                <a href="/account/logout">
-                                    <i class="icon-logout"></i>退出系统
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <!-- END USER LOGIN DROPDOWN -->
-                </ul>
-            </div>
-            <!-- END TOP NAVIGATION MENU -->
-        </div>
-    </div>
+    <div th:include="header"></div>
     <!-- END HEADER INNER -->
 </div>
 <!-- END HEADER -->
@@ -157,71 +54,7 @@
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
     <!-- BEGIN SIDEBAR -->
-    <div class="page-sidebar-wrapper" id="leftmenue">
-        <div class="page-sidebar navbar-collapse collapse esh-fixed-sidebar">
-            <!-- BEGIN SIDEBAR MENU -->
-            <ul class="page-sidebar-menu page-sidebar-menu-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                <li class="sidebar-toggler-wrapper">
-                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                    <div class="sidebar-toggler">
-                    </div>
-                    <!-- END SIDEBAR TOGGLER BUTTON -->
-                </li>
-                <li class="">
-                    <a onclick="javascript:location.href='/index'">
-                        <i class="glyphicon glyphicon-home"></i>
-                        <span class="title">首页</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a onclick="javascript:location.href='/user'">
-                        <i class="fa fa-file-text"></i>
-                        <span class="title">用户管理</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a onclick="javascript:location.href='/mallOrder'">
-                        <i class="fa fa-file-text"></i>
-                        <span class="title">商城订单管理</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a onclick="javascript:location.href='/lotteryOrder'">
-                        <i class="fa fa-file-text"></i>
-                        <span class="title">抽奖订单管理</span>
-                    </a>
-                </li>
-
-                <li class="start active open">
-                    <a onclick="javascript:location.href='/mailProductType'">
-                        <i class="icon-puzzle bold"></i>
-                        <span class="title">产品类型管理</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a onclick="javascript:location.href='/mailProduct'">
-                        <i class="glyphicon glyphicon-user"></i>
-                        <span class="title">产品管理</span>
-                    </a>
-                </li>
-
-                <li class="">
-                    <a onclick="javascript:location.href='/customer'">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                        <span class="title">客户管理</span>
-                    </a>
-                </li>
-
-                <li class="">
-                    <a onclick="javascript:location.href='/lotterySettings'">
-                        <i class="glyphicon glyphicon-cog"></i>
-                        <span class="title">抽奖设置</span>
-                    </a>
-                </li>
-            </ul>
-            <!-- END SIDEBAR MENU -->
-        </div>
-    </div>
+    <div th:include="sidebar"></div>
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
@@ -562,50 +395,32 @@
 <script src="../static/global/plugins/respond.min.js"></script>
 <script src="../static/global/plugins/excanvas.min.js"></script>
 <![endif]-->
+<script type="text/javascript" src="../static/js/vue.js"></script>
+<script type="text/javascript" src="../static/js/vue-resource.js"></script>
 <script src="../static/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="../static/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
 <script src="../static/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../static/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"
+        type="text/javascript"></script>
 <script src="../static/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <script src="../static/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
-<script src="../static/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-<script src="../static/admin/scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="../static/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript" ></script>
-
-<!-- END CORE PLUGINS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="../static/global/plugins/select2/select2.min.js"></script>
-<script type="text/javascript" src="../static/global/plugins/select2/select2_locale_zh-CN.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="../static/admin/scripts/location.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/fileinput.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js"></script>
-<script type="text/javascript" src="../static/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="../static/admin/scripts/jquery.validate.unobtrusive.min.js"></script>
-<script type="text/javascript" src="../static/admin/scripts/honeySwitch.js"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-
 <script src="../static/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="../static/admin/scripts/layout.js" type="text/javascript"></script>
 <script src="../static/admin/scripts/theme.js" type="text/javascript"></script>
-<script src="../static/admin/scripts/jquery.signalR-2.2.0.js" type="text/javascript"></script>
-<script src="../static/signalr/hubs" type="text/javascript"></script>
+<script src="../static/layui/layui.js" type="text/javascript"></script>
 <script type="text/javascript" src="../static/admin/scripts/custom.js"></script>
 <script>
     jQuery(document).ready(function () {
-        $.ajaxSetup({ cache: false });//设置缓存策略
+        $.ajaxSetup({cache: false});//设置缓存策略
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
 
-        if ($(".side-menu-sidebar").length > 0) { initSideMenu(); }
-        if ($(".esh-filter-sidebar").length > 0) { initFlterMenu(); }
+        if ($(".side-menu-sidebar").length > 0) {
+            initSideMenu();
+        }
+        if ($(".esh-filter-sidebar").length > 0) {
+            initFlterMenu();
+        }
         if ($(".scroll-fixed").length > 0) {
             $(".scroll-fixed").each(function () {
                 var i = 0;
@@ -614,7 +429,7 @@
                     mouseWheel.addEventListener('DOMMouseScroll', function (event) {
                         this.scrollTop = this.scrollTop - (event.wheelDelta ? event.wheelDelta : -event.detail * 10);
                         return false;
-                    },false)
+                    }, false)
                 }
                 document.getElementsByClassName('scroll-fixed')[i].onmousewheel = function (event) {
                     if (!event) event = window.event;
@@ -627,8 +442,6 @@
     });
 </script>
 <!-- BEGIN PAGE SELF SCRIPTS -->
-
-
 <script type="text/javascript">
     $(document).ready(function () {
         initEvent();//事件绑定

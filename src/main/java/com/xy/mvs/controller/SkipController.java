@@ -195,6 +195,22 @@ public class SkipController {
         return "finished";
     }
 
+    /**
+     * 跳转到导航栏
+     */
+    @RequestMapping("/header")
+    public String header(){
+        return "header";
+    }
+
+    /**
+     * 跳转到侧边栏
+     */
+    @RequestMapping("/sidebar")
+    public String sidebar(){
+        return "sidebar";
+    }
+
 }
 
 

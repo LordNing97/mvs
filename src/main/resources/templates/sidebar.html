@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div class="page-sidebar-wrapper" id="leftmenue">
+    <div class="page-sidebar navbar-collapse collapse esh-fixed-sidebar">
+        <!-- BEGIN SIDEBAR MENU -->
+        <ul class="page-sidebar-menu page-sidebar-menu-fixed page-sidebar-menu-closed" data-keep-expanded="false"
+            data-auto-scroll="true"
+            data-slide-speed="200">
+            <li class="sidebar-toggler-wrapper">
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler"></div>
+                <!-- END SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <li data-val="/index" class="sidebar-item">
+                <a onclick="javascript:location.href='/index'">
+                    <i class="glyphicon glyphicon-home"></i>
+                    <span class="title">首页</span>
+                </a>
+            </li>
+            <li data-val="/user" class="sidebar-item">
+                <a onclick="javascript:location.href='/user'">
+                    <i class="fa fa-file-text"></i>
+                    <span class="title">用户管理</span>
+                </a>
+            </li>
+            <li data-val="/mallOrder" class="sidebar-item">
+                <a onclick="javascript:location.href='/mallOrder'">
+                    <i class="fa fa-file-text"></i>
+                    <span class="title">商城订单管理</span>
+                </a>
+            </li>
+            <li data-val="/lotteryOrder" class="sidebar-item">
+                <a onclick="javascript:location.href='/lotteryOrder'">
+                    <i class="fa fa-file-text"></i>
+                    <span class="title">抽奖订单管理</span>
+                </a>
+            </li>
+            <li data-val="/mailProductType" class="sidebar-item">
+                <a onclick="javascript:location.href='/mailProductType'">
+                    <i class="icon-puzzle bold"></i>
+                    <span class="title">产品类型管理</span>
+                </a>
+            </li>
+            <li data-val="/mailProduct" class="sidebar-item">
+                <a onclick="javascript:location.href='/mailProduct'">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span class="title">产品管理</span>
+                </a>
+            </li>
+            <li data-val="/customer" class="sidebar-item">
+                <a onclick="javascript:location.href='/customer'">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                    <span class="title">客户管理</span>
+                </a>
+            </li>
+            <li data-val="/lotterySettings" class="sidebar-item">
+                <a onclick="javascript:location.href='/lotterySettings'">
+                    <i class="glyphicon glyphicon-cog"></i>
+                    <span class="title">抽奖设置</span>
+                </a>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+</div>
+<script>
+    $(function () {
+        let index = ["/index"];
+        let user = ["/user"];
+        let mallOrder = ["/mallOrder", "/mallPaidOrder", "/mallDeliverOrder", "/mallReceivingOrder", "/mallCompleteOrder"];
+        let lotteryOrder = ["/lotteryOrder", "/lotteryDeliverOrder", "/lotteryReceivingOrder", "/lotteryCompleteOrder"];
+        let mailProductType = ["/mailProductType", "/lotteryProductType"];
+        let mailProduct = ["/mailProduct", "/lotteryProduct"];
+        let customer = ["/customer", "/mailCustomer", "/lotteryCustomer"];
+        let lotterySettings = ["/lotterySettings", "/noprize", "/isongoing", "/finished"];
+
+        if (index.indexOf(location.pathname) != -1) {
+            $(".sidebar-item").eq(0).addClass("active").siblings().removeClass("active");
+        } else if (user.indexOf(location.pathname) != -1) {
+            $(".sidebar-item").eq(1).addClass("active").siblings().removeClass("active");
+        } else if (mallOrder.indexOf(location.pathname) != -1) {
+            $(".sidebar-item").eq(2).addClass("active").siblings().removeClass("active");
+        } else if (lotteryOrder.indexOf(location.pathname) != -1) {
+            $(".sidebar-item").eq(3).addClass("active").siblings().removeClass("active");
+        } else if (mailProductType.indexOf(location.pathname) != -1) {
+            $(".sidebar-item").eq(4).addClass("active").siblings().removeClass("active");
+        } else if (mailProduct.indexOf(location.pathname) != -1) {
+            $(".sidebar-item").eq(5).addClass("active").siblings().removeClass("active");
+        } else if (customer.indexOf(location.pathname) != -1) {
+            $(".sidebar-item").eq(6).addClass("active").siblings().removeClass("active");
+        }else if (lotterySettings.indexOf(location.pathname) != -1) {
+            $(".sidebar-item").eq(7).addClass("active").siblings().removeClass("active");
+        }
+    });
+</script>
+</body>
+</html>

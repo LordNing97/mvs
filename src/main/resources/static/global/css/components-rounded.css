@@ -1340,7 +1340,9 @@ a:hover {
 .padding-left-30 {
       padding-left:30px !important;
 }
-
+.padding-left-150 {
+  padding-left:150px !important;
+}
 
 .padding-top-5 {
     padding-top:5px !important;
@@ -4001,6 +4003,13 @@ Customized Bootstrap Labels
   font-weight: 300;
   padding: 3px 6px 3px 6px;
   color: #fff;
+  font-family: "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.countLabel {
+  text-shadow: none !important;
+  font-size: 12px;
+  font-weight: 300;
+  padding: 3px 6px 3px 6px;
   font-family: "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .label.label-sm {
