@@ -59,7 +59,7 @@
     <div class="page-content-wrapper">
         <div class="page-content">
             <!-- BEGIN PAGE CONTENT-->
-            <div class="row">
+            <div id="userList" v-cloak class="row">
 
                 <div class="col-md-12">
 
@@ -101,7 +101,9 @@
                                         <option value="4">抽奖+商城</option>
                                     </select>
                                 </div>
-
+                                <div class="form-group">
+                                    <button type="button" class="btn green" onclick="listUser()">确定</button>
+                                </div>
                             </section>
                         </div>
 
@@ -119,8 +121,10 @@
                                     <div class="input-group input-medium ">
                                         <input class="form-control" id="userName" maxlength="20" name="userName" placeholder="输入姓名..." type="text" value="" />
                                         <span class="input-group-btn">
-                                <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
-                            </span>
+                                            <button onclick="listUser()" class="btn green" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +163,7 @@
                                                 </th>
                                             </tr>
                                             </thead>
-                                            <tbody id="userList" v-cloak>
+                                            <tbody>
                                                 <tr v-for="(item,index) in userList" class="odd gradeX">
                                                     <td>
                                                         {{item.name}}
@@ -168,7 +172,7 @@
                                                         {{item.role | roleStrFilter}}
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-default btn-xs black" @click="editDailog(item.id)">
+                                                        <button class="btn btn-default btn-xs black" @click="selectUser(item.id)">
                                                             <i class="fa fa-search"></i>
                                                             查看
                                                         </button>
@@ -185,7 +189,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="row">
+
+                                    <div id="haveData" style="display: none" class="row">
                                         <div class="col-md-5 col-sm-5">
                                             <div class="dataTables_info" role="status" aria-live="polite">
                                                 <label style="vertical-align: middle;">共<span
@@ -243,6 +248,18 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div id="nullData" style="display: none" class="row">
+                                        <div class="col-md-5 col-sm-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite">
+                                                <label>没有查询到所需数据</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <div class="dataTables_paginate paging_bootstrap_full_number"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -266,7 +283,7 @@
                                             姓名<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <input class="form-control" value="郝博闻" disabled>
+                                            <input class="form-control" :value="user.name" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -274,7 +291,7 @@
                                             密码<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <input class="form-control" type="password" value="121212" disabled>
+                                            <input class="form-control" :value="user.password" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -282,9 +299,7 @@
                                             权限<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <select class="form-control" disabled>
-                                                <option>系统管理员</option>
-                                            </select>
+                                            <input class="form-control" :value="user.role | roleStrFilter" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -339,7 +354,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="hidden">
+                                <input type="hidden" id="editId">
                                 <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
                                 <button type="button" class="btn green" onclick="saveUser()">确定</button>
                             </div>
@@ -467,10 +482,16 @@
 
     }
 
-    var vue = new Vue({
+    let vue = new Vue({
         el: "#userList",
         data: {
             userList: [],
+            user:{
+                id:"",
+                name:"",
+                password:"",
+                role:""
+            },
             name: ""
         },
         filters: {
@@ -504,13 +525,23 @@
             },
             //编辑用户
             editUser: function (id) {
-                $("#deleteDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
-                $("#deleteId").val(id);
-                $.post("/brand/selectBrandById", {id: id}, function (result) {
-                    if (result.status == 200) {
-                        var name = result.brand.name;
-                        $("#editName").val(name);
-                        vue.name = result.brand.name;
+                $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#editId").val(id);
+                $.get("/user/getById", {id: id}, function (result) {
+                    if (result.code == 200) {
+                        let user = result.data;
+                        $("#name").val(user.name);
+                        $("#password").val(user.password);
+                        $("#role").val(user.role);
+                    }
+                });
+            },
+            //查看用户
+            selectUser: function (id) {
+                $("#seeDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $.get("/user/getById", {id: id}, function (result) {
+                    if (result.code == 200) {
+                        vue.user = result.data;
                     }
                 });
             }
@@ -519,18 +550,37 @@
 
     //保存用户
     function saveUser(){
+        let id = $("#editId").val();
         let username = $("#name").val();
         let password = $("#password").val();
         let role = $("#role").val();
-        $.post("user/saveUser",{name:username, password:password, role:role},function(result){
-            if(result.code == 200){
-                growlAlert.success("保存成功");
-                listUser();
-                $("#createDailog").modal("hide");
+        if(username == '' || password == ''){
+            growlAlert.danger("用户名和密码不能为空");
+        }else{
+            if(id == ''){
+                //新增
+                $.post("user/saveUser",{name: username, password: password, role: role},function(result){
+                    if(result.code == 200){
+                        growlAlert.success("保存成功");
+                        listUser();
+                        $("#createDailog").modal("hide");
+                    }else{
+                        growlAlert.danger(result.msg);
+                    }
+                });
             }else{
-                growlAlert.danger(result.msg);
+                //编辑
+                $.post("user/modifyUser",{id: id, name: username, password: password, role: role},function(result){
+                    if(result.code == 200){
+                        growlAlert.success("保存成功");
+                        listUser();
+                        $("#createDailog").modal("hide");
+                    }else{
+                        growlAlert.danger(result.msg);
+                    }
+                });
             }
-        });
+        }
     }
 
     //分页查询用户
@@ -547,13 +597,15 @@
                 vue.userList = [];
                 vue.userList = result.data.userList;
                 total = result.data.total;
-                showYema();
-                $("#haveData").show();
-                $("#nullData").hide();
-            } else if (result.code == 100) {
-                vue.userList = [];
-                $("#haveData").hide();
-                $("#nullData").show();
+                if(total != 0){
+                    showYema();
+                    $("#haveData").show();
+                    $("#nullData").hide();
+                }else{
+                    vue.userList = [];
+                    $("#haveData").hide();
+                    $("#nullData").show();
+                }
             } else {
                 growlAlert.danger(result.message);
                 showYema();
@@ -563,7 +615,7 @@
 
     //删除单条记录
     function deleteUser() {
-        var id = $("#deleteId").val();
+        let id = $("#deleteId").val();
         $.post("/user/deleteUser", {id: id}, function (result) {
             if (result.code == 200) {
                 growlAlert.success("删除成功")
@@ -580,15 +632,13 @@
         $("#seeDailog").modal();
     }
 
-    //新建/编辑
+    //新建
     function create() {
+        $("#editId").val("");
+        $("#name").val("");
+        $("#password").val("");
+        $("#role").val(0);
         $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
-        // $("#createDailog").modal();
-    }
-
-    //删除
-    function deleteDailog() {
-        $("#deleteDailog").modal();
     }
 
     //生成分页按钮及绑定事件

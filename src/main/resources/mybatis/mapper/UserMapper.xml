@@ -60,7 +60,7 @@
         <if test="role != -1">
             and role = #{role}
         </if>
-        order by role
+        order by id
         limit #{page},#{size}
     </select>
 
