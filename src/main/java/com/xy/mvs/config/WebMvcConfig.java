@@ -28,9 +28,13 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+    @Resource
+    private FileConfig fileConfig;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/image/**").addResourceLocations("file:" + fileConfig.getImgPath());
     }
 
     @Override

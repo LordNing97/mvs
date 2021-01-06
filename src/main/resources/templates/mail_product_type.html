@@ -60,7 +60,7 @@
     <div class="page-content-wrapper">
         <div class="page-content">
             <!-- BEGIN PAGE CONTENT-->
-            <div class="row">
+            <div id="productTypeList" v-cloak class="row">
 
 
                 <div class="col-md-12">
@@ -121,9 +121,11 @@
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium">
-                                        <input class="form-control" id="accessoryCode" maxlength="50" name="accessoryCode" placeholder="名称..." type="text" value="" />
+                                        <input class="form-control" id="searchName" maxlength="50" name="accessoryCode" placeholder="产品类型名称" type="text" value="" />
                                         <span class="input-group-btn">
-                                            <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
+                                            <button onclick="listProductType()" class="btn green" id="btnSearch" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
@@ -132,7 +134,6 @@
                                 <div class="table-toolbar">
                                     <div class="col-md-6 col-xs-6 clear-padding-left">
                                         <a class="btn green" onclick="create()">新建</a>
-                                        <button class="btn green collapse" id="btnFilter">筛选</button>
                                         <a class="filter-a clear-filter hidden" href="javascript:void(0)" onclick="clearFilter()"><i class="icon fa fa-trash"></i>清空筛选</a>
                                     </div>
                                     <div class="col-md-6 col-xs-6 clear-padding-right">
@@ -160,86 +161,77 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="odd gradeX">
+                                                <tr v-for="(item,index) in productTypeList" class="odd gradeX">
                                                     <td>
-                                                        W201810230002
+                                                        {{item.id}}
                                                     </td>
                                                     <td>
-                                                        女用
+                                                        {{item.name}}
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-default btn-xs black" onclick="see()">
+                                                        <button class="btn btn-default btn-xs black" @click="selectProductType(item.id)">
                                                             <i class="fa fa-search"></i>
                                                             查看
                                                         </button>
-                                                        <button class="btn btn-default btn-xs black" onclick="create()">
-                                                            <i class="fa fa-pencil"></i>
-                                                            编辑
-                                                        </button>
-                                                        <button class="btn btn-default btn-xs black" onclick="deleteDailog()">
-                                                            <i class="fa fa-trash-o"></i>
-                                                            移除
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        W201810230002
-                                                    </td>
-                                                    <td>
-                                                        男用
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-default btn-xs black" onclick="see()">
+                                                        <button class="btn btn-default btn-xs black" @click="editProductType(item.id)">
                                                             <i class="fa fa-search"></i>
-                                                            查看
-                                                        </button>
-                                                        <button class="btn btn-default btn-xs black" onclick="create()">
-                                                            <i class="fa fa-pencil"></i>
                                                             编辑
                                                         </button>
-                                                        <button class="btn btn-default btn-xs black" onclick="deleteDailog()">
-                                                            <i class="fa fa-trash-o"></i>
-                                                            移除
+                                                        <button class="btn btn-default btn-xs black" @click="deleteProductType(item.id)">
+                                                            <i class="fa fa-search"></i>
+                                                            删除
                                                         </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="row">
+
+                                    <div id="haveData" style="display: none" class="row">
                                         <div class="col-md-5 col-sm-5">
                                             <div class="dataTables_info" role="status" aria-live="polite">
-                                                <label style="vertical-align: middle;">共3条</label>
+                                                <label style="vertical-align: middle;">共<span
+                                                        id="count">3</span>条</label>
                                                 <div class="btn-group pagesize dropup">
-                                                    <a href="javascript:void(0)" class="link name-wrap" data-toggle="dropdown" aria-expanded="false">
-                                                        <span data-val="10">10条/页&nbsp;</span>
+                                                    <a href="javascript:void(0)" class="link name-wrap"
+                                                       data-toggle="dropdown" aria-expanded="false">
+                                                        <span id="size">10条/页&nbsp;</span>
                                                         <i class="fa fa-angle-down"></i>
                                                     </a>
                                                     <ul class="dropdown-menu esh-pub-menu">
                                                         <li class="clearfix active">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="10">10条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="10">10条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="20">20条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="20">20条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="30">30条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="30">30条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="40">40条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="40">40条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="50">50条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="50">50条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -248,46 +240,22 @@
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <div class="dataTables_paginate paging_bootstrap_full_number">
-                                                <ul class="pagination">
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#" onclick="changePageIndex(1)">
-                                                            1
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-right"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-right"></i>
-                                                        </a>
-                                                    </li>
+                                                <ul id="pagination" class="pagination">
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-5 col-sm-5">-->
-<!--                                            <div class="dataTables_info" role="status" aria-live="polite">-->
-<!--                                                <label>没有查询到所需数据</label>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="col-md-7 col-sm-7">-->
-<!--                                            <div class="dataTables_paginate paging_bootstrap_full_number"></div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+
+                                    <div id="nullData" style="display: none" class="row">
+                                        <div class="col-md-5 col-sm-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite">
+                                                <label>没有查询到所需数据</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <div class="dataTables_paginate paging_bootstrap_full_number"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                     </div>
@@ -308,7 +276,7 @@
                                             产品类型编码<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <input id="name" class="form-control" value="W201810230002" disabled>
+                                            <input class="form-control" :value="productType.id" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -316,7 +284,7 @@
                                             名称<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <input class="form-control" value="女用" disabled>
+                                            <input class="form-control" :value="productType.name" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -343,15 +311,15 @@
                                             名称<span class="required">*</span>
                                         </label>
                                         <div class="col-md-7">
-                                            <input class="form-control" placeholder="请输入名称">
+                                            <input id="name" class="form-control" placeholder="请输入名称">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="hidden">
+                                <input type="hidden" id="editId">
                                 <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                <button type="button" class="btn green" onclick="deleteBrand()">确定</button>
+                                <button type="button" class="btn green" onclick="saveProductType()">确定</button>
                             </div>
                         </div>
                     </div>
@@ -370,9 +338,9 @@
                                 <div class="bootbox-body">您确认删除该产品类型吗?</div>
                             </div>
                             <div class="modal-footer">
-                                <input type="hidden">
+                                <input type="hidden" id="deleteId">
                                 <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                <button type="button" class="btn green">确定</button>
+                                <button type="button" class="btn green" onclick="deleteProductType()">确定</button>
                             </div>
                         </div>
                     </div>
@@ -444,9 +412,11 @@
 </script>
 <!-- BEGIN PAGE SELF SCRIPTS -->
 <script type="text/javascript">
-    $(document).ready(function () {
+    let page = 1, size = 10, total = 0;
+
+    $(function () {
+        listProductType();
         initEvent();//事件绑定
-        initPageSize();
     });
 
     //事件绑定
@@ -454,7 +424,7 @@
         //显示或隐藏筛选功能
         $('body').on('click', '#btnFilter.collapse, #btnFilter.expand', function (e) {
             if ($(this).hasClass("collapse")) {
-                $(this).removeClass("collapse").addClass("expand").text('隐藏筛选');
+                $(this).removeClass("collapse").addClass("expand").text('取消筛选');
                 $('.esh-filter-sidebar').addClass("open");
             } else {
                 $(this).removeClass("expand").addClass("collapse").text('筛选');
@@ -462,81 +432,126 @@
             }
         });
 
-        //Checkbox选择触发表单提交
-        $("ul.filter-option input[type=checkbox]").on("click", function () {
-            var attrName = $(this).attr('name');
-            var subData = $("#" + attrName + "_hide").val();
-            if ($(this).attr('checked')) {
-                subData += $(this).val() + ",";
-            } else {
-                var a = $(this).val() + ",";
-                subData = subData.replace(a, "");
-            }
-
-            $("#" + attrName + "_hide").val(subData);
-            changeQueryCondition();
-        });
-
-        //输入名称回车查询
-        $("#accessoryCode").keypress(function (e) {
-            if (e.which == 13) {
-                changeQueryCondition();
-                $("#btnSearch").focus();
-            }
-        });
-
-        //搜索按钮按下
-        $("#btnSearch").click(function () { changeQueryCondition(); })
     }
 
     //清空筛选
     function clearFilter() {
-        $("#state_hide").val("");
+        $("#type_hide,#select-network").val("");
         $("ul.filter-option input[type=checkbox]").attr("checked", false);
         $("ul.filter-option input[type=checkbox]").parent().removeClass("checked");
+        changeQueryCondition();
+
     }
 
-    ///初始化列表
-    function initTable() {
-        OperationTable.init("#tableList", "#Sort", "#Direction", changeSortCondition);
+    let vue = new Vue({
+        el: "#productTypeList",
+        data: {
+            productTypeList: [],
+            productType:{
+                id:"",
+                name:"",
+                type:""
+            }
+        },
+        methods: {
+            //删除产品类型
+            deleteProductType: function (id) {
+                $("#deleteDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#deleteId").val(id);
+            },
+            //编辑产品类型
+            editProductType: function (id) {
+                $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#editId").val(id);
+                $.get("/productType/getById", {id: id}, function (result) {
+                    if (result.code == 200) {
+                        let productType = result.data;
+                        $("#name").val(productType.name);
+                    }
+                });
+            },
+            //查看产品类型
+            selectProductType: function (id) {
+                $("#seeDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $.get("/productType/getById", {id: id}, function (result) {
+                    if (result.code == 200) {
+                        vue.productType = result.data;
+                    }
+                });
+            }
+        }
+    });
+
+    //保存产品类型
+    function saveProductType(){
+        let id = $("#editId").val();
+        let name = $("#name").val();
+        if(id == ''){
+            //新增
+            $.post("/productType/saveProductType",{name: name, type: 0},function(result){
+                if(result.code == 200){
+                    growlAlert.success("保存成功");
+                    listProductType();
+                    $("#createDailog").modal("hide");
+                }else{
+                    growlAlert.danger(result.msg);
+                }
+            });
+        }else{
+            //编辑
+            $.post("/productType/modifyProductType",{id: id, name: name},function(result){
+                if(result.code == 200){
+                    growlAlert.success("保存成功");
+                    listProductType();
+                    $("#createDailog").modal("hide");
+                }else{
+                    growlAlert.danger(result.msg);
+                }
+            });
+        }
     }
 
-    //初始化每页记录数
-    function initPageSize() {
-        if ($.cookie('accessory-mana-pagesize'))
-            $("#PageSize").val($.cookie('accessory-mana-pagesize'));
+    //分页查询产品类型
+    function listProductType() {
+        let name = $("#searchName").val();
+        $.get("/productType/getProductTypeList", {
+            name: name,
+            type: 0,
+            page: page,
+            size: size
+        }, function (result) {
+            if (result.code == 200) {
+                vue.productTypeList = [];
+                vue.productTypeList = result.data.productTypeList;
+                total = result.data.total;
+                if(total != 0){
+                    showYema();
+                    $("#haveData").show();
+                    $("#nullData").hide();
+                }else{
+                    vue.productTypeList = [];
+                    $("#haveData").hide();
+                    $("#nullData").show();
+                }
+            } else {
+                growlAlert.danger(result.message);
+                showYema();
+            }
+        });
     }
 
-    //改变每页记录数
-    function changePageSize(e) {
-        $(e).parent().addClass("active").siblings().removeClass("active");
-        var currItem = $(e).children();
-        var pageSize = $(currItem).attr("data-val");
-        var pageSizeTxt = $(currItem).text();
-
-        $("#currentPageSize").attr("data-val", pageSize).html(pageSizeTxt);
-        $("#PageSize").val(pageSize);
-        $("#PageIndex").val(1);
-
-        if ($.cookie('accessory-mana-pagesize'))
-            $.cookie('accessory-mana-pagesize', '', { expires: -1, path: '/' });
-        $.cookie('accessory-mana-pagesize', pageSize, { expires: 7, path: '/' });
-
-        $("#searchByRequest").submit();
-    }
-
-    //改变索引页
-    function changePageIndex(index) {
-        $("#PageIndex").val(index);
-        $("#searchByRequest").submit();
-    }
-
-    //改变排序条件
-    function changeSortCondition(sort, mode) {
-        $("#Sort").val(sort);
-        $("#Direction").val(mode);
-        $("#PageIndex").val(1);//页索引置为1
-        $("#searchByRequest").submit();
+    //删除单条记录
+    function deleteProductType() {
+        let id = $("#deleteId").val();
+        $.post("/productType/deleteProductType", {id: id}, function (result) {
+            if (result.code == 200) {
+                growlAlert.success("删除成功")
+                $("#deleteDailog").modal("hide");
+                listProductType();
+            } else {
+                growlAlert.danger("删除失败")
+            }
+        });
     }
 
     //查看详情
@@ -544,14 +559,81 @@
         $("#seeDailog").modal();
     }
 
-    //新建/编辑
+    //新建
     function create() {
-        $("#createDailog").modal();
+        $("#editId").val("");
+        $("#name").val("");
+        $("#password").val("");
+        $("#role").val(0);
+        $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
     }
 
-    //删除
-    function deleteDailog() {
-        $("#deleteDailog").modal();
+    //生成分页按钮及绑定事件
+    function showYema() {
+        var str = '<li class="prev"><a href="#"><i class="ace-icon fa fa-angle-left"></i></a></li>';
+
+        if (page == 1) {
+            str += '<li class="active"><a class="yeshu"> 1 </a></li>';
+        } else {
+            str += '<li><a class="yeshu"> 1 </a></li>';
+        }
+        if (Math.ceil(total / size) > 1) {
+            if (page > 4)
+                str += '<li class="paginItem"><a >...</a></li>';
+            for (var i = 2; i < Math.ceil(total / size); i++) {
+                if (i > page - 3 && i < page + 3) {
+                    if (page == i) {
+                        str += '<li class="paginItem active"><a class="yeshu"> '
+                            + i + ' </a></li>';
+                    } else {
+                        str += '<li class="paginItem"><a class="yeshu"> ' + i + ' </a></li>';
+                    }
+                }
+            }
+            if (page < Math.ceil(total / size) - 3)
+                str += '<li class="paginItem"><a >...</a></li>';
+
+            if (page == Math.ceil(total / size)) {
+                str += '<li class="paginItem active"><a class="yeshu"> '
+                    + Math.ceil(total / size) + ' </a></li>';
+            } else {
+                str += '<li class="paginItem"><a class="yeshu"> '
+                    + Math.ceil(total / size) + ' </a></li>';
+            }
+        }
+        str += '<li class="next"><a href="#"><i class="ace-icon fa fa-angle-right"></i></a></li>';
+        $("#pagination").html(str);
+        $(".prev").click(
+            function () {
+                if (page > 1)
+                    page--;
+                listProductType();
+            });
+        $(".next").click(
+            function () {
+                if (page < Math.ceil(total / size))
+                    page++;
+                listProductType();
+            });
+        $(".yeshu").click(
+            function () {
+                if (!isNaN($(this).html().trim())) {
+                    page = parseInt($(this).html());
+                    listProductType();
+                }
+            });
+        $("#count").html(total);
+    }
+
+    //改变每页记录数
+    function changePageSize(e) {
+        $(e).parent().addClass("active").siblings().removeClass("active");
+        var currItem = $(e).children();
+        size = $(currItem).attr("data-val");
+        var pageSizeTxt = $(currItem).text();
+        $("#size").html(pageSizeTxt);
+        page = 1;
+        listProductType();
     }
 
 </script>
