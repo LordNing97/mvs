@@ -33,8 +33,8 @@ public class UploadFileController {
     private FileConfig fileConfig;
 
     @ApiOperation(value = "上传图片", httpMethod = "POST")
-    @PostMapping(value = "uploadPhoto", consumes = "multipart/*", headers = "content-type=multipart/form-data")
-    public Result uploadPhoto(@ApiParam(value = "上传的文件", required = true) MultipartFile files) {
+    @PostMapping(value = "uploadPhoto")
+    public Result uploadPhoto(MultipartFile files) {
         //判断文件大小
         if (FileUploadUtil.checkImageFileSize(files.getSize())) {
             throw new FileException(ResultCode.FILE_SIZE_OUT);
