@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.mvs.mapper.MailProductMapper">
+
+    <!--  保存商城产品  -->
+    <insert id="saveMailProduct">
+        insert into mail_product(product_type_id, name, photo, information, price, num, status, is_del)
+        values (#{productTypeId}, #{name}, #{photo}, #{information}, #{price}, #{num}, #{status}, #{isDel})
+    </insert>
+
+    <!--  根据id获取  -->
+    <select id="getById" resultType="com.xy.mvs.model.MailProduct">
+        select * from mail_product
+        where id = #{id}
+    </select>
+
+    <!--  修改商城产品  -->
+    <update id="modifyMailProduct">
+        update mail_product
+        set product_type_id = #{productTypeId}, name = #{name}, photo = #{photo},
+        information = #{information}, price = #{price}, num = #{num}, status = #{status}
+        where id = #{id}
+    </update>
+
+    <select id="countMailProduct" resultType="java.lang.Integer">
+        select count(1) from mail_product
+        where is_del = 0
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="productTypeId != 0">
+            and product_type_id = #{productTypeId}
+        </if>
+        <if test="status != -1">
+            and status = #{status}
+        </if>
+    </select>
+
+    <!--  分页获取商城产品  -->
+    <select id="getMailProductList" resultType="com.xy.mvs.model.MailProduct">
+        select
+        mail_product.id, mail_product.product_type_id, product_type.name product_type_name, mail_product.name,
+        mail_product.photo, mail_product.information, mail_product.price, mail_product.num,
+        mail_product.status, mail_product.is_del
+        from mail_product
+        left join product_type on mail_product.product_type_id = product_type.id
+        where mail_product.is_del = 0
+        <if test="name != null and name != ''">
+            and mail_product.name = #{name}
+        </if>
+        <if test="productTypeId != 0">
+            and mail_product.product_type_id = #{productTypeId}
+        </if>
+        <if test="status != -1">
+            and mail_product.status = #{status}
+        </if>
+        order by mail_product.id
+        limit #{page},#{size}
+    </select>
+
+    <!--  删除商城产品  -->
+    <update id="deleteMailProduct">
+        update mail_product
+        set is_del = 1
+        where id = #{id}
+    </update>
+
+</mapper>
