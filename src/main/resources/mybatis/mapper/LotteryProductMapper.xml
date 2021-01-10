@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xy.mvs.mapper.LotteryProductMapper">
+
+    <!--  保存商城产品  -->
+    <insert id="saveLotteryProduct">
+        insert into lottery_product(product_type_id, name, photo, information, price, status, is_del)
+        values (#{productTypeId}, #{name}, #{photo}, #{information}, #{price}, #{status}, #{isDel})
+    </insert>
+
+    <!--  根据id获取  -->
+    <select id="getById" resultType="com.xy.mvs.model.MailProduct">
+        select * from lottery_product
+        where id = #{id}
+    </select>
+
+    <!--  修改商城产品  -->
+    <update id="modifyLotteryProduct">
+        update lottery_product
+        set product_type_id = #{productTypeId}, name = #{name}, photo = #{photo},
+        information = #{information}, price = #{price}, status = #{status}
+        where id = #{id}
+    </update>
+
+    <select id="countLotteryProduct" resultType="java.lang.Integer">
+        select count(1) from lottery_product
+        where is_del = 0
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="productTypeId != 0">
+            and product_type_id = #{productTypeId}
+        </if>
+        <if test="status != -1">
+            and status = #{status}
+        </if>
+    </select>
+
+    <!--  分页获取商城产品  -->
+    <select id="getLotteryProductList" resultType="com.xy.mvs.model.MailProduct">
+        select
+        lottery_product.id, lottery_product.product_type_id, product_type.name product_type_name, lottery_product.name,
+        lottery_product.photo, lottery_product.information, lottery_product.price,
+        lottery_product.status, lottery_product.is_del
+        from lottery_product
+        left join product_type on lottery_product.product_type_id = product_type.id
+        where lottery_product.is_del = 0
+        <if test="name != null and name != ''">
+            and lottery_product.name = #{name}
+        </if>
+        <if test="productTypeId != 0">
+            and lottery_product.product_type_id = #{productTypeId}
+        </if>
+        <if test="status != -1">
+            and lottery_product.status = #{status}
+        </if>
+        order by lottery_product.id
+        limit #{page},#{size}
+    </select>
+
+    <!--  删除商城产品  -->
+    <update id="deleteLotteryProduct">
+        update lottery_product
+        set is_del = 1
+        where id = #{id}
+    </update>
+
+</mapper>

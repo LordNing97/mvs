@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xy.mvs.mapper.CustomerMapper">
+
+    <!--  保存客户  -->
+    <insert id="saveCustomer">
+        insert into customer(name, telephone, turnover, consumption_amount,
+        number_winners, recharge_points, consumption_points, residual_integral, code, type, is_del)
+        values (#{name}, #{telephone}, #{turnover}, #{consumptionAmount},
+        #{numberWinners}, #{rechargePoints}, #{consumptionPoints}, #{residualIntegral}, #{code}, #{type}, #{isDel})
+    </insert>
+
+    <!--  根据id获取  -->
+    <select id="getById" resultType="com.xy.mvs.model.Customer">
+        select * from customer
+        where id = #{id}
+    </select>
+
+</mapper>
