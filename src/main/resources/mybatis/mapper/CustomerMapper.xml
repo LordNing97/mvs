@@ -6,15 +6,43 @@
     <!--  保存客户  -->
     <insert id="saveCustomer">
         insert into customer(name, telephone, turnover, consumption_amount,
-        number_winners, recharge_points, consumption_points, residual_integral, code, type, is_del)
+        number_winners, recharge_points, consumption_points, residual_integral, code, is_mail, is_lottery, is_del)
         values (#{name}, #{telephone}, #{turnover}, #{consumptionAmount},
-        #{numberWinners}, #{rechargePoints}, #{consumptionPoints}, #{residualIntegral}, #{code}, #{type}, #{isDel})
+        #{numberWinners}, #{rechargePoints}, #{consumptionPoints}, #{residualIntegral}, #{code}, #{isMail}, #{isLottery}, #{isDel})
     </insert>
 
     <!--  根据id获取  -->
     <select id="getById" resultType="com.xy.mvs.model.Customer">
         select * from customer
         where id = #{id}
+    </select>
+
+    <select id="countCustomer" resultType="java.lang.Integer">
+        select count(1) from customer
+        where is_del = 0
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="type != -1">
+            and type = #{type}
+        </if>
+    </select>
+
+    <!--  分页获取客户  -->
+    <select id="getCustomerList" resultType="com.xy.mvs.model.Customer">
+        select * from customer
+        where is_del = 0
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="type == 0">
+            and is_mail = 1
+        </if>
+        <if test="type == 1">
+            and is_lottery = 1
+        </if>
+        order by id
+        limit #{page},#{size}
     </select>
 
 </mapper>

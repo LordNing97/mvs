@@ -2,6 +2,9 @@ package com.xy.mvs.mapper;
 
 import com.xy.mvs.model.Customer;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Author 陈璇
@@ -24,5 +27,18 @@ public interface CustomerMapper {
      * @return
      */
     Customer getById(Integer id);
+
+    int countCustomer(@Param("name") String name, @Param("type") Integer type);
+
+    /**
+     * 分页获取客户
+     * @param name
+     * @param type
+     * @param page
+     * @param size
+     * @return
+     */
+    List<Customer> getCustomerList(@Param("name") String name, @Param("type") Integer type,
+                                   @Param("page") Integer page, @Param("size") Integer size);
 
 }

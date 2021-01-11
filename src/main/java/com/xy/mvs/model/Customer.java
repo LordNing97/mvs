@@ -30,8 +30,10 @@ public class Customer {
     private Integer residualIntegral;
     @ApiModelProperty(name = "code", value = "邀请码", required = true, dataType = "string")
     private String code;
-    @ApiModelProperty(name = "type", value = "类型(0:商城 1:抽奖)", required = true, dataType = "int")
-    private Integer type;
+    @ApiModelProperty(name = "isMail", value = "是否是商城客户(0:否 1:是)", required = true, dataType = "int")
+    private Integer isMail;
+    @ApiModelProperty(name = "isLottery", value = "是否是抽奖客户(0:否 1:是)", required = true, dataType = "int")
+    private Integer isLottery;
     @ApiModelProperty(name = "isDel", value = "是否删除(0:未删除 1:已删除)", dataType = "int")
     private Integer isDel;
 

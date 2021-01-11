@@ -2,8 +2,10 @@ package com.xy.mvs.service;
 
 import com.xy.mvs.mapper.CustomerMapper;
 import com.xy.mvs.model.Customer;
+import com.xy.mvs.request.CustomerList;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author 陈璇
@@ -33,6 +35,23 @@ public class CustomerService {
      */
     public Customer getById(Integer id){
         return customerMapper.getById(id);
+    }
+
+    /**
+     * 分页获取客户
+     * @param name
+     * @param type
+     * @param page
+     * @param size
+     * @return
+     */
+    public CustomerList getCustomerList(String name, Integer type, Integer page, Integer size){
+        List<Customer> customerList = customerMapper.getCustomerList(name, type, (page - 1) * size, size);
+        return CustomerList.builder()
+                .customerList(customerList)
+                .total(customerMapper.countCustomer(name, type))
+                .page(page)
+                .build();
     }
 
 }

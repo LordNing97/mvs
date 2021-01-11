@@ -47,4 +47,18 @@ public class CustomerController {
                 .build();
     }
 
+    @ApiOperation(value = "分页获取客户", httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "名称",dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "类型(-1:全部 0:商城 1:抽奖)",dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "当前页",dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "size", value = "每页显示的数量",dataType = "int", paramType = "query", required = true)
+    })
+    @GetMapping("getCustomerList")
+    public Result getCustomerList(String name, Integer type, Integer page, Integer size){
+        return Result.builder()
+                .data(customerService.getCustomerList(name, type, page, size))
+                .build();
+    }
+
 }
