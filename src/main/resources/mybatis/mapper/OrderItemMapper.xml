@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.mvs.mapper.OrderItemMapper">
+
+    <!--  保存订单详情  -->
+    <insert id="saveOrderItem">
+        insert into order_item(order_id, mail_product_id, product_type_id, product_type_name,
+        num, title, price, total_price, photo, discount, create_time, is_del)
+        values (#{orderId}, #{mailProductId}, #{productTypeId}, #{productTypeName},
+        #{num}, #{title}, #{price}, #{totalPrice}, #{photo}, #{discount}, #{createTime}, #{isDel})
+    </insert>
+
+</mapper>

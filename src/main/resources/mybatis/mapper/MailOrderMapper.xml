@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.mvs.mapper.MailOrderMapper">
+
+    <!--  保存商城订单  -->
+    <insert id="saveMailOrder">
+        insert into mail_order(user_id, address_id, order_number, payment, total_price, total_num,
+        member_cut, status, create_time, payment_time, consign_time, end_time, is_del)
+        values (#{userId}, #{addressId}, #{orderNumber}, #{payment}, #{totalPrice}, #{totalNum},
+        #{memberCut}, #{status}, #{createTime}, #{paymentTime}, #{consignTime}, #{endTime}, #{isDel})
+    </insert>
+
+</mapper>
