@@ -13,7 +13,7 @@ public class OrderItem {
 
     @ApiModelProperty(name = "id", value = "id(编辑/删除时使用)", dataType = "int")
     private Integer id;
-    @ApiModelProperty(name = "orderId", value = "订单id(", required = true, dataType = "int")
+    @ApiModelProperty(name = "orderId", value = "订单id", required = true, dataType = "int")
     private Integer orderId;
     @ApiModelProperty(name = "mailProductId", value = "商城产品id", required = true, dataType = "int")
     private Integer mailProductId;
@@ -33,7 +33,7 @@ public class OrderItem {
     private String photo;
     @ApiModelProperty(name = "discount", value = "商品优惠", required = true, dataType = "double")
     private double discount;
-    @ApiModelProperty(name = "createTime", value = "创建时间", required = true, dataType = "date")
+    @ApiModelProperty(name = "createTime", value = "创建时间", dataType = "date")
     private LocalDateTime createTime;
     @ApiModelProperty(name = "isDel", value = "是否删除(0:未删除 1:已删除)", dataType = "int")
     private Integer isDel;

@@ -29,13 +29,13 @@ public class MailOrder {
     private double memberCut;
     @ApiModelProperty(name = "status", value = "订单状态(0:待付款 1:已付款 2:待发货 3:待收货 4:已完成)", required = true, dataType = "int")
     private Integer status;
-    @ApiModelProperty(name = "createTime", value = "创建时间", required = true, dataType = "date")
+    @ApiModelProperty(name = "createTime", value = "创建时间", dataType = "date")
     private LocalDateTime createTime;
-    @ApiModelProperty(name = "paymentTime", value = "付款时间", required = true, dataType = "date")
+    @ApiModelProperty(name = "paymentTime", value = "付款时间", dataType = "date")
     private LocalDateTime paymentTime;
-    @ApiModelProperty(name = "consignTime", value = "发货时间", required = true, dataType = "date")
+    @ApiModelProperty(name = "consignTime", value = "发货时间", dataType = "date")
     private LocalDateTime consignTime;
-    @ApiModelProperty(name = "endTime", value = "完成时间", required = true, dataType = "date")
+    @ApiModelProperty(name = "endTime", value = "完成时间", dataType = "date")
     private LocalDateTime endTime;
     @ApiModelProperty(name = "isDel", value = "是否删除(0:未删除 1:已删除)", dataType = "int")
     private Integer isDel;
