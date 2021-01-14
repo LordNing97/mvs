@@ -37,7 +37,7 @@ public interface ProductTypeMapper {
      * @param id
      * @return
      */
-    ProductType getById(String id);
+    ProductType getById(Integer id);
 
     /**
      * 修改产品类型

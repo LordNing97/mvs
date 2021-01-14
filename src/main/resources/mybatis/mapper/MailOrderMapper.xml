@@ -10,4 +10,134 @@
         #{memberCut}, #{status}, #{createTime}, #{paymentTime}, #{consignTime}, #{endTime}, #{isDel})
     </insert>
 
+    <!--  根据id获取  -->
+    <select id="getById" resultType="com.xy.mvs.model.MailOrder">
+        select * from mail_order
+        where id = #{id}
+    </select>
+
+    <!--  付款  -->
+    <update id="payment">
+        update `order`
+        set payment_time = #{paymentTime},
+        payment = #{payment}, freight = #{freight}, cut_money = #{cutMoney},
+        status = #{status}
+        where id = #{id}
+    </update>
+
+    <!--  发货  -->
+    <update id="consign">
+        update `order`
+        set status = 3, consign_time = #{consignTime}
+        where id = #{id}
+    </update>
+
+    <!--  交易完成  -->
+    <update id="end">
+        update `order`
+        set status = 5, end_time = #{endTime}
+        where id = #{id}
+    </update>
+
+    <!--  退款  -->
+    <update id="refund">
+        update `order`
+        set status = 8, refund_time = #{refundTime}
+        where id = #{id}
+    </update>
+
+    <!--  取消订单  -->
+    <update id="cancelOrder">
+        update `order`
+        set status = 9
+        where id = #{id}
+    </update>
+
+    <!--  评价订单  -->
+    <update id="evaluateOrder">
+        update `order`
+        set status = 7
+        where id = #{id}
+    </update>
+
+    <!--  根据用户ID和状态获取订单数量 -->
+    <select id="countByUserIdAndStatus" resultType="java.lang.Integer">
+        select
+        count(1)
+        from `order`
+        where `order`.user_id = #{userId}
+        <if test="status != -1">
+            and `order`.status = #{status}
+        </if>
+        and `order`.is_del = 0 and `order`.status != 9
+    </select>
+
+    <!--  根据用户ID和状态获取订单 -->
+    <select id="getByUserIdAndStatus" resultMap="OrderAndItemMap">
+        select
+        <include refid="OrderAndItemSql"/>
+        from `order`
+        left join `user` on `user`.id = `order`.user_id
+        where `order`.user_id = #{userId}
+        <if test="status != -1">
+            and `order`.status = #{status}
+        </if>
+        and `order`.is_del = 0 and `order`.status != 9
+        order by `order`.create_time desc
+    </select>
+
+    <!--  根据ID修改订单编号  -->
+    <update id="modifyOrderNumber">
+        update `order`
+        set order_number = #{orderNumber}
+        where id = #{id}
+    </update>
+
+    <select id="countOrderByStatus" resultType="java.lang.Integer">
+        select count(1)
+        from `order`
+        where is_del = 0
+        <if test="status != -1">
+            and status = #{status}
+        </if>
+    </select>
+
+    <!--  分页获取订单  -->
+    <select id="getOrderByStatus" resultMap="OrderAndItemMap">
+        select
+        <include refid="OrderAndItemSql"/>
+        from `order`
+        left join `user` on `user`.id = `order`.user_id
+        where `order`.is_del = 0
+        <if test="status != -1">
+            and `order`.status = #{status}
+        </if>
+        order by `order`.create_time desc
+        limit #{page},#{size}
+    </select>
+
+    <!--  导出待发货订单  -->
+    <select id="listOrderExcel" resultType="com.lonty.beef.request.OrderExcel">
+        select
+         `order`.order_number, `order`.payment, `order`.total_price, `order`.create_time, `order`.payment_time,
+        order_item.title productName, order_item.num productNum, order_item.price productPrice, order_item.total_price productTotalPrice,
+        address.name, address.telephone, address.address
+        from order_item
+        LEFT JOIN `order` ON order_item.order_id = `order`.id
+        LEFT JOIN address ON `order`.address_id = address.id
+        where `order`.status = 1
+--         group by `order`.order_number
+--         order by `order`.create_time desc
+    </select>
+
+    <!--  自动完成订单  -->
+    <update id="autoEndOrder">
+        UPDATE
+            `order`
+         set
+            `status` = 5, end_time = #{endTime}
+         where
+            now() > DATE_ADD( consign_time, INTERVAL 7 DAY )
+    </update>
+
 </mapper>

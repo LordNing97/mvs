@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-@ApiModel(value = "保存用户参数对象")
+@ApiModel(value = "保存产品类型参数对象")
 public class ProductType {
 
     @ApiModelProperty(name = "id", value = "id(编辑/删除时使用)", dataType = "int")

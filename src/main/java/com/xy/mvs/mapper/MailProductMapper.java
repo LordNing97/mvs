@@ -3,7 +3,6 @@ package com.xy.mvs.mapper;
 import com.xy.mvs.model.MailProduct;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 /**

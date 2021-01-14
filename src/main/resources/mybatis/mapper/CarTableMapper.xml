@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.mvs.mapper.CarTableMapper">
+
+    <resultMap id="CarTableAndProductMap" type="com.xy.mvs.request.CarTableAndProduct">
+        <id column="id" property="id"></id>
+        <result column="mail_product_id" property="mailProductId"></result>
+        <result column="num" property="num"></result>
+        <result column="introduce" property="introduce"></result>
+        <result column="price" property="price"></result>
+        <result column="picture" property="picture"></result>
+        <result column="product_type_content" property="productTypeContent"></result>
+        <result column="product_type_id" property="productTypeId"></result>
+        <result column="product_type_num" property="productTypeNum"></result>
+        <result column="product_type_discount" property="productTypeDiscount"></result>
+        <result column="product_type_membership_price" property="productTypeMembershipPrice"></result>
+    </resultMap>
+
+    <sql id="CarTableAndProductSql">
+        car_table.id, car_table.mail_product_id, car_table.num,
+        product.introduce, product_type.price, product.picture,
+        product_type.content product_type_content, product_type.id product_type_id,
+        product_type.num product_type_num, product_type.discount product_type_discount, product_type.membership_price product_type_membership_price
+    </sql>
+
+    <!--  保存购物车  -->
+    <insert id="saveCarTable">
+        insert into car_table(id, user_id, product_id, product_type_id, num, create_time, is_del)
+        values (#{id}, #{userId}, #{productId}, #{productTypeId}, #{num}, #{createTime}, #{isDel})
+    </insert>
+
+    <!--  根据ID获取购物车  -->
+    <select id="getById" resultType="com.xy.mvs.model.CarTable">
+        select * from car_table where id = #{id}
+    </select>
+
+    <!--  修改数量  -->
+    <update id="modifyNum">
+        update car_table
+        set num = #{num}
+        where id = #{id}
+    </update>
+
+    <!--  删除购物车  -->
+    <update id="deleteCarTable">
+        update car_table
+        set is_del = 1
+        where id = #{id}
+    </update>
+
+    <select id="countCarTable" resultType="java.lang.Integer">
+        select count(1) from car_table where user_id = #{userId}
+        and is_del = 0
+    </select>
+
+    <!--  分页获取购物车  -->
+    <select id="getCarTableAndProductList" resultMap="CarTableAndProductMap">
+        select
+        <include refid="CarTableAndProductSql"/>
+        from car_table
+        left join product on product.id = car_table.product_id
+        left join product_type on product_type.id = car_table.product_type_id
+        where car_table.user_id = #{userId}
+        and car_table.is_del = 0
+        order by car_table.create_time desc
+        limit #{page},#{size}
+    </select>
+
+    <!--  查询购物车  -->
+    <select id="getCarTable" resultType="com.xy.mvs.model.CarTable">
+        select * from car_table
+        where user_id = #{userId}
+        and product_id = #{productId}
+        and product_type_id = #{productTypeId}
+        and is_del = 0
+        limit 1
+    </select>
+
+</mapper>
