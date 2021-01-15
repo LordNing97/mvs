@@ -65,4 +65,11 @@
         where id = #{id}
     </update>
 
+    <!--  修改库存  -->
+    <update id="modifyNum">
+        update mail_product
+        set num = #{num}
+        where id = #{id}
+    </update>
+
 </mapper>

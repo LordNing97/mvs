@@ -2,6 +2,7 @@ package com.xy.mvs.mapper;
 
 import com.xy.mvs.model.OrderItem;
 import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
 
 /**
  * @Author 陈璇
@@ -17,5 +18,19 @@ public interface OrderItemMapper {
      * @return
      */
     int saveOrderItem(OrderItem orderItem);
+
+    /**
+     * 根据订单ID获取订单详情
+     * @param orderId
+     * @return
+     */
+    List<OrderItem> getByOrderId(Integer orderId);
+
+    /**
+     * 根据订单ID取消订单详情
+     * @param orderId
+     * @return
+     */
+    int cancelOrderItem(Integer orderId);
 
 }

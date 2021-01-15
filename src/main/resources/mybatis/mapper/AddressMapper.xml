@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.mvs.mapper.AddressMapper">
+
+    <!--  保存地址  -->
+    <insert id="saveAddress">
+        insert into address(id, user_id, `name`, telephone, location, address, is_default, is_del)
+        values (#{id}, #{userId}, #{name}, #{telephone}, #{location}, #{address}, #{isDefault}, #{isDel})
+    </insert>
+
+    <!--  根据ID获取地址  -->
+    <select id="getById" resultType="com.xy.mvs.model.Address">
+        select
+        *
+        from address
+        where id = #{id}
+    </select>
+
+    <!--  获取用户地址  -->
+    <select id="getAddressList" resultType="com.xy.mvs.model.Address">
+        select
+        *
+        from address
+        where user_id = #{userId}
+        and is_del = 0
+    </select>
+
+    <!--  修改地址  -->
+    <update id="modifyAddress">
+        update address
+        set `name` = #{name}, telephone = #{telephone}, location = #{location}, address = #{address}, is_default = #{isDefault}
+        where id = #{id}
+    </update>
+
+    <!--  删除地址  -->
+    <update id="deleteAddress">
+        update address
+        set is_del = 1
+        where id = #{id}
+    </update>
+
+</mapper>

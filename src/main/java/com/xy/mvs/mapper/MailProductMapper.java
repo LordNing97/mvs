@@ -55,4 +55,12 @@ public interface MailProductMapper {
      */
     int deleteMailProduct(Integer id);
 
+    /**
+     * 修改库存
+     * @param id
+     * @param num
+     * @return
+     */
+    int modifyNum(Integer id, Integer num);
+
 }

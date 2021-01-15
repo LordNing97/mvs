@@ -50,7 +50,7 @@ public class ProductTypeService {
      * @param id
      * @return
      */
-    public ProductType getById(String id){
+    public ProductType getById(Integer id){
         return productTypeMapper.getById(id);
     }
 

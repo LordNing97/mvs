@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.mvs.mapper.ShippingInformationMapper">
+
+    <resultMap id="BaseResultMap" type="com.xy.mvs.model.ShippingInformation">
+        <id column="id" property="id"></id>
+        <result column="order_id" property="orderId"></result>
+        <result column="logistics_company" property="logisticsCompany"></result>
+        <result column="waybill_number" property="waybillNumber"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="is_del" property="isDel"></result>
+    </resultMap>
+
+    <sql id="BaseSql">
+        id, order_id, logistics_company, waybill_number, create_time, is_del
+    </sql>
+
+    <!--  保存运送信息  -->
+    <insert id="saveShippingInformation">
+        insert into shipping_information(order_id, logistics_company, waybill_number, create_time, is_dell)
+        values (#{orderId}, #{logisticsCompany}, #{waybillNumber}, #{createTime}, #{isDel})
+    </insert>
+
+    <!--  根据订单ID获取运送信息  -->
+    <select id="getByOrderId" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSql"/>
+        from shipping_information
+        where order_id = #{orderId}
+        and is_del = 0
+    </select>
+
+</mapper>

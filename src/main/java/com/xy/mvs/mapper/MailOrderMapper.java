@@ -1,9 +1,12 @@
 package com.xy.mvs.mapper;
 
 import com.xy.mvs.model.MailOrder;
+import com.xy.mvs.request.OrderAndItemInfoList;
+import com.xy.mvs.request.OrderExcel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @Author 陈璇
@@ -33,7 +36,7 @@ public interface MailOrderMapper {
      * @param paymentTime
      * @return
      */
-    int payment(@Param("id") String id, @Param("paymentTime") LocalDateTime paymentTime,
+    int payment(@Param("id") Integer id, @Param("paymentTime") LocalDateTime paymentTime,
                 @Param("payment") Double payment, @Param("freight") Double freight, @Param("cutMoney") Double cutMoney,
                 @Param("status") Integer status);
 
@@ -51,42 +54,21 @@ public interface MailOrderMapper {
      * @param endTime
      * @return
      */
-    int end(@Param("id") String id, @Param("endTime") LocalDateTime endTime);
-
-    /**
-     * 退款
-     * @param id
-     * @return
-     */
-    int refund(@Param("id") String id, @Param("refundTime") LocalDateTime refundTime);
-
-    /**
-     * 取消订单
-     * @param id
-     * @return
-     */
-    int cancelOrder(String id);
-
-    /**
-     * 评价订单
-     * @param id
-     * @return
-     */
-    int evaluateOrder(String id);
+    int end(@Param("id") Integer id, @Param("endTime") LocalDateTime endTime);
 
     /**
      * 根据用户ID和状态获取订单数量
-     * @param userId
+     * @param customerId
      * @return
      */
-    int countByUserIdAndStatus(@Param("userId") String userId, @Param("status") Integer status);
+    int countByUserIdAndStatus(@Param("customerId") Integer customerId, @Param("status") Integer status);
 
     /**
      * 根据用户ID和状态获取订单
-     * @param userId
+     * @param customerId
      * @return
      */
-    List<OrderAndItemInfoList> getByUserIdAndStatus(@Param("userId") String userId, @Param("status") Integer status);
+    List<OrderAndItemInfoList> getByUserIdAndStatus(@Param("customerId") Integer customerId, @Param("status") Integer status);
 
     /**
      * 根据ID修改订单编号
@@ -94,7 +76,7 @@ public interface MailOrderMapper {
      * @param orderNumber
      * @return
      */
-    int modifyOrderNumber(@Param("id") String id, @Param("orderNumber") String orderNumber);
+    int modifyOrderNumber(@Param("id") Integer id, @Param("orderNumber") String orderNumber);
 
     int countOrderByStatus(Integer status);
 

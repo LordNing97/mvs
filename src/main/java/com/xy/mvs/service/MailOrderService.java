@@ -4,6 +4,10 @@ import com.xy.mvs.api.Result;
 import com.xy.mvs.api.ResultCode;
 import com.xy.mvs.mapper.*;
 import com.xy.mvs.model.*;
+import com.xy.mvs.request.OrderAndItemInfoList;
+import com.xy.mvs.request.OrderDetails;
+import com.xy.mvs.request.OrderExcel;
+import com.xy.mvs.request.OrderList;
 import com.xy.mvs.util.UUIDUtil;
 import com.xy.mvs.vo.ConfirmCarTableVo;
 import com.xy.mvs.vo.ConsignVo;
@@ -40,17 +44,23 @@ public class MailOrderService {
     @Resource
     private CarTableMapper carTableMapper;
 
+    @Resource
+    private ShippingInformationMapper shippingInformationMapper;
+
+    @Resource
+    private AddressMapper addressMapper;
+
     /**
      * 保存订单
      * @param confirmCarTableVo
      * @return
      */
     @Transactional
-    public Result saveOrder(ConfirmCarTableVo confirmCarTableVo){
+    public Result saveMailOrder(ConfirmCarTableVo confirmCarTableVo){
         int result = 0;
         //新建订单
         MailOrder mailOrder = new MailOrder();
-        mailOrder.setUserId(confirmCarTableVo.getUserId());
+        mailOrder.setCustomerId(confirmCarTableVo.getUserId());
         mailOrder.setAddressId(confirmCarTableVo.getAddressId());
         mailOrder.setTotalPrice(confirmCarTableVo.getTotalPrice());
         mailOrder.setPayment(confirmCarTableVo.getPayment());
@@ -120,77 +130,25 @@ public class MailOrderService {
     }
 
     /**
-     * 下单
-     * @param confirmCarTableVo
-     */
-    public void placeAnOrder(ConfirmCarTableVo confirmCarTableVo){
-        // 将对象转为字符串 便于传输
-        String json = JSONUtil.beanToJson(confirmCarTableVo);
-        String msgId = UUIDUtil.randomID();
-        /**
-         * 构建Message ,主要是使用 msgId 将 message 和 CorrelationData 关联起来。
-         * 这样当消息发送到交换机失败的时候，在 MsgSendConfirmCallBack 中就可以根据
-         * correlationData.getId()即 msgId,知道具体是哪个message发送失败,进而进行处理。
-         */
-        // 将msgId和 message绑定
-        Message message = MessageBuilder.withBody(json.getBytes())
-                .setContentType(MessageProperties.CONTENT_TYPE_JSON)
-                .setCorrelationId(msgId)
-                .build();
-        // 将msgId和CorrelationData绑定
-        CorrelationData correlationData = new CorrelationData(msgId);
-        System.out.println(correlationData);
-        // TODO 将 msgId 与 Message 的关系保存起来
-        /**
-         * 将 msgId 与 Message 的关系保存起来,例如放到缓存中.
-         * 当 MsgSendReturnCallback回调时（消息从交换机到队列失败）,进行处理 {@code MsgSendReturnCallback}.
-         * 当 MsgSendConfirmCallBack回调时,进行处理 {@code MsgSendConfirmCallBack}.
-         * 定时检查这个绑定关系列表,如果发现一些已经超时(自己设定的超时时间)未被处理,则手动处理这些消息.
-         */
-        // 发送消息
-        // 指定消息交换机  "car_table_exchange"
-        // 指定队列key    "car_table_queue"
-        rabbitTemplate.convertAndSend("car_table_exchange", "car_table_routing_key",
-                message, correlationData);
-    }
-
-    /**
      * 付款
      * @param id
      * @return
      */
     @Transactional
-    public boolean payment(String id, Double payment, Double cutMoney, Double freight){
+    public boolean payment(Integer id, Double payment, Double cutMoney, Double freight){
         //获取订单
-        Order order = orderMapper.getById(id);
+        MailOrder mailOrder = mailOrderMapper.getById(id);
         //获取订单详情
         List<OrderItem> orderItemList = orderItemMapper.getByOrderId(id);
         String productName = "";
         for(int i = 0;i < orderItemList.size();i++){
             //获取商品原库存
-            ProductType productType = productTypeMapper.getById(orderItemList.get(i).getProductTypeId());
-            int num = productType.getNum();
-            productTypeMapper.modifyNum(productType.getId(), num - orderItemList.get(i).getNum());
+            MailProduct mailProduct = mailProductMapper.getById(orderItemList.get(i).getMailProductId());
+            int num = mailProduct.getNum();
+            mailProductMapper.modifyNum(mailProduct.getId(), num - orderItemList.get(i).getNum());
             productName += orderItemList.get(i).getTitle() + ",";
         }
-        //获取用户ID
-        String userId = orderMapper.getById(id).getUserId();
-        //获取用户
-        User user = userMapper.getById(userId);
-        //修改用户积分
-        userMapper.modifyIntegral(userId, user.getIntegral() + 10);
-        //修改累计节省
-        userMapper.modifyCutMoney(userId, user.getCutMoney() + cutMoney);
-        //推送通知
-        if(productName.substring(productName.length() - 1).equals(",")){
-            productName = productName.substring(0, productName.length() - 1);
-        }
-        PushUtil.sendPaymentMsg(user.getOpenid(), productName, order.getOrderNumber(), Double.toString(payment));
-        if(order.getReceivingWay() == 1){
-            return orderMapper.payment(id, LocalDateTime.now(), payment, freight, cutMoney, 5) > 0;
-        }else{
-            return orderMapper.payment(id, LocalDateTime.now(), payment, freight, cutMoney, 1) > 0;
-        }
+        return mailOrderMapper.payment(id, LocalDateTime.now(), payment, freight, cutMoney, 1) > 0;
     }
 
     /**
@@ -203,7 +161,6 @@ public class MailOrderService {
         //填写运送信息
         ShippingInformation shippingInformation = new ShippingInformation();
         BeanUtils.copyProperties(consignVo, shippingInformation);
-        shippingInformation.setId(UUIDUtil.randomID());
         shippingInformation.setCreateTime(LocalDateTime.now());
         shippingInformation.setIsDel(0);
         shippingInformationMapper.saveShippingInformation(shippingInformation);
@@ -216,44 +173,27 @@ public class MailOrderService {
      * @param id
      * @return
      */
-    public boolean end(String id){
+    public boolean end(Integer id){
         return mailOrderMapper.end(id, LocalDateTime.now()) > 0;
     }
 
     /**
-     * 取消订单
-     * @param id
-     * @return
-     */
-    @Transactional
-    public boolean cancelOrder(String id){
-        orderItemMapper.cancelOrderItem(id);
-        return orderMapper.cancelOrder(id) > 0;
-    }
-
-    /**
      * 根据用户ID和状态获取订单
-     * @param userId
+     * @param customerId
      * @param status
      * @return
      */
-    public List<OrderAndItemInfoList> getByUserIdAndStatus(String userId, Integer status){
-        List<OrderAndItemInfoList> orderAndItemInfoList = orderMapper.getByUserIdAndStatus(userId, status);
+    public List<OrderAndItemInfoList> getByUserIdAndStatus(Integer customerId, Integer status){
+        List<OrderAndItemInfoList> orderAndItemInfoList = mailOrderMapper.getByUserIdAndStatus(customerId, status);
         for(int j = 0;j < orderAndItemInfoList.size();j++){
             //获取订单详细信息
             List<OrderItem> orderItem = orderItemMapper.getByOrderId(orderAndItemInfoList.get(j).getId());
             for(int i = 0;i < orderItem.size();i++){
                 //获取产品
-                Product product = productMapper.getById(orderItem.get(i).getProductId());
-                orderItem.get(i).setIntroduction(product.getIntroduce());
+                MailProduct mailProduct = mailProductMapper.getById(orderItem.get(i).getMailProductId());
+                orderItem.get(i).setProductTypeName(mailProduct.getName());
             }
             orderAndItemInfoList.get(j).setOrderItem(orderItem);
-        }
-        for(int i = 0;i < orderAndItemInfoList.size();i++){
-            if(orderAndItemInfoList.get(i).getStatus().equals(8)){
-                OrderRefund orderRefund = orderRefundMapper.getByOrderId(orderAndItemInfoList.get(i).getId());
-                orderAndItemInfoList.get(i).setOrderRefund(orderRefund);
-            }
         }
         return orderAndItemInfoList;
     }
@@ -264,29 +204,26 @@ public class MailOrderService {
      * @return
      */
     @Transactional
-    public OrderDetails getOrderDetails(String id){
+    public OrderDetails getOrderDetails(Integer id){
         //获取订单信息
-        Order order = orderMapper.getById(id);
+        MailOrder mailOrder = mailOrderMapper.getById(id);
         //获取订单详细信息
         List<OrderItem> orderItem = orderItemMapper.getByOrderId(id);
         for(int i = 0;i < orderItem.size();i++){
             //获取产品
-            Product product = productMapper.getById(orderItem.get(i).getProductId());
-            orderItem.get(i).setIntroduction(product.getIntroduce());
+            MailProduct mailProduct = mailProductMapper.getById(orderItem.get(i).getMailProductId());
+            orderItem.get(i).setProductTypeName(mailProduct.getName());
         }
         //获取收货地址
-        Address address = addressMapper.getById(order.getAddressId());
+        Address address = addressMapper.getById(mailOrder.getAddressId());
         //获取运送信息
         ShippingInformation shippingInformation = shippingInformationMapper.getByOrderId(id);
-        //获取退款订单
-        OrderRefund orderRefund = orderRefundMapper.getByOrderId(id);
         //新建订单详细信息
         OrderDetails orderDetails = OrderDetails.builder()
-                .order(order)
+                .mailOrder(mailOrder)
                 .orderItem(orderItem)
                 .shippingInformation(shippingInformation)
                 .address(address)
-                .orderRefund(orderRefund)
                 .build();
         return orderDetails;
     }
@@ -299,21 +236,17 @@ public class MailOrderService {
      * @return
      */
     public OrderList getOrderByStatus(Integer status, Integer page, Integer size){
-        List<OrderAndItemInfoList> orderList = orderMapper.getOrderByStatus(status, (page - 1) * size, size);
+        List<OrderAndItemInfoList> orderList = mailOrderMapper.getOrderByStatus(status, (page - 1) * size, size);
         for(int i = 0;i < orderList.size();i++){
-            String orderId = orderList.get(i).getId();
+            Integer orderId = orderList.get(i).getId();
             //获取订单详细信息
             List<OrderItem> orderItem = orderItemMapper.getByOrderId(orderId);
             for(int j = 0;j < orderItem.size();j++){
                 //获取产品
-                Product product = productMapper.getById(orderItem.get(j).getProductId());
-                orderItem.get(j).setIntroduction(product.getIntroduce());
+                MailProduct mailProduct = mailProductMapper.getById(orderItem.get(j).getMailProductId());
+                orderItem.get(j).setProductTypeName(mailProduct.getName());
             }
             orderList.get(i).setOrderItem(orderItem);
-            if(orderList.get(i).getStatus().equals(8)){
-                OrderRefund orderRefund = orderRefundMapper.getByOrderId(orderList.get(i).getId());
-                orderList.get(i).setOrderRefund(orderRefund);
-            }
             //获取收货地址
             if(orderList.get(i).getAddressId() != null){
                 Address address = addressMapper.getById(orderList.get(i).getAddressId());
@@ -325,7 +258,7 @@ public class MailOrderService {
         }
         return OrderList.builder()
                 .orderList(orderList)
-                .total(orderMapper.countOrderByStatus(status))
+                .total(mailOrderMapper.countOrderByStatus(status))
                 .page(page)
                 .build();
     }
@@ -335,17 +268,7 @@ public class MailOrderService {
      * @return
      */
     public List<OrderExcel> listOrderExcel(){
-        List<OrderExcel> orderExcelList = orderMapper.listOrderExcel();
-//        List<OrderExcel> orderExcels = new ArrayList<>();
-//        List<OrderExcel> orderExcels1 = new ArrayList<>();
-//        for(int i = 0;i < orderExcelList.size();i++){
-//            OrderExcel orderExcel = orderExcelList.get(i);
-//            OrderExcel nextOrderExcel = orderExcelList.get(i + 1);
-//            if(nextOrderExcel.getOrderNumber().equals(orderExcel.getOrderNumber())){
-//                orderExcels.add(orderExcel);
-//                orderExcels.add(nextOrderExcel);
-//            }
-//        }
+        List<OrderExcel> orderExcelList = mailOrderMapper.listOrderExcel();
         return orderExcelList;
     }
 
@@ -354,7 +277,7 @@ public class MailOrderService {
      * @return
      */
     public boolean autoEndOrder(LocalDateTime endTime){
-        return orderMapper.autoEndOrder(endTime) > 0;
+        return mailOrderMapper.autoEndOrder(endTime) > 0;
     }
 
 }

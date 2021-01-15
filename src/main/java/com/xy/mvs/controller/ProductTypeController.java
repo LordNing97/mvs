@@ -53,7 +53,7 @@ public class ProductTypeController {
             @ApiImplicitParam(name = "id", value = "id",dataType = "string", paramType = "query", required = true)
     })
     @GetMapping("getById")
-    public Result getById(String id){
+    public Result getById(Integer id){
         return Result.builder()
                 .data(productTypeService.getById(id))
                 .build();

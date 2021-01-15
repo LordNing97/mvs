@@ -13,8 +13,8 @@ public class MailOrder {
 
     @ApiModelProperty(name = "id", value = "id(编辑/删除时使用)", dataType = "int")
     private Integer id;
-    @ApiModelProperty(name = "userId", value = "用户id", required = true, dataType = "int")
-    private Integer userId;
+    @ApiModelProperty(name = "customerId", value = "客户id", required = true, dataType = "int")
+    private Integer customerId;
     @ApiModelProperty(name = "addressId", value = "收货地址id", required = true, dataType = "int")
     private Integer addressId;
     @ApiModelProperty(name = "orderNumber", value = "订单编号", required = true, dataType = "string")
