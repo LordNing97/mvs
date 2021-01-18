@@ -73,7 +73,6 @@ public class MailOrderController {
         return Result.builder(ResultCode.OPERATION_ERROR).build();
     }
 
-
     @ApiOperation(value = "根据用户ID和状态获取订单", httpMethod = "GET")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户ID",dataType = "string", paramType = "query"),

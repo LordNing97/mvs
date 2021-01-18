@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xy.mvs.mapper.LotteryOrderMapper">
+
+    <resultMap id="OrderAndItemMap" type="com.xy.mvs.request.OrderAndItemInfoList">
+        <id column="id" property="id"></id>
+        <result column="customer_id" property="customerId"></result>
+        <result column="address_id" property="addressId"></result>
+        <result column="status" property="status"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="consign_time" property="consignTime"></result>
+        <result column="end_time" property="endTime"></result>
+        <result column="name" property="name"></result>
+        <result column="order_number" property="orderNumber"></result>
+    </resultMap>
+
+    <sql id="OrderAndItemSql">
+        lottery_order.id id, lottery_order.customer_id customer_id, lottery_order.address_id address_id,
+        lottery_order.status status, lottery_order.create_time create_time, lottery_order.consign_time consign_time,
+        lottery_order.end_time end_time,
+        customer.name, lottery_order.order_number
+    </sql>
+
+    <!--  保存商城订单  -->
+    <insert id="saveLotteryOrder">
+        insert into lottery_order(customer_id, address_id, order_number, status, create_time,
+        consign_time, end_time, is_del)
+        values (#{customerId}, #{addressId}, #{orderNumber}, #{status}, #{createTime},
+        #{consignTime}, #{endTime}, #{isDel})
+    </insert>
+
+    <!--  根据id获取  -->
+    <select id="getById" resultType="com.xy.mvs.model.LotteryOrder">
+        select * from lottery_order
+        where id = #{id}
+    </select>
+
+    <!--  发货  -->
+    <update id="consign">
+        update lottery_order
+        set status = 3, consign_time = #{consignTime}
+        where id = #{id}
+    </update>
+
+    <!--  交易完成  -->
+    <update id="end">
+        update lottery_order
+        set status = 4, end_time = #{endTime}
+        where id = #{id}
+    </update>
+
+    <!--  根据用户ID和状态获取订单数量 -->
+    <select id="countByUserIdAndStatus" resultType="java.lang.Integer">
+        select
+        count(1)
+        from lottery_order
+        where lottery_order.customer_id = #{customerId}
+        <if test="status != -1">
+            and lottery_order.status = #{status}
+        </if>
+        and lottery_order.is_del = 0
+    </select>
+
+    <!--  根据用户ID和状态获取订单 -->
+    <select id="getByUserIdAndStatus" resultMap="OrderAndItemMap">
+        select
+        <include refid="OrderAndItemSql"/>
+        from lottery_order
+        left join customer on customer.id = lottery_order.customer_id
+        where lottery_order.customer_id = #{customerId}
+        <if test="status != -1">
+            and lottery_order.status = #{status}
+        </if>
+        and lottery_order.is_del = 0
+        order by lottery_order.create_time desc
+    </select>
+
+    <select id="countOrderByStatus" resultType="java.lang.Integer">
+        select count(1)
+        from lottery_order
+        where is_del = 0
+        <if test="status != -1">
+            and status = #{status}
+        </if>
+    </select>
+
+    <!--  分页获取订单  -->
+    <select id="getOrderByStatus" resultMap="OrderAndItemMap">
+        select
+        <include refid="OrderAndItemSql"/>
+        from lottery_order
+        left join customer on customer.id = lottery_order.customer_id
+        where lottery_order.is_del = 0
+        <if test="status != -1">
+            and lottery_order.status = #{status}
+        </if>
+        order by lottery_order.create_time desc
+        limit #{page},#{size}
+    </select>
+
+    <!--  导出待发货订单  -->
+    <select id="listOrderExcel" resultType="com.xy.mvs.request.OrderExcel">
+        select
+         lottery_order.order_number, lottery_order.create_time,
+         order_item.title productName, order_item.num productNum, order_item.price productPrice, order_item.total_price productTotalPrice,
+         address.name, address.telephone, address.address
+        from order_item
+        LEFT JOIN lottery_order ON order_item.order_id = lottery_order.id
+        LEFT JOIN address ON `order`.address_id = address.id
+        where `order`.status = 1
+    </select>
+
+    <!--  自动完成订单  -->
+    <update id="autoEndOrder">
+        UPDATE
+            lottery_order
+         set
+            `status` = 4, end_time = #{endTime}
+         where
+            now() > DATE_ADD( consign_time, INTERVAL 7 DAY )
+    </update>
+
+</mapper>
