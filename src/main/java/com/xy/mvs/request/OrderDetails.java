@@ -1,9 +1,6 @@
 package com.xy.mvs.request;
 
-import com.xy.mvs.model.Address;
-import com.xy.mvs.model.MailOrder;
-import com.xy.mvs.model.OrderItem;
-import com.xy.mvs.model.ShippingInformation;
+import com.xy.mvs.model.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -22,6 +19,8 @@ public class OrderDetails {
 
     //订单信息
     private MailOrder mailOrder;
+
+    private LotteryOrder lotteryOrder;
 
     //订单详细信息
     private List<OrderItem> orderItem;

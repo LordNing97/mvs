@@ -3,15 +3,13 @@ package com.xy.mvs.service;
 import com.xy.mvs.api.Result;
 import com.xy.mvs.api.ResultCode;
 import com.xy.mvs.mapper.*;
-import com.xy.mvs.model.Address;
-import com.xy.mvs.model.OrderItem;
-import com.xy.mvs.model.ProductType;
-import com.xy.mvs.model.ShippingInformation;
+import com.xy.mvs.model.*;
 import com.xy.mvs.request.OrderAndItemInfoList;
 import com.xy.mvs.request.OrderDetails;
 import com.xy.mvs.request.OrderExcel;
 import com.xy.mvs.request.OrderList;
 import com.xy.mvs.util.UUIDUtil;
+import com.xy.mvs.vo.ConfirmCarTableVo;
 import com.xy.mvs.vo.ConsignVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -44,105 +42,48 @@ public class LotteryOrderService {
     @Resource
     private AddressMapper addressMapper;
 
+    @Resource
+    private LotteryProductMapper lotteryProductMapper;
+
     /**
      * 保存订单
      * @param confirmCarTableVo
      * @return
      */
     @Transactional
-    public Result saveMailOrder(ConfirmCarTableVo confirmCarTableVo){
+    public Result saveLotteryOrder(ConfirmCarTableVo confirmCarTableVo){
         int result = 0;
         //新建订单
-        MailOrder mailOrder = new MailOrder();
-        mailOrder.setCustomerId(confirmCarTableVo.getUserId());
-        mailOrder.setAddressId(confirmCarTableVo.getAddressId());
-        mailOrder.setTotalPrice(confirmCarTableVo.getTotalPrice());
-        mailOrder.setPayment(confirmCarTableVo.getPayment());
-        mailOrder.setOrderNumber(UUIDUtil.randomID());
-        mailOrder.setTotalNum(confirmCarTableVo.getTotalNum());
-        mailOrder.setMemberCut(confirmCarTableVo.getMemberCut());
-        mailOrder.setStatus(0);
-        mailOrder.setCreateTime(LocalDateTime.now());
-        mailOrder.setIsDel(0);
-        if(!StringUtils.isEmpty(confirmCarTableVo.getMailProductId())){
-            //新建订单详情
-            //根据ID获取产品
-            MailProduct mailProduct = mailProductMapper.getById(confirmCarTableVo.getMailProductId());
-            ProductType productType = productTypeMapper.getById(confirmCarTableVo.getProductTypeId());
-            if(mailProduct.getNum() < confirmCarTableVo.getNum()){
-                return Result.builder(101, "库存不足").build();
-            }
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrderId(mailOrder.getId());
-            orderItem.setMailProductId(mailProduct.getId());
-            orderItem.setProductTypeId(productType.getId());
-            orderItem.setProductTypeName(productType.getName());
-            orderItem.setNum(confirmCarTableVo.getNum());
-            orderItem.setTitle(mailProduct.getName());
-            orderItem.setPrice(mailProduct.getPrice());
-            orderItem.setTotalPrice(confirmCarTableVo.getNum() * mailProduct.getPrice());
-            orderItem.setPhoto(mailProduct.getPhoto());
-            orderItem.setCreateTime(LocalDateTime.now());
-            orderItem.setIsDel(0);
-            result = orderItemMapper.saveOrderItem(orderItem);
-        }else{
-            String carTableIdsStr = confirmCarTableVo.getCarTableIds();
-            String[] carTableIds = carTableIdsStr.split(",");
-            for(int i = 0;i < carTableIds.length;i++){
-                //根据ID获取购物车
-                CarTable carTable = carTableMapper.getById(Integer.parseInt(carTableIds[i]));
-                //根据产品ID获取产品
-                MailProduct mailProduct = mailProductMapper.getById(carTable.getMailProductId());
-                ProductType productType = productTypeMapper.getById(carTable.getProductTypeId());
-                if(mailProduct.getNum() < carTable.getNum()){
-                    return Result.builder(101, "库存不足").build();
-                }
-                OrderItem orderItem = new OrderItem();
-                orderItem.setOrderId(mailOrder.getId());
-                orderItem.setMailProductId(mailProduct.getId());
-                orderItem.setProductTypeId(productType.getId());
-                orderItem.setProductTypeName(productType.getName());
-                orderItem.setNum(carTable.getNum());
-                orderItem.setTitle(mailProduct.getName());
-                orderItem.setPrice(mailProduct.getPrice());
-                orderItem.setTotalPrice(carTable.getNum() * mailProduct.getPrice());
-                orderItem.setPhoto(mailProduct.getPhoto());
-                orderItem.setCreateTime(LocalDateTime.now());
-                orderItem.setIsDel(0);
-                result = orderItemMapper.saveOrderItem(orderItem);
-                //删除购物车
-                carTableMapper.deleteCarTable(Integer.parseInt(carTableIds[i]));
-            }
-        }
+        LotteryOrder lotteryOrder = new LotteryOrder();
+        lotteryOrder.setCustomerId(confirmCarTableVo.getUserId());
+        lotteryOrder.setAddressId(confirmCarTableVo.getAddressId());
+        lotteryOrder.setOrderNumber(UUIDUtil.randomID());
+        lotteryOrder.setStatus(0);
+        lotteryOrder.setCreateTime(LocalDateTime.now());
+        lotteryOrder.setIsDel(0);
+        //新建订单详情
+        //根据ID获取产品
+        LotteryProduct lotteryProduct = lotteryProductMapper.getById(confirmCarTableVo.getMailProductId());
+        ProductType productType = productTypeMapper.getById(confirmCarTableVo.getProductTypeId());
+        OrderItem orderItem = new OrderItem();
+        orderItem.setOrderId(lotteryOrder.getId());
+        orderItem.setMailProductId(lotteryProduct.getId());
+        orderItem.setProductTypeId(productType.getId());
+        orderItem.setProductTypeName(productType.getName());
+        orderItem.setTitle(lotteryProduct.getName());
+        orderItem.setPrice(lotteryProduct.getPrice());
+        orderItem.setTotalPrice(lotteryProduct.getPrice());
+        orderItem.setPhoto(lotteryProduct.getPhoto());
+        orderItem.setCreateTime(LocalDateTime.now());
+        orderItem.setIsDel(0);
+        result = orderItemMapper.saveOrderItem(orderItem);
         //保存订单
-        mailOrderMapper.saveMailOrder(mailOrder);
+        lotteryOrderMapper.saveLotteryOrder(lotteryOrder);
         if(result > 0){
-            return Result.builder().data(mailOrder.getId()).build();
+            return Result.builder().data(lotteryOrder.getId()).build();
         }else{
             return Result.builder(ResultCode.OPERATION_ERROR).build();
         }
-    }
-
-    /**
-     * 付款
-     * @param id
-     * @return
-     */
-    @Transactional
-    public boolean payment(Integer id, Double payment, Double cutMoney, Double freight){
-        //获取订单
-        MailOrder mailOrder = mailOrderMapper.getById(id);
-        //获取订单详情
-        List<OrderItem> orderItemList = orderItemMapper.getByOrderId(id);
-        String productName = "";
-        for(int i = 0;i < orderItemList.size();i++){
-            //获取商品原库存
-            MailProduct mailProduct = mailProductMapper.getById(orderItemList.get(i).getMailProductId());
-            int num = mailProduct.getNum();
-            mailProductMapper.modifyNum(mailProduct.getId(), num - orderItemList.get(i).getNum());
-            productName += orderItemList.get(i).getTitle() + ",";
-        }
-        return mailOrderMapper.payment(id, LocalDateTime.now(), payment, freight, cutMoney, 1) > 0;
     }
 
     /**
@@ -168,7 +109,7 @@ public class LotteryOrderService {
      * @return
      */
     public boolean end(Integer id){
-        return mailOrderMapper.end(id, LocalDateTime.now()) > 0;
+        return lotteryOrderMapper.end(id, LocalDateTime.now()) > 0;
     }
 
     /**
@@ -178,14 +119,14 @@ public class LotteryOrderService {
      * @return
      */
     public List<OrderAndItemInfoList> getByUserIdAndStatus(Integer customerId, Integer status){
-        List<OrderAndItemInfoList> orderAndItemInfoList = mailOrderMapper.getByUserIdAndStatus(customerId, status);
+        List<OrderAndItemInfoList> orderAndItemInfoList = lotteryOrderMapper.getByUserIdAndStatus(customerId, status);
         for(int j = 0;j < orderAndItemInfoList.size();j++){
             //获取订单详细信息
             List<OrderItem> orderItem = orderItemMapper.getByOrderId(orderAndItemInfoList.get(j).getId());
             for(int i = 0;i < orderItem.size();i++){
                 //获取产品
-                MailProduct mailProduct = mailProductMapper.getById(orderItem.get(i).getMailProductId());
-                orderItem.get(i).setProductTypeName(mailProduct.getName());
+                LotteryProduct lotteryProduct = lotteryProductMapper.getById(orderItem.get(i).getMailProductId());
+                orderItem.get(i).setProductTypeName(lotteryProduct.getName());
             }
             orderAndItemInfoList.get(j).setOrderItem(orderItem);
         }
@@ -200,21 +141,21 @@ public class LotteryOrderService {
     @Transactional
     public OrderDetails getOrderDetails(Integer id){
         //获取订单信息
-        MailOrder mailOrder = mailOrderMapper.getById(id);
+        LotteryOrder lotteryOrder = lotteryOrderMapper.getById(id);
         //获取订单详细信息
         List<OrderItem> orderItem = orderItemMapper.getByOrderId(id);
         for(int i = 0;i < orderItem.size();i++){
             //获取产品
-            MailProduct mailProduct = mailProductMapper.getById(orderItem.get(i).getMailProductId());
-            orderItem.get(i).setProductTypeName(mailProduct.getName());
+            LotteryProduct lotteryProduct = lotteryProductMapper.getById(orderItem.get(i).getMailProductId());
+            orderItem.get(i).setProductTypeName(lotteryProduct.getName());
         }
         //获取收货地址
-        Address address = addressMapper.getById(mailOrder.getAddressId());
+        Address address = addressMapper.getById(lotteryOrder.getAddressId());
         //获取运送信息
         ShippingInformation shippingInformation = shippingInformationMapper.getByOrderId(id);
         //新建订单详细信息
         OrderDetails orderDetails = OrderDetails.builder()
-                .mailOrder(mailOrder)
+                .lotteryOrder(lotteryOrder)
                 .orderItem(orderItem)
                 .shippingInformation(shippingInformation)
                 .address(address)
@@ -237,8 +178,8 @@ public class LotteryOrderService {
             List<OrderItem> orderItem = orderItemMapper.getByOrderId(orderId);
             for(int j = 0;j < orderItem.size();j++){
                 //获取产品
-                MailProduct mailProduct = mailProductMapper.getById(orderItem.get(j).getMailProductId());
-                orderItem.get(j).setProductTypeName(mailProduct.getName());
+                LotteryProduct lotteryProduct = lotteryProductMapper.getById(orderItem.get(i).getMailProductId());
+                orderItem.get(j).setProductTypeName(lotteryProduct.getName());
             }
             orderList.get(i).setOrderItem(orderItem);
             //获取收货地址

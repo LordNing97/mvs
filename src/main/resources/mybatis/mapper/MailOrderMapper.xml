@@ -29,7 +29,7 @@
     </sql>
 
     <!--  保存商城订单  -->
-    <insert id="saveMailOrder">
+    <insert id="saveMailOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into mail_order(customer_id, address_id, order_number, payment, total_price, total_num,
         member_cut, status, create_time, payment_time, consign_time, end_time, is_del)
         values (#{customerId}, #{addressId}, #{orderNumber}, #{payment}, #{totalPrice}, #{totalNum},

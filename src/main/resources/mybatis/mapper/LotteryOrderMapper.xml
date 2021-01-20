@@ -22,7 +22,7 @@
     </sql>
 
     <!--  保存商城订单  -->
-    <insert id="saveLotteryOrder">
+    <insert id="saveLotteryOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into lottery_order(customer_id, address_id, order_number, status, create_time,
         consign_time, end_time, is_del)
         values (#{customerId}, #{addressId}, #{orderNumber}, #{status}, #{createTime},
