@@ -3,19 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xy.mvs.mapper.LotteryProductMapper">
 
-    <!--  保存商城产品  -->
-    <insert id="saveLotteryProduct">
+    <!--  保存抽奖产品  -->
+    <insert id="saveLotteryProduct" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into lottery_product(product_type_id, name, photo, information, price, status, is_del)
         values (#{productTypeId}, #{name}, #{photo}, #{information}, #{price}, #{status}, #{isDel})
     </insert>
 
     <!--  根据id获取  -->
-    <select id="getById" resultType="com.xy.mvs.model.MailProduct">
+    <select id="getById" resultType="com.xy.mvs.model.LotteryProduct">
         select * from lottery_product
         where id = #{id}
     </select>
 
-    <!--  修改商城产品  -->
+    <!--  修改抽奖产品  -->
     <update id="modifyLotteryProduct">
         update lottery_product
         set product_type_id = #{productTypeId}, name = #{name}, photo = #{photo},
@@ -37,8 +37,8 @@
         </if>
     </select>
 
-    <!--  分页获取商城产品  -->
-    <select id="getLotteryProductList" resultType="com.xy.mvs.model.MailProduct">
+    <!--  分页获取抽奖产品  -->
+    <select id="getLotteryProductList" resultType="com.xy.mvs.model.LotteryProduct">
         select
         lottery_product.id, lottery_product.product_type_id, product_type.name product_type_name, lottery_product.name,
         lottery_product.photo, lottery_product.information, lottery_product.price,
@@ -59,7 +59,7 @@
         limit #{page},#{size}
     </select>
 
-    <!--  删除商城产品  -->
+    <!--  删除抽奖产品  -->
     <update id="deleteLotteryProduct">
         update lottery_product
         set is_del = 1

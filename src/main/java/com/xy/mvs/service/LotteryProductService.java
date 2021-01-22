@@ -1,10 +1,15 @@
 package com.xy.mvs.service;
 
+import com.xy.mvs.mapper.LotteryMapper;
 import com.xy.mvs.mapper.LotteryProductMapper;
+import com.xy.mvs.model.Lottery;
 import com.xy.mvs.model.LotteryProduct;
 import com.xy.mvs.request.LotteryProductList;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -18,14 +23,25 @@ public class LotteryProductService {
     @Resource
     private LotteryProductMapper lotteryProductMapper;
 
+    @Resource
+    private LotteryMapper lotteryMapper;
+
     /**
      * 保存抽奖产品
      * @param lotteryProduct
      * @return
      */
+    @Transactional
     public boolean saveLotteryProduct(LotteryProduct lotteryProduct){
         lotteryProduct.setIsDel(0);
-        return lotteryProductMapper.saveLotteryProduct(lotteryProduct) > 0;
+        lotteryProductMapper.saveLotteryProduct(lotteryProduct);
+        Lottery lottery = new Lottery();
+        lottery.setProductTypeId(lotteryProduct.getProductTypeId());
+        lottery.setLotteryProductId(lotteryProduct.getId());
+        lottery.setStatus(1);
+        lottery.setCreateTime(LocalDateTime.now());
+        lottery.setIsDel(0);
+        return lotteryMapper.saveLottery(lottery) > 0;
     }
 
     /**
