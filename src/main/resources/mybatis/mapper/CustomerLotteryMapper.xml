@@ -8,4 +8,25 @@
         values (#{userId}, #{lotteryId}, #{points}, #{isWin}, #{isDesignated}, #{createTime})
     </insert>
 
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from customer_lottery
+        where lottery_id = #{lotteryId}
+    </select>
+
+    <!--  分页获取  -->
+    <select id="getCustomerLotteryList" resultType="com.xy.mvs.model.CustomerLottery">
+        select customer_lottery.*, user.recharge_points, user.number_winners
+        from customer_lottery
+        left join user on user.id = customer_lottery.user_id
+        where customer_lottery.lottery_id = #{lotteryId}
+        order by customer_lottery.points desc
+        limit #{page},#{size}
+    </select>
+
+    <!--  根据抽奖Id获取所有积分  -->
+    <select id="sumPoints" resultType="java.lang.Integer">
+        select sum(points) from customer_lottery
+        where lottery_id = #{lotteryId}
+    </select>
+
 </mapper>

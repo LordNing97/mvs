@@ -15,4 +15,8 @@ public class Lottery {
     private LocalDateTime createTime;
     private Integer isDel;
 
+    private String productName;
+    private Integer peopleNum;
+    private String progress;
+
 }

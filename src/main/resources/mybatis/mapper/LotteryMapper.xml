@@ -8,4 +8,35 @@
         values (#{productTypeId}, #{lotteryProductId}, #{status}, #{createTime}, #{isDel})
     </insert>
 
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from lottery
+        left join lottery_product on lottery_product.id = lottery.lottery_product_id
+        where lottery.is_del = 0
+        <if test="status != 0">
+            and lottery.status = #{status}
+        </if>
+        <if test="productName != null and productName != ''">
+            and lottery_product.name like concat('%',#{productName},'%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and lottery.create_time between #{startTime} and #{endTime}
+        </if>
+    </select>
+
+    <!--  分页获取抽奖  -->
+    <select id="getLotteryList" resultType="com.xy.mvs.model.Lottery">
+        select lottery.*, lottery_product.name productName from lottery
+        left join lottery_product on lottery_product.id = lottery.lottery_product_id
+        where lottery.is_del = 0
+        <if test="status != 0">
+            and lottery.status = #{status}
+        </if>
+        <if test="productName != null and productName != ''">
+            and lottery_product.name like concat('%',#{productName},'%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and lottery.create_time between #{startTime} and #{endTime}
+        </if>
+    </select>
+
 </mapper>

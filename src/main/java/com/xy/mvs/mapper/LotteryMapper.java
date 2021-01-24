@@ -2,6 +2,10 @@ package com.xy.mvs.mapper;
 
 import com.xy.mvs.model.Lottery;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @Author 陈璇
@@ -18,6 +22,20 @@ public interface LotteryMapper {
      */
     int saveLottery(Lottery lottery);
 
-    int count();
+    int count(@Param("productName") String productName, @Param("status") Integer status,
+              @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
+
+    /**
+     * 分页获取抽奖
+     * @param productName
+     * @param startTime
+     * @param endTime
+     * @param page
+     * @param size
+     * @return
+     */
+    List<Lottery> getLotteryList(@Param("productName") String productName, @Param("status") Integer status,
+                                 @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime,
+                                 @Param("page") Integer page, @Param("size") Integer size);
 
 }

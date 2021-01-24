@@ -16,4 +16,7 @@ public class CustomerLottery {
     private Integer isDesignated;
     private LocalDateTime createTime;
 
+    private Integer rechargePoints;
+    private Integer numberWinners;
+
 }
