@@ -3,7 +3,6 @@ package com.xy.mvs.mapper;
 import com.xy.mvs.model.CustomerLottery;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 /**
@@ -20,6 +19,13 @@ public interface CustomerLotteryMapper {
      * @return
      */
     int saveCustomerLottery(CustomerLottery customerLottery);
+
+    /**
+     * 批量保存
+     * @param customerLotteryList
+     * @return
+     */
+    int saveBatchCustomerLottery(@Param("customerLotteryList") List<CustomerLottery> customerLotteryList);
 
     int count(Integer lotteryId);
 

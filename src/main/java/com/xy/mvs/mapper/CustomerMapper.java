@@ -22,6 +22,13 @@ public interface CustomerMapper {
     int saveCustomer(Customer customer);
 
     /**
+     * 批量保存客户
+     * @param customerList
+     * @return
+     */
+    int saveBatchCustomer(@Param("customerList") List<Customer> customerList);
+
+    /**
      * 根据id获取
      * @param id
      * @return

@@ -1,5 +1,6 @@
 package com.xy.mvs;
 
+import com.xy.mvs.util.IntegerUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +12,7 @@ public class MvsApplicationTests {
 
     @Test
     public void contextLoads() {
-
+        System.out.println(IntegerUtils.telephoneNum());
     }
 
 }

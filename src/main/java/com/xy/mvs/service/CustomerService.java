@@ -24,6 +24,9 @@ public class CustomerService {
      * @return
      */
     public boolean saveCustomer(Customer customer){
+        customer.setIsMail(1);
+        customer.setIsLottery(0);
+        customer.setIsAuto(0);
         customer.setIsDel(0);
         return customerMapper.saveCustomer(customer) > 0;
     }

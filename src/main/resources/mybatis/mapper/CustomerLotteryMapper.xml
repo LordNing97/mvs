@@ -8,6 +8,15 @@
         values (#{userId}, #{lotteryId}, #{points}, #{isWin}, #{isDesignated}, #{createTime})
     </insert>
 
+    <!--  批量保存  -->
+    <insert id="saveBatchCustomerLottery">
+        insert into customer_lottery(user_id, lottery_id, points, is_win, is_designated, create_time)
+        values
+        <foreach collection="customerLotteryList" item="item" separator=",">
+            ( #{item.userId}, #{item.lotteryId}, 1, 0, 0, #{item.createTime} )
+        </foreach>
+    </insert>
+
     <select id="count" resultType="java.lang.Integer">
         select count(1) from customer_lottery
         where lottery_id = #{lotteryId}

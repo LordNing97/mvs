@@ -1,14 +1,18 @@
 package com.xy.mvs.service;
 
-import com.xy.mvs.mapper.CustomerLotteryMapper;
-import com.xy.mvs.mapper.LotteryMapper;
-import com.xy.mvs.mapper.LotteryProductMapper;
+import com.xy.mvs.mapper.*;
+import com.xy.mvs.model.Customer;
+import com.xy.mvs.model.CustomerLottery;
 import com.xy.mvs.model.Lottery;
 import com.xy.mvs.model.LotteryProduct;
 import com.xy.mvs.request.LotteryList;
+import com.xy.mvs.util.IntegerUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +31,12 @@ public class LotteryService {
 
     @Resource
     private LotteryProductMapper lotteryProductMapper;
+
+    @Resource
+    private TelephoneMapper telephoneMapper;
+
+    @Resource
+    private CustomerMapper customerMapper;
 
     /**
      * 保存抽奖
@@ -67,6 +77,56 @@ public class LotteryService {
                 .total(lotteryMapper.count(productName, status, startTime, endTime))
                 .page(page)
                 .build();
+    }
+
+    /**
+     * 修改进度
+     * @param lotteryId
+     * @param num
+     * @return
+     */
+    @Transactional
+    public void modificationProgress(Integer lotteryId, Integer num){
+        List<String> telephoneList = telephoneMapper.getNumber();
+//        List<Customer> customerList = new ArrayList<>();
+//        List<CustomerLottery> customerLotteryList = new ArrayList<>();
+        int telephoneSize = telephoneList.size() - 1;
+        do{
+            if(telephoneSize < 0){
+                telephoneSize = telephoneList.size() - 1;
+            }
+            //保存机器人客户
+            Customer customer = new Customer();
+            customer.setTelephone(telephoneList.get(telephoneSize) + IntegerUtils.telephoneNum());
+            customer.setCode(IntegerUtils.random());
+            customer.setIsMail(1);
+            customer.setIsLottery(1);
+            customer.setIsAuto(1);
+            customer.setIsDel(0);
+            customerMapper.saveCustomer(customer);
+            //保存机器人客户抽奖
+            CustomerLottery customerLottery = new CustomerLottery();
+            customerLottery.setUserId(customer.getId());
+            customerLottery.setLotteryId(lotteryId);
+            customerLottery.setPoints(1);
+            customerLottery.setIsWin(0);
+            customerLottery.setIsDesignated(0);
+            customerLottery.setCreateTime(LocalDateTime.now());
+            customerLotteryMapper.saveCustomerLottery(customerLottery);
+            telephoneSize--;
+            num--;
+        }while (num != 0);
+//        //保存机器人客户
+//        customerMapper.saveBatchCustomer(customerList);
+//        for(int i = 0;i < customerList.size();i++){
+//            CustomerLottery customerLottery = new CustomerLottery();
+//            customerLottery.setUserId(customerList.get(i).getId());
+//            customerLottery.setLotteryId(lotteryId);
+//            customerLottery.setCreateTime(LocalDateTime.now());
+//            customerLotteryList.add(customerLottery);
+//        }
+//        //保存机器人客户抽奖
+//        return customerLotteryMapper.saveBatchCustomerLottery(customerLotteryList) > 0;
     }
 
 }

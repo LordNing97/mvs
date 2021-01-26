@@ -4,11 +4,20 @@
 <mapper namespace="com.xy.mvs.mapper.CustomerMapper">
 
     <!--  保存客户  -->
-    <insert id="saveCustomer">
+    <insert id="saveCustomer" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into customer(name, telephone, turnover, consumption_amount,
-        number_winners, recharge_points, consumption_points, residual_integral, code, is_mail, is_lottery, is_del)
-        values (#{name}, #{telephone}, #{turnover}, #{consumptionAmount},
-        #{numberWinners}, #{rechargePoints}, #{consumptionPoints}, #{residualIntegral}, #{code}, #{isMail}, #{isLottery}, #{isDel})
+        number_winners, recharge_points, consumption_points, residual_integral, code, is_mail, is_lottery, is_auto, is_del)
+        values (#{name}, #{telephone}, 0, 0,
+        0, 0, 0, 0, #{code}, #{isMail}, #{isLottery}, #{isAuto}, #{isDel})
+    </insert>
+
+    <!--  批量保存客户  -->
+    <insert id="saveBatchCustomer" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into customer(telephone, code, is_mail, is_lottery, is_auto, is_del)
+        values
+        <foreach collection="customerList" item="item" separator=",">
+            ( #{item.telephone}, #{item.code}, #{item.isMail}, #{item.isLottery}, #{item.isAuto}, #{item.isDel} )
+        </foreach>
     </insert>
 
     <!--  根据id获取  -->

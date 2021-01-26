@@ -58,4 +58,15 @@ public class LotteryController {
                 .build();
     }
 
+    @ApiOperation(value = "修改进度", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "lotteryId", value = "抽奖id",dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "num", value = "添加人数",dataType = "int", paramType = "query", required = true)
+    })
+    @PostMapping("modificationProgress")
+    public Result modificationProgress(Integer lotteryId, Integer num){
+        lotteryService.modificationProgress(lotteryId, num);
+        return Result.builder().build();
+    }
+
 }
