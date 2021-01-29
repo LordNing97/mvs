@@ -10,8 +10,13 @@
 
     <!--  根据id获取  -->
     <select id="getById" resultType="com.xy.mvs.model.MailProduct">
-        select * from mail_product
-        where id = #{id}
+        select
+        mail_product.id, mail_product.product_type_id, product_type.name product_type_name, mail_product.name,
+        mail_product.photo, mail_product.information, mail_product.price, mail_product.num,
+        mail_product.status, mail_product.is_del
+        from mail_product
+        left join product_type on mail_product.product_type_id = product_type.id
+        where mail_product.id = #{id}
     </select>
 
     <!--  修改商城产品  -->

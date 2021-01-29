@@ -53,4 +53,11 @@ public interface ProductTypeMapper {
      */
     int deleteProductType(String id);
 
+    /**
+     * 根据类型获取产品
+     * @param type
+     * @return
+     */
+    List<ProductType> getProductTypeByType(Integer type);
+
 }

@@ -50,7 +50,7 @@ public class ProductTypeController {
 
     @ApiOperation(value = "根据id获取产品类型", httpMethod = "GET")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id",dataType = "string", paramType = "query", required = true)
+            @ApiImplicitParam(name = "id", value = "id",dataType = "int", paramType = "query", required = true)
     })
     @GetMapping("getById")
     public Result getById(Integer id){
@@ -75,6 +75,17 @@ public class ProductTypeController {
             return Result.builder().build();
         }
         return Result.builder(ResultCode.OPERATION_ERROR).build();
+    }
+
+    @ApiOperation(value = "根据类型获取产品", httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "type", value = "类型(0:商城 1:抽奖)",dataType = "int", paramType = "query", required = true)
+    })
+    @GetMapping("getProductTypeByType")
+    public Result getProductTypeByType(Integer type){
+        return Result.builder()
+                .data(productTypeService.getProductTypeByType(type))
+                .build();
     }
 
 }

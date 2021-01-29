@@ -72,4 +72,13 @@ public class ProductTypeService {
         return productTypeMapper.deleteProductType(id) > 0;
     }
 
+    /**
+     * 根据类型获取产品
+     * @param type
+     * @return
+     */
+    public List<ProductType> getProductTypeByType(Integer type){
+        return productTypeMapper.getProductTypeByType(type);
+    }
+
 }

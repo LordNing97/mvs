@@ -29,4 +29,6 @@ public class MailProduct {
     @ApiModelProperty(name = "isDel", value = "是否删除(0:未删除 1:已删除)", dataType = "int")
     private Integer isDel;
 
+    private String productTypeName;
+
 }

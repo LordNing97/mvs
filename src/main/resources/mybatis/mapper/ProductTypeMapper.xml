@@ -48,4 +48,10 @@
         where id = #{id}
     </update>
 
+    <!--  根据类型获取产品  -->
+    <select id="getProductTypeByType" resultType="com.xy.mvs.model.ProductType">
+        select * from product_type
+        where type = #{type}
+    </select>
+
 </mapper>
