@@ -400,12 +400,12 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-horizontal">
-                                        <div class="form-group">
+                                        <div id="productTypeIdDiv" class="form-group">
                                             <label class="control-label col-md-3">
                                                 类型<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <select v-model="selected" id="productTypeId" class="form-control">
+                                                <select id="productTypeId" class="form-control">
                                                     <option value="-1">请选择</option>
                                                     <option selected v-for="(item,index) in productType" :value="item.id">
                                                         {{item.name}}
@@ -617,8 +617,7 @@
                 num:"",
                 status:"",
             },
-            productType:[],
-            selected: []
+            productType:[]
         },
         filters: {
             statusStrFilter: function (value) {
@@ -643,20 +642,18 @@
             },
             //编辑商城产品
             editMailProduct: function (id) {
+                $("#productTypeIdDiv").hide();
                 $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
                 $("#editId").val(id);
                 $.get("/mailProduct/getById", {id: id}, function (result) {
                     if (result.code == 200) {
                         let mailProduct = result.data;
-                        console.log(result.data);
-                        this.selected = mailProduct.productTypeId;
                         $("#name").val(mailProduct.name);
                         $("#preview_photo").attr("src", mailProduct.photo);
                         $("#information").val(mailProduct.information);
                         $("#price").val(mailProduct.price);
                         $("#num").val(mailProduct.num);
                         $("#status").val(mailProduct.status);
-                        getProductTypeByType();
                     }
                 });
             },
@@ -781,7 +778,6 @@
 
     //获取产品类型
     function getProductTypeByType() {
-        console.log(vue.selected);
         $.get("/productType/getProductTypeByType", {
             type: 0,
         }, function (result) {
@@ -802,6 +798,7 @@
 
     //新建
     function create() {
+        $("#productTypeIdDiv").show();
         $("#editId").val("");
         $("#productTypeId").val(-1);
         $("#name").val("");
@@ -815,7 +812,7 @@
 
     //生成分页按钮及绑定事件
     function showYema() {
-        var str = '<li class="prev"><a href="#"><i class="ace-icon fa fa-angle-left"></i></a></li>';
+        let str = '<li class="prev"><a href="#"><i class="ace-icon fa fa-angle-left"></i></a></li>';
 
         if (page == 1) {
             str += '<li class="active"><a class="yeshu"> 1 </a></li>';
@@ -873,9 +870,9 @@
     //改变每页记录数
     function changePageSize(e) {
         $(e).parent().addClass("active").siblings().removeClass("active");
-        var currItem = $(e).children();
+        let currItem = $(e).children();
         size = $(currItem).attr("data-val");
-        var pageSizeTxt = $(currItem).text();
+        let pageSizeTxt = $(currItem).text();
         $("#size").html(pageSizeTxt);
         page = 1;
         listMailProduct();
