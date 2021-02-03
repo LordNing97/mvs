@@ -43,4 +43,17 @@ public class CustomerLotteryController {
                 .build();
     }
 
+    @ApiOperation(value = "修改内定", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id",dataType = "int", paramType = "query, required = true"),
+            @ApiImplicitParam(name = "isDesignated", value = ", required = true",dataType = "int", paramType = "query", required = true)
+    })
+    @PostMapping("modifyIsDesignated")
+    public Result modifyIsDesignated(Integer id, Integer isDesignated){
+        if(customerLotteryService.modifyIsDesignated(id, isDesignated)){
+            return Result.builder().build();
+        }
+        return Result.builder(ResultCode.OPERATION_ERROR).build();
+    }
+
 }

@@ -45,4 +45,14 @@ public class CustomerLotteryService {
                 .build();
     }
 
+    /**
+     * 修改内定
+     * @param id
+     * @param isDesignated
+     * @return
+     */
+    public boolean modifyIsDesignated(Integer id, Integer isDesignated){
+        return customerLotteryMapper.modifyIsDesignated(id, isDesignated) > 0;
+    }
+
 }

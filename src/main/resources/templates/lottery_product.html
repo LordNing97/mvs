@@ -60,7 +60,7 @@
     <div class="page-content-wrapper">
         <div class="page-content">
             <!-- BEGIN PAGE CONTENT-->
-            <div class="row">
+            <div id="lotteryProductList" v-cloak class="row">
 
                 <div class="col-md-12">
 
@@ -102,47 +102,34 @@
                         </div>
                     </div>
                     <div class="esh-filter-sidebar">
-                        <div class="header"><b class="title">服务人员筛选</b> <a class="close" href="javascript:void(0)"></a></div>
+                        <div class="header"><b class="title">商城产品筛选</b> <a class="close" href="javascript:void(0)"></a></div>
                         <div class="sidebar-wrap">
                             <section class="content">
                                 <div class="tip clearfix"><i class="fa fa-filter" style="color:#999"></i> 筛选条件<a class="pull-right hidden clear-filter" href="javascript:void(0)" onclick="clearFilter()">清空筛选</a></div>
                                 <div class="form-group">
-                                    <label>所属网点</label>
-                                    <select id="select-network" class="form-control">
-                                        <option value="">请选择网点</option>
-                                        <option value="8ccc5342-5b0d-4ef0-b022-d081d685cf9b">万维信达分部4号</option>
-                                        <option value="d1eec2a7-d02f-4429-bf28-01a39984d7c8">万维信达分部3号</option>
-                                        <option value="5a5c7698-9d42-4fd2-9a03-96498bd2eb4b">万维信达分部2号</option>
-                                        <option value="0ae09199-6d30-491b-afec-c649944a5395">万维信达分部1号</option>
-                                        <option value="a61e0c34-46cc-4244-8aa2-255450ed740b">万维信达</option>
+                                    <label>产品类型</label>
+                                    <select id="productTypeIdSearch" class="form-control">
+                                        <option value="0">请选择</option>
+                                        <option v-for="(item,index) in productType" :value="item.id">
+                                            {{item.name}}
+                                        </option>
                                     </select>
                                 </div>
 
+                                <div class="form-group">
+                                    <label>状态</label>
+                                    <select id="statusSearch" class="form-control">
+                                        <option value="-1">全部</option>
+                                        <option value="0">上架</option>
+                                        <option value="1">下架</option>
+                                    </select>
+                                </div>
 
                                 <div class="form-group">
-                                    <label>网点类型</label>
-                                    <ul class="filter-option two clearfix">
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="1" /><input name="type" type="hidden" value="false" />总部
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="2" /><input name="type" type="hidden" value="false" />自建网点
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="3" /><input name="type" type="hidden" value="false" />第三方服务商
-                                            </label>
-                                        </li>
-                                    </ul>
-                                    <input type="hidden" id="type_hide" value="" />
+                                    <button type="button" class="btn green" onclick="listLotteryProduct()">确定</button>
                                 </div>
                             </section>
                         </div>
-
                     </div>
                     <div class="side-menu-content">
                         <div class="portlet light">
@@ -151,10 +138,12 @@
                                     抽奖产品
                                 </div>
                                 <div class="input-group pull-right">
-                                    <div class="input-group input-medium ">
-                                        <input class="form-control" id="userName" maxlength="20" name="userName" placeholder="输入姓名..." type="text" value="" />
+                                    <div class="input-group input-medium">
+                                        <input class="form-control" id="nameSearch" maxlength="20" name="name" placeholder="输入名称..." type="text" value="" />
                                         <span class="input-group-btn">
-                                            <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
+                                            <button onclick="listLotteryProduct()" class="btn green" id="btnSearch" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
@@ -199,9 +188,6 @@
                                                     详情
                                                 </th>
                                                 <th style="width: 9%;">
-                                                    起投金额
-                                                </th>
-                                                <th style="width: 9%;">
                                                     状态
                                                 </th>
                                                 <th style="width: 16%;">
@@ -210,116 +196,91 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX">
+                                            <tr v-for="(item,index) in lotteryProductList" class="odd gradeX">
                                                 <td>
-                                                    1
+                                                    {{item.id}}
                                                 </td>
                                                 <td>
-                                                    小米
+                                                    {{item.productTypeName}}
                                                 </td>
                                                 <td>
-                                                    手机
+                                                    {{item.name}}
                                                 </td>
                                                 <td>
-                                                    <img src="../static/admin/img/iphone.png" width="20px" height="20px">
+                                                    <img :src="item.photo" width="20px" height="20px">
                                                 </td>
                                                 <td>
-                                                    这是小米手机
+                                                    {{item.information}}
                                                 </td>
                                                 <td>
-                                                    10
+                                                    <span :class="statusClass(item.status)">
+                                                        {{item.status | statusStrFilter}}
+                                                    </span>
                                                 </td>
                                                 <td>
-                                                    <span class="label label-success">上架</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="see()">
+                                                    <button class="btn btn-default btn-xs black" @click="selectLotteryProduct(item.id)">
                                                         <i class="fa fa-search"></i>
                                                         查看
                                                     </button>
-                                                    <button class="btn btn-default btn-xs black" onclick="create()">
-                                                        <i class="fa fa-pencil"></i>
-                                                        编辑
-                                                    </button>
-                                                    <button class="btn btn-default btn-xs black" onclick="deleteDailog()">
-                                                        <i class="fa fa-trash-o"></i>
-                                                        移除
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd gradeX">
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td>
-                                                    华为
-                                                </td>
-                                                <td>
-                                                    电脑
-                                                </td>
-                                                <td>
-                                                    <img src="../static/admin/img/iphone.png" width="20px" height="20px">
-                                                </td>
-                                                <td>
-                                                    这是华为电脑
-                                                </td>
-                                                <td>
-                                                    10
-                                                </td>
-                                                <td>
-                                                    <span class="label label-gray">下架</span>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="see()">
+                                                    <button class="btn btn-default btn-xs black" @click="editLotteryProduct(item.id)">
                                                         <i class="fa fa-search"></i>
-                                                        查看
-                                                    </button>
-                                                    <button class="btn btn-default btn-xs black" onclick="create()">
-                                                        <i class="fa fa-pencil"></i>
                                                         编辑
                                                     </button>
-                                                    <button class="btn btn-default btn-xs black" onclick="deleteDailog()">
-                                                        <i class="fa fa-trash-o"></i>
-                                                        移除
+                                                    <button class="btn btn-default btn-xs black" @click="deleteLotteryProduct(item.id)">
+                                                        <i class="fa fa-search"></i>
+                                                        删除
                                                     </button>
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="row">
+
+                                    <div id="haveData" style="display: none" class="row">
                                         <div class="col-md-5 col-sm-5">
                                             <div class="dataTables_info" role="status" aria-live="polite">
-                                                <label style="vertical-align: middle;">共3条</label>
+                                                <label style="vertical-align: middle;">共<span
+                                                        id="count">3</span>条</label>
                                                 <div class="btn-group pagesize dropup">
-                                                    <a href="javascript:void(0)" class="link name-wrap" data-toggle="dropdown" aria-expanded="false">
-                                                        <span data-val="10">10条/页&nbsp;</span>
+                                                    <a href="javascript:void(0)" class="link name-wrap"
+                                                       data-toggle="dropdown" aria-expanded="false">
+                                                        <span id="size">10条/页&nbsp;</span>
                                                         <i class="fa fa-angle-down"></i>
                                                     </a>
                                                     <ul class="dropdown-menu esh-pub-menu">
                                                         <li class="clearfix active">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="10">10条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="10">10条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="20">20条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="20">20条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="30">30条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="30">30条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="40">40条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="40">40条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="50">50条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="50">50条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -328,40 +289,26 @@
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <div class="dataTables_paginate paging_bootstrap_full_number">
-                                                <ul class="pagination">
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#" onclick="changePageIndex(1)">
-                                                            1
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-right"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-right"></i>
-                                                        </a>
-                                                    </li>
+                                                <ul id="pagination" class="pagination">
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div id="nullData" style="display: none" class="row">
+                                        <div class="col-md-5 col-sm-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite">
+                                                <label>没有查询到所需数据</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <div class="dataTables_paginate paging_bootstrap_full_number"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
-                </div>
 
                     <!--查看详情模态框-->
                     <div class="modal fade bs-modal-lg" id="seeDailog" tabindex="-1" aria-hidden="true">
@@ -378,7 +325,7 @@
                                                 产品类型编码<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" value="W201810230002" disabled>
+                                                <input class="form-control" :value="lotteryProduct.productTypeId" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -386,9 +333,7 @@
                                                 类型<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <select class="form-control" disabled>
-                                                    <option>小米</option>
-                                                </select>
+                                                <input class="form-control" :value="lotteryProduct.productTypeName" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -396,7 +341,7 @@
                                                 名称<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" value="手机" disabled>
+                                                <input class="form-control" :value="lotteryProduct.name" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -404,7 +349,7 @@
                                                 图片<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <img src="../static/admin/img/iphone.png" width="150px" height="150px">
+                                                <img :src="lotteryProduct.photo" width="150px" height="150px">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -412,15 +357,7 @@
                                                 详情<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" value="这是小米手机" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">
-                                                起投金额<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-7">
-                                                <input class="form-control" value="10" disabled>
+                                                <input class="form-control" :value="lotteryProduct.information" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -428,9 +365,7 @@
                                                 状态<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <select class="form-control" disabled>
-                                                    <option>上架</option>
-                                                </select>
+                                                <input class="form-control" :value="lotteryProduct.status | statusStrFilter" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -452,15 +387,16 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-horizontal">
-                                        <div class="form-group">
+                                        <div id="productTypeIdDiv" class="form-group">
                                             <label class="control-label col-md-3">
                                                 类型<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <select class="form-control">
-                                                    <option>请选择</option>
-                                                    <option>小米</option>
-                                                    <option>华为</option>
+                                                <select id="productTypeId" class="form-control">
+                                                    <option value="0">请选择</option>
+                                                    <option v-for="(item,index) in productType" :value="item.id">
+                                                        {{item.name}}
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -469,7 +405,15 @@
                                                 名称<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" placeholder="请输入名称">
+                                                <input id="name" class="form-control" placeholder="请输入名称">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                上传图片<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                <input id="photoFile" class="form-control" type="file" onchange="uploadImg()">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -477,7 +421,7 @@
                                                 图片<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" type="file">
+                                                <img id="preview_photo" width="150px" height="150px">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -485,15 +429,15 @@
                                                 详情<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" placeholder="请输入详情">
+                                                <input id="information" class="form-control" placeholder="请输入详情">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3">
-                                                起投金额<span class="required">*</span>
+                                                价格<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input class="form-control" placeholder="请输入起投金额">
+                                                <input id="price" class="form-control" placeholder="请输入价格">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -501,18 +445,18 @@
                                                 状态<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <select class="form-control">
-                                                    <option>上架</option>
-                                                    <option>下架</option>
+                                                <select id="status" class="form-control">
+                                                    <option value="0">上架</option>
+                                                    <option value="1">下架</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="hidden">
+                                    <input type="hidden" id="editId">
                                     <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                    <button type="button" class="btn green" onclick="deleteBrand()">确定</button>
+                                    <button type="button" class="btn green" onclick="saveLotteryProduct()">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -531,9 +475,9 @@
                                     <div class="bootbox-body">您确认删除该产品吗?</div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="hidden">
+                                    <input type="hidden" id="deleteId">
                                     <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                    <button type="button" class="btn green">确定</button>
+                                    <button onclick="deleteLotteryProduct()" type="button" class="btn green">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -606,11 +550,13 @@
 </script>
 <!-- BEGIN PAGE SELF SCRIPTS -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        initEvent();//事件绑定
-        initPageSize();
 
-        //changeQueryCondition();
+    let page = 1, size = 10, total = 0;
+
+    $(function () {
+        listLotteryProduct();
+        getProductTypeByType();
+        initEvent();//事件绑定
     });
 
     //事件绑定
@@ -626,37 +572,7 @@
             }
         });
 
-        //Checkbox选择触发表单提交
-        $("ul.filter-option input[type=checkbox]").on("click", function () {
-            var attrName = $(this).attr('name');
-            var subData = $("#" + attrName + "_hide").val();
-            if ($(this).attr('checked')) {
-                subData += $(this).val() + ",";
-            } else {
-                var a = $(this).val() + ",";
-                subData = subData.replace(a, "");
-            }
-            $("#" + attrName + "_hide").val(subData);
-            changeQueryCondition();
-        })
-
-        //选择产品
-        $("#select-network").change(function () { changeQueryCondition(); });
-
-        //输入名称回车查询
-        $("#userName").keypress(function (e) {
-            if (e.which == 13) {
-                changeQueryCondition();
-                $("#btnSearch").focus();
-            }
-        });
-
-        //搜索按钮按下
-        $("#btnSearch").click(function () { changeQueryCondition(); })
     }
-
-    ///初始化列表
-    function initTable() { OperationTable.init("#tableList", "#Sort", "#Direction", changeSortCondition); }
 
     //清空筛选
     function clearFilter() {
@@ -664,108 +580,192 @@
         $("ul.filter-option input[type=checkbox]").attr("checked", false);
         $("ul.filter-option input[type=checkbox]").parent().removeClass("checked");
         changeQueryCondition();
-
     }
 
-    //初始化每页记录数
-    function initPageSize() {
-        if ($.cookie('system-setting-pagesize'))
-            $("#PageSize").val($.cookie('system-setting-pagesize'));
-    }
-
-    //改变每页记录数
-    function changePageSize(e) {
-        $(e).parent().addClass("active").siblings().removeClass("active");
-        var currItem = $(e).children();
-        var pageSize = $(currItem).attr("data-val");
-        var pageSizeTxt = $(currItem).text();
-
-        $("#currentPageSize").attr("data-val", pageSize).html(pageSizeTxt);
-        $("#PageSize").val(pageSize);
-        $("#PageIndex").val(1);
-
-        if ($.cookie('system-setting-pagesize'))
-            $.cookie('system-setting-pagesize', '', { expires: -1, path: '/' });
-        $.cookie('system-setting-pagesize', pageSize, { expires: 7, path: '/' });
-
-        $("#searchByRequest").submit();
-    }
-
-    //改变索引页
-    function changePageIndex(index) {
-        $("#PageIndex").val(index);
-        $("#searchByRequest").submit();
-    }
-
-    //改变查询条件
-    function changeQueryCondition() {
-        if ($("#select-network").val() == "" && $("#type_hide").val() == "") {
-            $(".clear-filter").addClass("hidden")
+    let vue = new Vue({
+        el: "#lotteryProductList",
+        data: {
+            lotteryProductList: [],
+            lotteryProduct:{
+                productTypeId:"",
+                productTypeName:"",
+                name:"",
+                photo:"",
+                information:"",
+                price:"",
+                status:"",
+            },
+            productType:[]
+        },
+        filters: {
+            statusStrFilter: function (value) {
+                let str = "";
+                switch (value) {
+                    case 0:
+                        str = "上架";
+                        break;
+                    case 1:
+                        str = "下架";
+                        break;
+                        break;
+                }
+                return str;
+            }
+        },
+        methods: {
+            //删除抽奖产品
+            deleteLotteryProduct: function (id) {
+                $("#deleteDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#deleteId").val(id);
+            },
+            //编辑抽奖产品
+            editLotteryProduct: function (id) {
+                $("#productTypeIdDiv").hide();
+                $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#editId").val(id);
+                $.get("/lotteryProduct/getById", {id: id}, function (result) {
+                    if (result.code == 200) {
+                        let lotteryProduct = result.data;
+                        $("#name").val(lotteryProduct.name);
+                        $("#preview_photo").attr("src", lotteryProduct.photo);
+                        $("#information").val(lotteryProduct.information);
+                        $("#price").val(lotteryProduct.price);
+                        $("#status").val(lotteryProduct.status);
+                    }
+                });
+            },
+            //查看抽奖产品
+            selectLotteryProduct: function (id) {
+                $("#seeDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $.get("/lotteryProduct/getById", {id: id}, function (result) {
+                    if (result.code == 200) {
+                        vue.lotteryProduct = result.data;
+                    }
+                });
+            },
+            statusClass: function (status) {
+                if(status == 0){
+                    return "label label-success";
+                }else if(status == 1){
+                    return "label label-gray";
+                }
+            }
         }
-        else {
-            $(".clear-filter").removeClass("hidden")
+    });
+
+    //保存抽奖产品
+    function saveLotteryProduct(){
+        let id = $("#editId").val();
+        let productTypeId = $("#productTypeId").val();
+        let name = $("#name").val();
+        let photo = $("#preview_photo").attr("src");
+        let information = $("#information").val();
+        let price = $("#price").val();
+        let status = $("#status").val();
+        console.log(photo);
+        if(id == ''){
+            if(productTypeId == 0){
+                growlAlert.danger("请选择类型");
+            }else{
+                //新增
+                $.post("/lotteryProduct/saveLotteryProduct",{
+                    productTypeId : productTypeId ,
+                    name: name,
+                    photo: photo,
+                    information: information,
+                    price: price,
+                    status: status
+                },function(result){
+                    if(result.code == 200){
+                        growlAlert.success("保存成功");
+                        listLotteryProduct();
+                        $("#createDailog").modal("hide");
+                    }else{
+                        growlAlert.danger(result.msg);
+                    }
+                });
+            }
+        }else{
+            //编辑
+            $.post("/lotteryProduct/modifyLotteryProduct",{
+                id: id,
+                productTypeId : productTypeId ,
+                name: name,
+                photo: photo,
+                information: information,
+                price: price,
+                status: status
+            },function(result){
+                if(result.code == 200){
+                    growlAlert.success("保存成功");
+                    listLotteryProduct();
+                    $("#createDailog").modal("hide");
+                }else{
+                    growlAlert.danger(result.msg);
+                }
+            });
         }
-
-        var userName = $("#userName").val();
-        if (userName.indexOf("输入") >= 0) {
-            userName = "";
-        }
-
-        var networType = $("#type_hide").val(); //组装网点类型
-        var network = $("#select-network").val();
-        var whereData = "{'name':'" + userName + "','servicenetworkid':'" + network + "','type':[" + trimEnd(networType) + "]" + "}";
-
-        $("#Where").val(whereData);
-        $("#PageIndex").val(1);//页索引置为1
-        $("#searchByRequest").submit();
     }
 
-    //改变排序条件
-    function changeSortCondition(sort, direction) {
-        $("#Sort").val(sort);
-        $("#Direction").val(direction);
-        $("#PageIndex").val(1);//页索引置为1
-        $("#searchByRequest").submit();
+    //分页查询抽奖产品
+    function listLotteryProduct() {
+        let name = $("#nameSearch").val();
+        let productTypeId = $("#productTypeIdSearch").val();
+        let status = $("#statusSearch").val();
+        $.get("/lotteryProduct/getLotteryProductList", {
+            name: name,
+            productTypeId: productTypeId,
+            status: status,
+            page: page,
+            size: size
+        }, function (result) {
+            if (result.code == 200) {
+                vue.lotteryProductList = [];
+                vue.lotteryProductList = result.data.lotteryProductList;
+                total = result.data.total;
+                if(total != 0){
+                    showYema();
+                    $("#haveData").show();
+                    $("#nullData").hide();
+                }else{
+                    vue.lotteryProductList = [];
+                    $("#haveData").hide();
+                    $("#nullData").show();
+                }
+            } else {
+                growlAlert.danger(result.message);
+                showYema();
+            }
+        });
     }
 
-    //启动对话框
-    function startDialog(title) {
-        modalLoadding("#editDailog", title, 400)
-        $("#editDailog").modal();
+    //删除单条记录
+    function deleteLotteryProduct() {
+        let id = $("#deleteId").val();
+        $.post("/lotteryProduct/deleteLotteryProduct", {id: id}, function (result) {
+            if (result.code == 200) {
+                growlAlert.success("删除成功")
+                $("#deleteDailog").modal("hide");
+                listLotteryProduct();
+            } else {
+                growlAlert.danger("删除失败")
+            }
+        });
     }
 
-    //显示对话框
-    function showDialog(data) {
-        $("#editDailog .modal-content").html(data);//填充对话框
-        $("#editForm").removeData("validator");//删除验证器
-        $.validator.unobtrusive.parse("#editForm");//添加验证器
-
-        //角色选择
-        $("#ServicePersonRoleSel").change(function () {
-            $("#RoleID").val($(this).val()).blur();
-        })
-
-        $("#ServiceNetworkSel").change(function () {
-            var b = $(this).find("option:selected").attr("data-bind");
-            $("#ServiceNetworkID").val($(this).val());
-
-            GetRoleByNetwork(b, "#ServicePersonRoleSel");
-        })
-    }
-
-    //启动large对话框
-    function startLargeDialog(title) {
-        modalLoadding("#editLgDailog", title, 425)
-        $("#editLgDailog").modal();
-    }
-
-    //显示large对话框
-    function showLargeDialog(data) {
-
-        $("#editLgDailog .modal-content").html(data);//填充对话框
-        $("#importForm").removeData("validator");//删除验证器
-        $.validator.unobtrusive.parse("#importForm");//添加验证器
-        Metronic.initSlimScroll('.scroller');//滚动条
+    //获取产品类型
+    function getProductTypeByType() {
+        $.get("/productType/getProductTypeByType", {
+            type: 0,
+        }, function (result) {
+            if (result.code == 200) {
+                vue.productType = [];
+                vue.productType = result.data;
+            } else {
+                growlAlert.danger(result.message);
+                showYema();
+            }
+        });
     }
 
     //查看详情
@@ -773,15 +773,115 @@
         $("#seeDailog").modal();
     }
 
-    //新建/编辑
+    //新建
     function create() {
-        $("#createDailog").modal();
+        $("#productTypeIdDiv").show();
+        $("#editId").val("");
+        $("#productTypeId").val(0);
+        $("#name").val("");
+        $("#preview_photo").attr("src", "");
+        $("#information").val("");
+        $("#price").val("");
+        $("#status").val(0);
+        $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
     }
 
-    //删除
-    function deleteDailog() {
-        $("#deleteDailog").modal();
+    //生成分页按钮及绑定事件
+    function showYema() {
+        let str = '<li class="prev"><a href="#"><i class="ace-icon fa fa-angle-left"></i></a></li>';
+
+        if (page == 1) {
+            str += '<li class="active"><a class="yeshu"> 1 </a></li>';
+        } else {
+            str += '<li><a class="yeshu"> 1 </a></li>';
+        }
+        if (Math.ceil(total / size) > 1) {
+            if (page > 4)
+                str += '<li class="paginItem"><a >...</a></li>';
+            for (var i = 2; i < Math.ceil(total / size); i++) {
+                if (i > page - 3 && i < page + 3) {
+                    if (page == i) {
+                        str += '<li class="paginItem active"><a class="yeshu"> '
+                            + i + ' </a></li>';
+                    } else {
+                        str += '<li class="paginItem"><a class="yeshu"> ' + i + ' </a></li>';
+                    }
+                }
+            }
+            if (page < Math.ceil(total / size) - 3)
+                str += '<li class="paginItem"><a >...</a></li>';
+
+            if (page == Math.ceil(total / size)) {
+                str += '<li class="paginItem active"><a class="yeshu"> '
+                    + Math.ceil(total / size) + ' </a></li>';
+            } else {
+                str += '<li class="paginItem"><a class="yeshu"> '
+                    + Math.ceil(total / size) + ' </a></li>';
+            }
+        }
+        str += '<li class="next"><a href="#"><i class="ace-icon fa fa-angle-right"></i></a></li>';
+        $("#pagination").html(str);
+        $(".prev").click(
+            function () {
+                if (page > 1)
+                    page--;
+                listLotteryProduct();
+            });
+        $(".next").click(
+            function () {
+                if (page < Math.ceil(total / size))
+                    page++;
+                listLotteryProduct();
+            });
+        $(".yeshu").click(
+            function () {
+                if (!isNaN($(this).html().trim())) {
+                    page = parseInt($(this).html());
+                    listLotteryProduct();
+                }
+            });
+        $("#count").html(total);
     }
+
+    //改变每页记录数
+    function changePageSize(e) {
+        $(e).parent().addClass("active").siblings().removeClass("active");
+        let currItem = $(e).children();
+        size = $(currItem).attr("data-val");
+        let pageSizeTxt = $(currItem).text();
+        $("#size").html(pageSizeTxt);
+        page = 1;
+        listLotteryProduct();
+    }
+
+    //上传图片
+    function uploadImg() {
+        if ($("#photoFile").val() == '') {
+            return;
+        }
+        let formData = new FormData();
+        formData.append('files', document.getElementById('photoFile').files[0]);
+        console.log(formData.get("files"));
+        $.ajax({
+            url:"/app/file/uploadPhoto",
+            type:"post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                if (data.code == 200) {
+                    $("#preview_photo").attr("src", data.data);
+                    $("#productImg").val(data.filename);
+                } else {
+                    growlAlert.danger(data.msg);
+                }
+            },
+            error:function(data) {
+                growlAlert.danger(data.msg)
+            }
+        });
+    }
+
 </script>
 
 <!-- END PAGE SELF SCRIPTS -->

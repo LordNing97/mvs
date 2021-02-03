@@ -90,43 +90,31 @@
                         </div>
                     </div>
                     <div class="esh-filter-sidebar">
-                        <div class="header"><b class="title">服务人员筛选</b> <a class="close" href="javascript:void(0)"></a></div>
+                        <div class="header"><b class="title">商城产品筛选</b> <a class="close" href="javascript:void(0)"></a></div>
                         <div class="sidebar-wrap">
                             <section class="content">
                                 <div class="tip clearfix"><i class="fa fa-filter" style="color:#999"></i> 筛选条件<a class="pull-right hidden clear-filter" href="javascript:void(0)" onclick="clearFilter()">清空筛选</a></div>
                                 <div class="form-group">
-                                    <label>所属网点</label>
-                                    <select id="select-network" class="form-control">
-                                        <option value="">请选择网点</option>
-                                        <option value="8ccc5342-5b0d-4ef0-b022-d081d685cf9b">万维信达分部4号</option>
-                                        <option value="d1eec2a7-d02f-4429-bf28-01a39984d7c8">万维信达分部3号</option>
-                                        <option value="5a5c7698-9d42-4fd2-9a03-96498bd2eb4b">万维信达分部2号</option>
-                                        <option value="0ae09199-6d30-491b-afec-c649944a5395">万维信达分部1号</option>
-                                        <option value="a61e0c34-46cc-4244-8aa2-255450ed740b">万维信达</option>
+                                    <label>产品类型</label>
+                                    <select id="productTypeIdSearch" class="form-control">
+                                        <option value="0">请选择</option>
+                                        <option v-for="(item,index) in productType" :value="item.id">
+                                            {{item.name}}
+                                        </option>
                                     </select>
                                 </div>
 
+                                <div class="form-group">
+                                    <label>状态</label>
+                                    <select id="statusSearch" class="form-control">
+                                        <option value="-1">全部</option>
+                                        <option value="0">上架</option>
+                                        <option value="1">下架</option>
+                                    </select>
+                                </div>
 
                                 <div class="form-group">
-                                    <label>网点类型</label>
-                                    <ul class="filter-option two clearfix">
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="1" /><input name="type" type="hidden" value="false" />总部
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="2" /><input name="type" type="hidden" value="false" />自建网点
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="type" type="checkbox" value="3" /><input name="type" type="hidden" value="false" />第三方服务商
-                                            </label>
-                                        </li>
-                                    </ul>
-                                    <input type="hidden" id="type_hide" value="" />
+                                    <button type="button" class="btn green" onclick="listMailProduct()">确定</button>
                                 </div>
                             </section>
                         </div>
@@ -140,9 +128,11 @@
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium">
-                                        <input class="form-control" id="userName" maxlength="20" name="userName" placeholder="输入姓名..." type="text" value="" />
+                                        <input class="form-control" id="nameSearch" maxlength="20" name="name" placeholder="输入名称..." type="text" value="" />
                                         <span class="input-group-btn">
-                                            <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
+                                            <button onclick="listMailProduct()" class="btn green" id="btnSearch" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
@@ -406,8 +396,8 @@
                                             </label>
                                             <div class="col-md-7">
                                                 <select id="productTypeId" class="form-control">
-                                                    <option value="-1">请选择</option>
-                                                    <option selected v-for="(item,index) in productType" :value="item.id">
+                                                    <option value="0">请选择</option>
+                                                    <option v-for="(item,index) in productType" :value="item.id">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -687,10 +677,10 @@
         let num = $("#num").val();
         let status = $("#status").val();
         console.log(photo);
-        if(productTypeId == -1){
-            growlAlert.danger("请选择类型");
-        }else{
-            if(id == ''){
+        if(id == ''){
+            if(productTypeId == 0){
+                growlAlert.danger("请选择类型");
+            }else{
                 //新增
                 $.post("/mailProduct/saveMailProduct",{
                     productTypeId : productTypeId ,
@@ -709,36 +699,39 @@
                         growlAlert.danger(result.msg);
                     }
                 });
-            }else{
-                //编辑
-                $.post("/mailProduct/modifyMailProduct",{
-                    id: id,
-                    productTypeId : productTypeId ,
-                    name: name,
-                    photo: photo,
-                    information: information,
-                    price: price,
-                    num: num,
-                    status: status
-                },function(result){
-                    if(result.code == 200){
-                        growlAlert.success("保存成功");
-                        listMailProduct();
-                        $("#createDailog").modal("hide");
-                    }else{
-                        growlAlert.danger(result.msg);
-                    }
-                });
             }
+        }else{
+            //编辑
+            $.post("/mailProduct/modifyMailProduct",{
+                id: id,
+                productTypeId : productTypeId ,
+                name: name,
+                photo: photo,
+                information: information,
+                price: price,
+                num: num,
+                status: status
+            },function(result){
+                if(result.code == 200){
+                    growlAlert.success("保存成功");
+                    listMailProduct();
+                    $("#createDailog").modal("hide");
+                }else{
+                    growlAlert.danger(result.msg);
+                }
+            });
         }
     }
 
     //分页查询商城产品
     function listMailProduct() {
+        let name = $("#nameSearch").val();
+        let productTypeId = $("#productTypeIdSearch").val();
+        let status = $("#statusSearch").val();
         $.get("/mailProduct/getMailProductList", {
-            name: "",
-            productTypeId: 0,
-            status: -1,
+            name: name,
+            productTypeId: productTypeId,
+            status: status,
             page: page,
             size: size
         }, function (result) {
@@ -800,7 +793,7 @@
     function create() {
         $("#productTypeIdDiv").show();
         $("#editId").val("");
-        $("#productTypeId").val(-1);
+        $("#productTypeId").val(0);
         $("#name").val("");
         $("#preview_photo").attr("src", "");
         $("#information").val("");

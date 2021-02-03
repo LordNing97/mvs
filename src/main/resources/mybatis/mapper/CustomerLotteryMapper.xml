@@ -38,4 +38,11 @@
         where lottery_id = #{lotteryId}
     </select>
 
+    <!--  修改内定  -->
+    <update id="modifyIsDesignated">
+        update customer_lottery
+        set is_designated = #{isDesignated}
+        where id = #{id}
+    </update>
+
 </mapper>

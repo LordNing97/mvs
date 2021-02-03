@@ -58,7 +58,15 @@ public class LotteryProductService {
      * @param lotteryProduct
      * @return
      */
+    @Transactional
     public boolean modifyLotteryProduct(LotteryProduct lotteryProduct){
+        if(lotteryProduct.getStatus() == 0){
+            //上架
+            lotteryMapper.modifyIsDel(lotteryProduct.getId(), 0);
+        }else{
+            //下架
+            lotteryMapper.modifyIsDel(lotteryProduct.getId(), 1);
+        }
         return lotteryProductMapper.modifyLotteryProduct(lotteryProduct) > 0;
     }
 
@@ -85,7 +93,9 @@ public class LotteryProductService {
      * @param id
      * @return
      */
+    @Transactional
     public boolean deleteLotteryProduct(Integer id){
+        lotteryMapper.modifyIsDel(id, 1);
         return lotteryProductMapper.deleteLotteryProduct(id) > 0;
     }
 

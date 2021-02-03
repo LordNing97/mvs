@@ -60,7 +60,7 @@
     <div class="page-content-wrapper">
         <div class="page-content">
             <!-- BEGIN PAGE CONTENT-->
-            <div class="row">
+            <div id="lotteryList" v-cloak class="row">
 
                 <div class="col-md-12">
                     <div class="side-menu-sidebar ">
@@ -76,7 +76,7 @@
                                 <div class="side-menu-project-list" data-always-visible="1" data-rail-visible1="1" id="workView">
                                     <ul class="nav nav-pills nav-stacked esh-nav-pills">
                                         <li class=" active">
-                                            <a onclick="javascript:location.href='/lotterysettings'"><span>所有抽奖</span> <span class="badge badge-success">3</span></a>
+                                            <a onclick="javascript:location.href='/lotterySettings'"><span>所有抽奖</span> <span class="badge badge-success">3</span></a>
                                         </li>
                                         <li class="">
                                             <a onclick="javascript:location.href='/noprize'"><span>未开奖</span> <span class="badge badge-success">0</span></a>
@@ -788,13 +788,11 @@
 </script>
 <!-- BEGIN PAGE SELF SCRIPTS -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        initDataPicker();//设置时间控件
-        initSelect();//初始化select2控件
-        initEvent();//事件绑定
-        initPageSize();//初始化每页记录数
+    let page = 1, size = 10, total = 0;
 
-        //changeQueryReLoad();
+    $(function () {
+        listLotteryProduct();
+        initEvent();//事件绑定
     });
 
     //事件绑定
@@ -802,7 +800,7 @@
         //显示或隐藏筛选功能
         $('body').on('click', '#btnFilter.collapse, #btnFilter.expand', function (e) {
             if ($(this).hasClass("collapse")) {
-                $(this).removeClass("collapse").addClass("expand").text('隐藏筛选');
+                $(this).removeClass("collapse").addClass("expand").text('取消筛选');
                 $('.esh-filter-sidebar').addClass("open");
             } else {
                 $(this).removeClass("expand").addClass("collapse").text('筛选');
@@ -810,224 +808,117 @@
             }
         });
 
-        //开始日期改变触发表单提交
-        $('.input-daterange input[name=startDate]').on("changeDate", function () {
-            blnfirst = false;
-            changeQueryCondition();
-        });
-
-        //结束日期改变触发表单提交
-        $('.input-daterange input[name=endDate]').on("changeDate", function () {
-            var date1 = $('.input-daterange input[name=startDate]').val();
-            var date2 = $(this).val();
-            if (date2 >= date1) {
-                changeQueryCondition();
-            }
-        });
-
-        //Checkbox选择触发表单提交
-        $("ul.filter-option input[type=checkbox]").on("click", function () {
-            var attrName = $(this).attr('name');
-            var subData = $("#" + attrName + "_hide").val();
-            if ($(this).attr('checked')) {
-                subData += $(this).val() + ",";
-            } else {
-                var a = $(this).val() + ",";
-                subData = subData.replace(a, "");
-            }
-
-            $("#" + attrName + "_hide").val(subData);
-            changeQueryCondition();
-        });
-
-        //输入名称回车查询
-        $("#workOrderNumber").keypress(function (e) {
-            if (e.which == 13) {
-                changeQueryCondition();
-                $("#btnSearch").focus();
-            }
-        });
-
-        $("#select-product").change(function () { changeQueryCondition(); });//选择产品
-        $("#select-serviceCategory").change(function () { changeQueryCondition(); });//选择工单类型
-        $("#select-serviceMode").change(function () { changeQueryCondition(); });//选择服务模式
-        $("#select-serviceNetwork").change(function () { changeQueryCondition(); });//选择服务网点
-        $("#select-servicePerson").change(function () { changeQueryCondition(); });//选择服务人员
-        $("#btnSearch").click(function () { changeQueryCondition(); });//搜索按钮按下
     }
 
     //清空筛选
     function clearFilter() {
-        $("#select-serviceNetwork,#select-product,#state_hide,#channel_hide,#select-serviceCategory,#select-serviceMode,#startDate,#endDate,#select-servicePerson").val("");
+        $("#type_hide,#select-network").val("");
         $("ul.filter-option input[type=checkbox]").attr("checked", false);
         $("ul.filter-option input[type=checkbox]").parent().removeClass("checked");
         changeQueryCondition();
     }
 
-    //清空日期
-    var blnfirst = true;//首次执行标识
-    function clearDate(input) {
-        if (blnfirst) {
-            //为避免与onchangeDate事件的冲突
-            return;
-        }
-
-        if (!$(input).val()) {
-            //日期清空时，重新查询
-            changeQueryCondition();
-        }
-    }
-
-    //初始化每页记录数
-    function initPageSize() {
-        if ($.cookie('workorder-view-pagesize'))
-            $("#PageSize, #pageSize_hid").val($.cookie('workorder-view-pagesize'));
-    }
-
-    //改变每页记录数
-    function changePageSize(e) {
-        $(e).parent().addClass("active").siblings().removeClass("active");
-        var currItem = $(e).children();
-        var pageSize = $(currItem).attr("data-val");
-        var pageSizeTxt = $(currItem).text();
-
-        $("#currentPageSize").attr("data-val", pageSize).html(pageSizeTxt);
-        $("#PageSize, #pageSize_hid").val(pageSize);
-        $("#PageIndex, #pageIndex_hid").val(1);
-
-        if ($.cookie('workorder-view-pagesize'))
-            $.cookie('workorder-view-pagesize', '', { expires: -1, path: '/' });
-        $.cookie('workorder-view-pagesize', pageSize, { expires: 7, path: '/' });
-
-        $("#searchByRequest").submit();
-    }
-
-    //改变索引页
-    function changePageIndex(index) {
-        $("#PageIndex, #pageIndex_hid").val(index);
-        $("#searchByRequest").submit();
-    }
-
-    //改变查询条件
-    function changeQueryCondition() {
-        //判断是否显示清除筛选
-        if ($("#select-serviceNetwork").val() == "" && $("#select-servicePerson").val() == "" && $("#select-product").val() == "" && $("#state_hide").val() == "" && $("#channel_hide").val() == "" && $("#select-serviceCategory").val() == "" && $("#select-serviceMode").val() == "" && $("#startDate").val() == "" && $("#endDate").val() == "") {
-            $(".clear-filter").addClass("hidden")
-        }
-        else {
-            $(".clear-filter").removeClass("hidden")
-        }
-
-        //组装查询条件
-        var publicfilter = $("#viewtype").val() == 1 ? $("#viewId").val() : "";//公有视图
-        var privatefilter = $("#viewtype").val() == 2 ? $("#viewId").val() : "";//个人视图
-        var workOrderNumber = $("#workOrderNumber").val();//搜索关键字
-        if (workOrderNumber.indexOf("输入") >= 0) {
-            workOrderNumber = "";
-        }
-        var productId = $("#select-product").val();//产品id
-        var serviceCategoryId = $("#select-serviceCategory").val();//工单类型
-        var serviceModeId = $("#select-serviceMode").val();//服务模式
-        var state = $("#state_hide").val();//状态
-        var channel = $("#channel_hide").val();//渠道
-        var startDate = $("#startDate").val();//开始时间
-        var endDate = $("#endDate").val();//结束时间
-        var serviceSpaceId = $("#serviceSpaceId").val();//服务空间id
-        var serviceNetworkId = $("#serviceNetworkId").val();//服务网点id
-        var selNetworkId = $("#select-serviceNetwork").val();//筛选的服务网点Id
-        var servicePersonId = $("#select-servicePerson").val();//服务人员
-        if (selNetworkId) {
-            serviceNetworkId = selNetworkId;
-        }
-
-        var whereData;
-        whereData = "{'servicespaceid':'" + serviceSpaceId + "','servicenetworkid':'" + serviceNetworkId + "','publicfilter':'" + publicfilter + "','privatefilter':'" + privatefilter + "','searchkey':'" + workOrderNumber + "','servicestaffid':'" + servicePersonId + "','productid':'" + productId + "','servicecategoryid':'" + serviceCategoryId + "','servicemodeid':'" + serviceModeId + "','channel':[" + trimEnd(channel) + "],'pendstate':[" + trimEnd(state) + "],'startdate':'" + startDate + "','enddate':'" + endDate + "'}";
-        if ($("#Where").val() == whereData) {
-            return;
-        }
-        $("#Where").val(whereData);
-
-        //将查询条件存储隐藏域中
-        saveCondition();
-
-        //页索引置为1
-        $("#PageIndex, #pageIndex_hid").val(1);
-
-        //提交查询表单
-        $("#searchByRequest").submit();
-
-    }
-
-    //将查询条件存储隐藏域中
-    function saveCondition() {
-        $("#product_hid").val($("#select-product").val());
-        $("#serviceCategory_hid").val($("#select-serviceCategory").val());
-        $("#state_hid").val($("#state_hide").val());
-        $("#channel_hid").val($("#channel_hide").val());
-        $("#serviceMode_hid").val($("#select-serviceMode").val());
-        $("#serviceNetwork_hid").val($("#select-serviceNetwork").val());
-        $("#servicePerson_hid").val($("#select-servicePerson").val());
-        $("#startDate_hid").val($("#startDate").val());
-        $("#endDate_hid").val($("#endDate").val());
-
-        $("#pageIndex_hid").val($("#PageIndex").val());
-        $("#pageSize_hid").val($("#PageSize").val());
-        $("#sort_hid").val($("#Sort").val());
-        $("#direction_hid").val($("#Direction").val());
-
-        $("#workOrderNumber").val($("#workOrderNumber").val());
-    }
-
-    //从隐藏域中加载查询条件
-    function loadConditionForIE() {
-        $("#select-product").val($("#product_hid").val());
-        $("#select-serviceCategory").val($("#serviceCategory_hid").val());
-        $("#state_hide").val($("#state_hid").val());
-        $("#channel_hide").val($("#channel_hid").val());
-        $("#select-serviceMode").val($("#serviceMode_hid").val());
-        $("#select-serviceNetwork").val($("#serviceNetwork_hid").val());
-        $("#select-servicePerson").val($("#servicePerson_hid").val());
-        $("#startDate").val($("#startDate_hid").val());
-        $("#endDate").val($("#endDate_hid").val());
-
-        $("#PageIndex").val($("#pageIndex_hid").val());
-        $("#PageSize").val($("#pageSize_hid").val());
-        $("#Sort").val($("#sort_hid").val());
-        $("#Direction").val($("#direction_hid").val());
-
-        var stateArray = trimEnd($("#state_hide").val()).split(',');
-        $("#stateGroup input[type=checkbox]").each(function () {
-            if ($.inArray($(this).val(), stateArray) > -1) {
-                $(this).attr("checked", true).parent().addClass("checked");
-            }
-        });
-
-        var channelArray = trimEnd($("#channel_hide").val()).split(',');
-        $("#channelGroup input[type=checkbox]").each(function () {
-            if ($.inArray($(this).val(), channelArray) > -1) {
-                $(this).attr("checked", true).parent().addClass("checked");
-            }
-        });
-    }
-
-    //从隐藏域中加载查询条件
-    function loadConditionForChrome() {
-        $(".filter-option").each(function () {
-            var hidVal = "";
-            var e = $(this).attr("data-bind");
-            $(this).find("input[type=checkbox]").each(function () {
-                if (jQuery(this).attr("checked")) {
-                    hidVal += $(this).val() + ",";
+    let vue = new Vue({
+        el: "#lotteryProductList",
+        data: {
+            lotteryProductList: [],
+            lotteryProduct:{
+                productTypeId:"",
+                productTypeName:"",
+                name:"",
+                photo:"",
+                information:"",
+                price:"",
+                status:"",
+            },
+            productType:[]
+        },
+        filters: {
+            statusStrFilter: function (value) {
+                let str = "";
+                switch (value) {
+                    case 0:
+                        str = "上架";
+                        break;
+                    case 1:
+                        str = "下架";
+                        break;
+                        break;
                 }
-            })
-            $("#" + e).val(hidVal);
+                return str;
+            }
+        },
+        methods: {
+            //删除抽奖产品
+            deleteLotteryProduct: function (id) {
+                $("#deleteDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#deleteId").val(id);
+            },
+            //编辑抽奖产品
+            editLotteryProduct: function (id) {
+                $("#productTypeIdDiv").hide();
+                $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#editId").val(id);
+                $.get("/lotteryProduct/getById", {id: id}, function (result) {
+                    if (result.code == 200) {
+                        let lotteryProduct = result.data;
+                        $("#name").val(lotteryProduct.name);
+                        $("#preview_photo").attr("src", lotteryProduct.photo);
+                        $("#information").val(lotteryProduct.information);
+                        $("#price").val(lotteryProduct.price);
+                        $("#status").val(lotteryProduct.status);
+                    }
+                });
+            },
+            //查看抽奖产品
+            selectLotteryProduct: function (id) {
+                $("#seeDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $.get("/lotteryProduct/getById", {id: id}, function (result) {
+                    if (result.code == 200) {
+                        vue.lotteryProduct = result.data;
+                    }
+                });
+            },
+            statusClass: function (status) {
+                if(status == 0){
+                    return "label label-success";
+                }else if(status == 1){
+                    return "label label-gray";
+                }
+            }
+        }
+    });
 
+    //分页查询抽奖产品
+    function listLotteryProduct() {
+        let name = $("#nameSearch").val();
+        let productTypeId = $("#productTypeIdSearch").val();
+        let status = $("#statusSearch").val();
+        $.get("/lotteryProduct/getLotteryProductList", {
+            name: name,
+            productTypeId: productTypeId,
+            status: status,
+            page: page,
+            size: size
+        }, function (result) {
+            if (result.code == 200) {
+                vue.lotteryProductList = [];
+                vue.lotteryProductList = result.data.lotteryProductList;
+                total = result.data.total;
+                if(total != 0){
+                    showYema();
+                    $("#haveData").show();
+                    $("#nullData").hide();
+                }else{
+                    vue.lotteryProductList = [];
+                    $("#haveData").hide();
+                    $("#nullData").show();
+                }
+            } else {
+                growlAlert.danger(result.message);
+                showYema();
+            }
         });
-
-        $("#PageIndex").val($("#pageIndex_hid").val());
-        $("#PageSize").val($("#pageSize_hid").val());
-        $("#Sort").val($("#sort_hid").val());
-        $("#Direction").val($("#direction_hid").val());
     }
 
     //查看详情
@@ -1035,15 +926,87 @@
         $("#seeDailog").modal();
     }
 
-    //修改进度条
-    function modify() {
-        $("#modifyDailog").modal();
+    //新建
+    function create() {
+        $("#productTypeIdDiv").show();
+        $("#editId").val("");
+        $("#productTypeId").val(0);
+        $("#name").val("");
+        $("#preview_photo").attr("src", "");
+        $("#information").val("");
+        $("#price").val("");
+        $("#status").val(0);
+        $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
     }
 
-    //内定
-    function internalization() {
-        $("#internalizationDailog").modal();
+    //生成分页按钮及绑定事件
+    function showYema() {
+        let str = '<li class="prev"><a href="#"><i class="ace-icon fa fa-angle-left"></i></a></li>';
+
+        if (page == 1) {
+            str += '<li class="active"><a class="yeshu"> 1 </a></li>';
+        } else {
+            str += '<li><a class="yeshu"> 1 </a></li>';
+        }
+        if (Math.ceil(total / size) > 1) {
+            if (page > 4)
+                str += '<li class="paginItem"><a >...</a></li>';
+            for (var i = 2; i < Math.ceil(total / size); i++) {
+                if (i > page - 3 && i < page + 3) {
+                    if (page == i) {
+                        str += '<li class="paginItem active"><a class="yeshu"> '
+                            + i + ' </a></li>';
+                    } else {
+                        str += '<li class="paginItem"><a class="yeshu"> ' + i + ' </a></li>';
+                    }
+                }
+            }
+            if (page < Math.ceil(total / size) - 3)
+                str += '<li class="paginItem"><a >...</a></li>';
+
+            if (page == Math.ceil(total / size)) {
+                str += '<li class="paginItem active"><a class="yeshu"> '
+                    + Math.ceil(total / size) + ' </a></li>';
+            } else {
+                str += '<li class="paginItem"><a class="yeshu"> '
+                    + Math.ceil(total / size) + ' </a></li>';
+            }
+        }
+        str += '<li class="next"><a href="#"><i class="ace-icon fa fa-angle-right"></i></a></li>';
+        $("#pagination").html(str);
+        $(".prev").click(
+            function () {
+                if (page > 1)
+                    page--;
+                listLotteryProduct();
+            });
+        $(".next").click(
+            function () {
+                if (page < Math.ceil(total / size))
+                    page++;
+                listLotteryProduct();
+            });
+        $(".yeshu").click(
+            function () {
+                if (!isNaN($(this).html().trim())) {
+                    page = parseInt($(this).html());
+                    listLotteryProduct();
+                }
+            });
+        $("#count").html(total);
     }
+
+    //改变每页记录数
+    function changePageSize(e) {
+        $(e).parent().addClass("active").siblings().removeClass("active");
+        let currItem = $(e).children();
+        size = $(currItem).attr("data-val");
+        let pageSizeTxt = $(currItem).text();
+        $("#size").html(pageSizeTxt);
+        page = 1;
+        listLotteryProduct();
+    }
+
 </script>
 
 <!-- END PAGE SELF SCRIPTS -->

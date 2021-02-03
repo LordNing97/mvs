@@ -44,6 +44,14 @@ public interface CustomerLotteryMapper {
      * @param lotteryId
      * @return
      */
-    int sumPoints(Integer lotteryId);
+    Integer sumPoints(Integer lotteryId);
+
+    /**
+     * 修改内定
+     * @param id
+     * @param isDesignated
+     * @return
+     */
+    Integer modifyIsDesignated(@Param("id") Integer id, @Param("isDesignated") Integer isDesignated);
 
 }

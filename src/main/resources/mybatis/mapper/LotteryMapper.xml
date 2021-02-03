@@ -39,4 +39,11 @@
         </if>
     </select>
 
+    <!--  修改删除状态  -->
+    <update id="modifyIsDel">
+        update lottery
+        set is_del = #{isDel}
+        where lottery_product_id = #{lotteryProductId}
+    </update>
+
 </mapper>

@@ -69,6 +69,9 @@ public class LotteryService {
             Integer peopleNum = customerLotteryMapper.count(lottery.getId());
             lottery.setPeopleNum(peopleNum);
             Integer sumPoints = customerLotteryMapper.sumPoints(lottery.getId());
+            if(sumPoints == null){
+                sumPoints = 0;
+            }
             LotteryProduct lotteryProduct = lotteryProductMapper.getById(lottery.getLotteryProductId());
             lottery.setProgress(String.valueOf(Double.parseDouble(sumPoints.toString()) / lotteryProduct.getPrice() * 100));
         }

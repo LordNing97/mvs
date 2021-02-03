@@ -3,7 +3,6 @@ package com.xy.mvs.mapper;
 import com.xy.mvs.model.Lottery;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,5 +36,12 @@ public interface LotteryMapper {
     List<Lottery> getLotteryList(@Param("productName") String productName, @Param("status") Integer status,
                                  @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime,
                                  @Param("page") Integer page, @Param("size") Integer size);
+
+    /**
+     * 修改删除状态
+     * @param lotteryProductId
+     * @return
+     */
+    int modifyIsDel(@Param("lotteryProductId") Integer lotteryProductId, @Param("isDel") Integer isDel);
 
 }

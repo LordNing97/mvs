@@ -22,7 +22,7 @@
     <!--  修改商城产品  -->
     <update id="modifyMailProduct">
         update mail_product
-        set product_type_id = #{productTypeId}, name = #{name}, photo = #{photo},
+        set name = #{name}, photo = #{photo},
         information = #{information}, price = #{price}, num = #{num}, status = #{status}
         where id = #{id}
     </update>
@@ -31,7 +31,7 @@
         select count(1) from mail_product
         where is_del = 0
         <if test="name != null and name != ''">
-            and name = #{name}
+            and name like concat('%',#{name},'%')
         </if>
         <if test="productTypeId != 0">
             and product_type_id = #{productTypeId}
@@ -51,7 +51,7 @@
         left join product_type on mail_product.product_type_id = product_type.id
         where mail_product.is_del = 0
         <if test="name != null and name != ''">
-            and mail_product.name = #{name}
+            and mail_product.name like concat('%',#{name},'%')
         </if>
         <if test="productTypeId != 0">
             and mail_product.product_type_id = #{productTypeId}
