@@ -24,9 +24,9 @@
 
     <!--  分页获取  -->
     <select id="getCustomerLotteryList" resultType="com.xy.mvs.model.CustomerLottery">
-        select customer_lottery.*, user.recharge_points, user.number_winners
+        select customer_lottery.*, customer.telephone user_telephone, customer.recharge_points, customer.number_winners
         from customer_lottery
-        left join user on user.id = customer_lottery.user_id
+        left join customer on customer.id = customer_lottery.user_id
         where customer_lottery.lottery_id = #{lotteryId}
         order by customer_lottery.points desc
         limit #{page},#{size}

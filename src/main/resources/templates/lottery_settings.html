@@ -93,185 +93,45 @@
                         </div>
                     </div>
                     <div class="esh-filter-sidebar">
-                        <div class="header"><b class="title">工单筛选</b> <a class="close" href="javascript:void(0)"></a></div>
+                        <div class="header"><b class="title">抽奖筛选</b> <a class="close" href="javascript:void(0)"></a></div>
                         <div class="scroller">
                             <section class="content">
-                                <div class="tip clearfix"><i class="fa fa-filter" style="color:#999"></i> 筛选条件<a class="pull-right hidden clear-filter" href="javascript:void(0)" onclick="clearFilter()">清空筛选</a></div>
+                                <div class="tip clearfix">
+                                    <i class="fa fa-filter" style="color:#999"></i>
+                                    筛选条件
+                                    <a class="pull-right hidden clear-filter" href="javascript:void(0)" onclick="clearFilter()">
+                                        清空筛选
+                                    </a>
+                                </div>
                                 <div class="form-group">
-                                    <label>产品</label>
-                                    <select id="select-product" class="form-control">
-                                        <option value="">选择产品</option>
-                                        <option value="4643">请在下方填写-型号名称</option>
-                                        <option value="4867">3PAR-8400</option>
-                                        <option value="4868">EVA-8000</option>
-                                        <option value="4872">Integrit-rx9800</option>
+                                    <label>产品名称</label>
+                                    <input id="name" class="form-control" placeholder="请输入产品名称">
+                                </div>
+                                <div class="form-group">
+                                    <label>抽奖状态</label>
+                                    <select id="status" class="form-control">
+                                        <option value="0">全部</option>
+                                        <option value="1">未开奖</option>
+                                        <option value="2">进行中</option>
+                                        <option value="3">已结束</option>
                                     </select>
-
-                                </div>
-                                <div class="form-group">
-                                    <label>订单类型</label>
-                                    <select id="select-serviceCategory" class="form-control">
-                                        <option value="">选择工单订单</option>
-                                        <option value="2417">维修单</option>
-                                    </select>
-
-                                </div>
-                                <div class="form-group">
-                                    <label>订单状态</label>
-                                    <ul class="filter-option clearfix" id="stateGroup" data-bind="state_hide">
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="1" /><input name="state" type="hidden" value="false" />待受理
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="3" /><input name="state" type="hidden" value="false" />待分配
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="4" /><input name="state" type="hidden" value="false" />待派工
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="6" /><input name="state" type="hidden" value="false" />待预约
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="7" /><input name="state" type="hidden" value="false" />待服务
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="8" /><input name="state" type="hidden" value="false" />待回单
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="9" /><input name="state" type="hidden" value="false" />待质检
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="11" /><input name="state" type="hidden" value="false" />待结算
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="12" /><input name="state" type="hidden" value="false" />待回访
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="13" /><input name="state" type="hidden" value="false" />待关闭
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="14" /><input name="state" type="hidden" value="false" />已关闭
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="15" /><input name="state" type="hidden" value="false" />已取消
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input name="state" type="checkbox" value="16" /><input name="state" type="hidden" value="false" />异常
-                                            </label>
-                                        </li>
-                                    </ul>
-                                    <input type="hidden" id="state_hide" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <label>服务模式</label>
-                                    <select id="select-serviceMode" class="form-control">
-                                        <option value="">选择服务模式</option>
-                                        <option value="2087">上门服务</option>
-                                        <option value="2097">邮寄维修</option>
-                                    </select>
-
-                                </div>
-                                <div class="form-group">
-                                    <label>服务人员</label>
-                                    <select id="select-servicePerson" class="form-control">
-                                        <option value="">选择服务人员</option>
-                                        <option value="30da7b29-700b-4310-adc5-1ee224a5b4a6">郝博闻</option>
-                                        <option value="8a3e240d-6cc4-4f87-b8ac-35a06cc51904">小红</option>
-                                        <option value="5b145798-d851-4608-9792-e9c814408954">小兰</option>
-                                        <option value="2212ba86-a8ec-49cf-8bb9-8e435309bb4d">李树东</option>
-                                        <option value="26836a31-fb54-448b-9126-5b306b1f72c0">111</option>
-                                    </select>
-
-                                </div>
-                                <div class="form-group">
-                                    <label>服务网点</label>
-                                    <select id="select-serviceNetwork" class="form-control">
-                                        <option value="">选择服务网点</option>
-                                        <option value="a61e0c34-46cc-4244-8aa2-255450ed740b">万维信达</option>
-                                        <option value="8ccc5342-5b0d-4ef0-b022-d081d685cf9b">万维信达分部4号</option>
-                                        <option value="d1eec2a7-d02f-4429-bf28-01a39984d7c8">万维信达分部3号</option>
-                                        <option value="5a5c7698-9d42-4fd2-9a03-96498bd2eb4b">万维信达分部2号</option>
-                                        <option value="0ae09199-6d30-491b-afec-c649944a5395">万维信达分部1号</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>渠道</label>
-                                    <ul class="filter-option clearfix" id="channelGroup" data-bind="channel_hide">
-                                        <li>
-                                            <label>
-                                                <input type="checkbox" name="channel" value="1" /> 电话
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="checkbox" name="channel" value="2" /> web网页
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="checkbox" name="channel" value="3" /> 微信
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="checkbox" name="channel" value="4" /> APP
-                                            </label>
-                                        </li>
-
-                                    </ul>
-                                    <input type="hidden" id="channel_hide" value="" />
                                 </div>
                                 <div class="form-group">
                                     <label>创建时间</label>
-                                    <div class="input-group  date-picker input-daterange">
-                                        <input class="form-control" id="startDate" name="startDate" onblur="clearDate(this)" placeholder="开始日期" type="text" value="" />
+                                    <div class="input-group input-daterange">
+                                        <input class="form-control date" id="startDate" placeholder="开始日期" type="text"
+                                               value=""/>
                                         <span class="input-group-addon">
-                                至
-                            </span>
-                                        <input class="form-control" id="endDate" name="endDate" onblur="clearDate(this)" placeholder="结束日期" type="text" value="" />
+                                            至
+                                        </span>
+                                        <input class="form-control date" id="endDate" placeholder="结束日期" type="text"
+                                               value=""/>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn green" onclick="listLottery()">确定</button>
+                                </div>
                             </section>
-                        </div>
-                        <div class="hidden">
-                            <input type="hidden" id="product_hid" value="" />
-                            <input type="hidden" id="serviceCategory_hid" value="" />
-                            <input type="hidden" id="state_hid" value="" />
-                            <input type="hidden" id="serviceMode_hid" value="" />
-                            <input type="hidden" id="serviceNetwork_hid" value="" />
-                            <input type="hidden" id="channel_hid" value="" />
-                            <input type="hidden" id="startDate_hid" value="" />
-                            <input type="hidden" id="endDate_hid" value="" />
-                            <input type="hidden" id="servicePerson_hid" value="" />
-                            <input type="text" value="1" id="pageIndex_hid" />
-                            <input type="text" value="10" id="pageSize_hid" />
-                            <input type="text" value="" id="sort_hid" />
-                            <input type="text" value="" id="direction_hid" />
                         </div>
                     </div>
                     <div class="side-menu-content">
@@ -284,8 +144,10 @@
                                     <div class="input-group input-medium " style= "width: 280px !important">
                                         <input class="form-control" id="workOrderNumber" maxlength="50" name="workOrderNumber" placeholder="输入订单编号" type="text" value="" />
                                         <span class="input-group-btn">
-                                <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
-                            </span>
+                                            <button class="btn green" id="btnSearch" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -335,133 +197,88 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX">
+                                            <tr v-for="(item,index) in lotteryList" class="odd gradeX">
                                                 <td>
-                                                    W201810230002
+                                                    {{item.id}}
                                                 </td>
                                                 <td>
-                                                    W201810230002
+                                                    {{item.lotteryProductId}}
                                                 </td>
                                                 <td>
-                                                    测试用
+                                                    {{item.productName}}
                                                 </td>
                                                 <td>
-                                                    33
+                                                    {{item.peopleNum}}
                                                 </td>
                                                 <td>
-                                                    99%
+                                                    {{item.progress | numFilter}}%
                                                 </td>
                                                 <td>
-                                                    <span class="label label-purple">未开奖</span>
+                                                    <span :class="statusClass(item.status)">{{item.status | statusStrFilter}}</span>
                                                 </td>
                                                 <td>
-                                                    2020-10-23 09:48:44
+                                                    {{item.createTime}}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="see()">
+                                                    <button class="btn btn-default btn-xs black" @click="getCustomerLotteryList(item.id)">
                                                         <i class="fa fa-search"></i>
                                                         查看
                                                     </button>
-                                                    <button class="btn btn-default btn-xs black" onclick="modify()">
+                                                    <button v-if="item.status != 3" class="btn btn-default btn-xs black" @click="modificationProgress(item.id)">
                                                         <i class="fa fa-search"></i>
                                                         修改进度
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd gradeX">
-                                                <td>
-                                                    W201810230002
-                                                </td>
-                                                <td>
-                                                    W201810230002
-                                                </td>
-                                                <td>
-                                                    测试用
-                                                </td>
-                                                <td>
-                                                    33
-                                                </td>
-                                                <td>
-                                                    99%
-                                                </td>
-                                                <td>
-                                                    <span class="label label-newly">进行中</span>
-                                                </td>
-                                                <td>
-                                                    2020-10-23 09:48:44
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="see()">
-                                                        <i class="fa fa-search"></i>
-                                                        查看
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd gradeX">
-                                                <td>
-                                                    W201807100001
-                                                </td>
-                                                <td>
-                                                    W201807100001
-                                                </td>
-                                                <td>
-                                                    [示例]张小西
-                                                </td>
-                                                <td>
-                                                    22
-                                                </td>
-                                                <td>
-                                                    50%
-                                                </td>
-                                                <td>
-                                                    <span class="label label-success">已结束</span>
-                                                </td>
-                                                <td>
-                                                    2020-07-10 15:07:49
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="see()">
-                                                        <i class="fa fa-search"></i>
-                                                        查看
                                                     </button>
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="row">
+
+                                    <div id="haveData" style="display: none" class="row">
                                         <div class="col-md-5 col-sm-5">
                                             <div class="dataTables_info" role="status" aria-live="polite">
-                                                <label style="vertical-align: middle;">共3条</label>
+                                                <label style="vertical-align: middle;">共<span
+                                                        id="count">3</span>条</label>
                                                 <div class="btn-group pagesize dropup">
-                                                    <a href="javascript:void(0)" class="link name-wrap" data-toggle="dropdown" aria-expanded="false">
-                                                        <span data-val="10">10条/页&nbsp;</span>
+                                                    <a href="javascript:void(0)" class="link name-wrap"
+                                                       data-toggle="dropdown" aria-expanded="false">
+                                                        <span id="size">10条/页&nbsp;</span>
                                                         <i class="fa fa-angle-down"></i>
                                                     </a>
                                                     <ul class="dropdown-menu esh-pub-menu">
                                                         <li class="clearfix active">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="10">10条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="10">10条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="20">20条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="20">20条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="30">30条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="30">30条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="40">40条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="40">40条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="50">50条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="50">50条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -470,43 +287,26 @@
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <div class="dataTables_paginate paging_bootstrap_full_number">
-                                                <ul class="pagination">
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#" onclick="changePageIndex(1)">
-                                                            1
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-right"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-right"></i>
-                                                        </a>
-                                                    </li>
+                                                <ul id="pagination" class="pagination">
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div id="nullData" style="display: none" class="row">
+                                        <div class="col-md-5 col-sm-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite">
+                                                <label>没有查询到所需数据</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <div class="dataTables_paginate paging_bootstrap_full_number"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
-                            <form action="/servicespace/workorder/getlist?viewId=19083&amp;viewtype=1" data-ajax="true" data-ajax-begin="showLoading" data-ajax-complete="hideLoading" data-ajax-failure="showException" data-ajax-mode="replace" data-ajax-success="initTable" data-ajax-update="#dataTable" id="searchByRequest" method="post">                    <input type="hidden" id="serviceStaffId" value="30da7b29-700b-4310-adc5-1ee224a5b4a6" />
-                                <input type="hidden" id="serviceSpaceId" value="b45dc42c-1abb-4103-b6bf-87dc9bba082c" />
-                                <input type="hidden" id="serviceNetworkId" value="" />
-                                <input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /><input id="viewId" name="viewId" type="hidden" value="19083" /><input id="viewtype" name="viewtype" type="hidden" value="1" /></form>            </div>
                     </div>
 
                     <!--查看详情模态框-->
@@ -518,12 +318,13 @@
                                     <h4 class="modal-title">查看详情</h4>
                                 </div>
                                 <div class="modal-body padding-bottom-10 clearfix" style="min-height:420px;width: 100%">
+
                                     <div class="table-scrollable">
                                         <table class="table table-striped dataTable table-bordered table-hover table-pointer">
                                             <thead>
                                             <tr>
                                                 <th style="width: 14%;">
-                                                    客户名称
+                                                    客户手机号
                                                 </th>
                                                 <th style="width: 14%;">
                                                     总积分
@@ -543,47 +344,24 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX">
+                                            <tr v-for="(item,index) in customerLotteryList" class="odd gradeX">
                                                 <td>
-                                                    刘梦丽
+                                                    {{item.userTelephone}}
                                                 </td>
                                                 <td>
-                                                    10000
+                                                    {{item.rechargePoints}}
                                                 </td>
                                                 <td>
-                                                    33
+                                                    {{item.points}}
                                                 </td>
                                                 <td>
-                                                    1
+                                                    {{item.numberWinners}}
                                                 </td>
                                                 <td>
-                                                    是
+                                                    {{item.isDesignated}}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="internalization()">
-                                                        <i class="fa fa-search"></i>
-                                                        内定
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr class="odd gradeX">
-                                                <td>
-                                                    陈璇
-                                                </td>
-                                                <td>
-                                                    10
-                                                </td>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    0
-                                                </td>
-                                                <td>
-                                                    否
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default btn-xs black" onclick="internalization()">
+                                                    <button class="btn btn-default btn-xs black" @click="isDesignated(item.id)">
                                                         <i class="fa fa-search"></i>
                                                         内定
                                                     </button>
@@ -592,39 +370,51 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="row">
+                                    <div id="haveData2" style="display: none" class="row">
                                         <div class="col-md-5 col-sm-5">
                                             <div class="dataTables_info" role="status" aria-live="polite">
-                                                <label style="vertical-align: middle;">共3条</label>
+                                                <label style="vertical-align: middle;">共<span
+                                                        id="count2"></span>条</label>
                                                 <div class="btn-group pagesize dropup">
-                                                    <a href="javascript:void(0)" class="link name-wrap" data-toggle="dropdown" aria-expanded="false">
-                                                        <span data-val="10">10条/页&nbsp;</span>
+                                                    <a href="javascript:void(0)" class="link name-wrap"
+                                                       data-toggle="dropdown" aria-expanded="false">
+                                                        <span id="size2">10条/页&nbsp;</span>
                                                         <i class="fa fa-angle-down"></i>
                                                     </a>
                                                     <ul class="dropdown-menu esh-pub-menu">
                                                         <li class="clearfix active">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="10">10条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize2(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="10">10条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="20">20条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize2(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="20">20条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="30">30条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize2(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="30">30条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="40">40条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize2(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="40">40条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="50">50条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize2(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="50">50条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -633,34 +423,20 @@
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <div class="dataTables_paginate paging_bootstrap_full_number">
-                                                <ul class="pagination">
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#" onclick="changePageIndex(1)">
-                                                            1
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-right"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-right"></i>
-                                                        </a>
-                                                    </li>
+                                                <ul id="pagination2" class="pagination">
                                                 </ul>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="nullData2" style="display: none" class="row">
+                                        <div class="col-md-5 col-sm-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite">
+                                                <label>没有查询到所需数据</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <div class="dataTables_paginate paging_bootstrap_full_number"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -672,7 +448,7 @@
                     </div>
 
                     <!--修改进度模态框-->
-                    <div class="modal fade" id="modifyDailog" tabindex="-1" aria-hidden="true">
+                    <div class="modal fade" id="modificationProgressDailog" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -686,15 +462,16 @@
                                                 添加人数<span class="required">*</span>
                                             </label>
                                             <div class="col-md-7">
-                                                <input id="name" class="form-control"
+                                                <input id="num" class="form-control"
                                                        placeholder="请输入添加人数">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
+                                    <input id="modificationProgressId" type="hidden">
                                     <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                    <button type="button" class="btn green" onclick="saveBrand()">确定</button>
+                                    <button type="button" class="btn green" onclick="modificationProgress()">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -713,9 +490,9 @@
                                     <div class="bootbox-body">您确认内定该用户吗?</div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="hidden" id="brandId">
+                                    <input type="hidden" id="internalizationId">
                                     <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
-                                    <button type="button" class="btn green" onclick="deleteBrand()">确定</button>
+                                    <button type="button" class="btn green" onclick="isDesignated()">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -754,6 +531,10 @@
 <script src="../static/admin/scripts/theme.js" type="text/javascript"></script>
 <script src="../static/layui/layui.js" type="text/javascript"></script>
 <script type="text/javascript" src="../static/admin/scripts/custom.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../static/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
     jQuery(document).ready(function () {
         $.ajaxSetup({cache: false});//设置缓存策略
@@ -789,9 +570,12 @@
 <!-- BEGIN PAGE SELF SCRIPTS -->
 <script type="text/javascript">
     let page = 1, size = 10, total = 0;
+    let page2 = 1, size2 = 10, total2 = 0;
 
     $(function () {
-        listLotteryProduct();
+        initData();//设置时间控件
+        initDataPicker();//设置时间控件
+        listLottery();
         initEvent();//事件绑定
     });
 
@@ -819,98 +603,89 @@
     }
 
     let vue = new Vue({
-        el: "#lotteryProductList",
+        el: "#lotteryList",
         data: {
-            lotteryProductList: [],
-            lotteryProduct:{
-                productTypeId:"",
-                productTypeName:"",
-                name:"",
-                photo:"",
-                information:"",
-                price:"",
-                status:"",
-            },
-            productType:[]
+            lotteryList: [],
+            customerLotteryList: [],
+            lotteryId: ""
         },
         filters: {
             statusStrFilter: function (value) {
                 let str = "";
                 switch (value) {
-                    case 0:
-                        str = "上架";
-                        break;
                     case 1:
-                        str = "下架";
+                        str = "未开奖";
                         break;
+                    case 2:
+                        str = "进行中";
+                        break;
+                    case 3:
+                        str = "已结束";
                         break;
                 }
                 return str;
+            },
+            numFilter: function (value) {
+                // 截取当前数据到小数点后三位
+                let tempVal = parseFloat(value).toFixed(3);
+                let realVal = tempVal.substring(0, tempVal.length - 1);
+                return realVal;
             }
         },
         methods: {
-            //删除抽奖产品
-            deleteLotteryProduct: function (id) {
-                $("#deleteDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
-                $("#deleteId").val(id);
+            //内定
+            isDesignated: function (id) {
+                $("#internalizationDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#internalizationId").val(id);
             },
-            //编辑抽奖产品
-            editLotteryProduct: function (id) {
-                $("#productTypeIdDiv").hide();
-                $("#createDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
-                $("#editId").val(id);
-                $.get("/lotteryProduct/getById", {id: id}, function (result) {
-                    if (result.code == 200) {
-                        let lotteryProduct = result.data;
-                        $("#name").val(lotteryProduct.name);
-                        $("#preview_photo").attr("src", lotteryProduct.photo);
-                        $("#information").val(lotteryProduct.information);
-                        $("#price").val(lotteryProduct.price);
-                        $("#status").val(lotteryProduct.status);
-                    }
-                });
+            //修改进度
+            modificationProgress: function (id) {
+                $("#num").val("");
+                $("#modificationProgressDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
+                $("#modificationProgressId").val(id);
             },
-            //查看抽奖产品
-            selectLotteryProduct: function (id) {
+            //根据抽奖Id分页获取所有积分
+            getCustomerLotteryList: function (id) {
+                vue.lotteryId = id;
+                getCustomerLotteryList();
                 $("#seeDailog").modal({backdrop: 'static', keyboard: false});  //手动开启
-                $.get("/lotteryProduct/getById", {id: id}, function (result) {
-                    if (result.code == 200) {
-                        vue.lotteryProduct = result.data;
-                    }
-                });
             },
             statusClass: function (status) {
-                if(status == 0){
+                if(status == 1){
+                    return "label label-purple";
+                }else if(status == 2){
+                    return "label label-newly";
+                }else if(status == 3){
                     return "label label-success";
-                }else if(status == 1){
-                    return "label label-gray";
                 }
             }
         }
     });
 
-    //分页查询抽奖产品
-    function listLotteryProduct() {
-        let name = $("#nameSearch").val();
-        let productTypeId = $("#productTypeIdSearch").val();
-        let status = $("#statusSearch").val();
-        $.get("/lotteryProduct/getLotteryProductList", {
-            name: name,
-            productTypeId: productTypeId,
+    //分页查询抽奖
+    function listLottery() {
+        let name = $("#name").val();
+        let status = $("#status").val();
+        let startDate = $("#startDate").val() + " 00:00:00";
+        let endDate = $("#endDate").val() + " 00:00:00";
+        $.get("/lottery/getLotteryList", {
             status: status,
+            productName: name,
+            startTime: startDate,
+            endTime: endDate,
             page: page,
             size: size
         }, function (result) {
             if (result.code == 200) {
-                vue.lotteryProductList = [];
-                vue.lotteryProductList = result.data.lotteryProductList;
+                vue.lotteryList = [];
+                vue.lotteryList = result.data.lotteryList;
                 total = result.data.total;
                 if(total != 0){
                     showYema();
                     $("#haveData").show();
                     $("#nullData").hide();
                 }else{
-                    vue.lotteryProductList = [];
+                    vue.lotteryList = [];
                     $("#haveData").hide();
                     $("#nullData").show();
                 }
@@ -921,9 +696,65 @@
         });
     }
 
-    //查看详情
-    function see() {
-        $("#seeDailog").modal();
+    //根据抽奖Id分页获取所有积分
+    function getCustomerLotteryList() {
+        $.get("/customerLottery/getCustomerLotteryList", {
+            lotteryId: vue.lotteryId,
+            page: page2,
+            size: size2
+        }, function (result) {
+            if (result.code == 200) {
+                vue.customerLotteryList = [];
+                vue.customerLotteryList = result.data.customerLotteryList;
+                total2 = result.data.total;
+                if(total2 != 0){
+                    showYema2();
+                    $("#haveData2").show();
+                    $("#nullData2").hide();
+                }else{
+                    vue.customerLotteryList = [];
+                    $("#haveData2").hide();
+                    $("#nullData2").show();
+                }
+            } else {
+                growlAlert.danger(result.message);
+                showYema2();
+            }
+        });
+    }
+
+    //修改进度
+    function modificationProgress() {
+        let id = $("#modificationProgressId").val();
+        let num = $("#num").val();
+        $.post("/lottery/modificationProgress", {
+            lotteryId: id,
+            num: num
+        }, function (result) {
+            if(result.code == 200){
+                growlAlert.success("修改成功");
+                listLottery();
+                getCustomerLotteryList();
+                $("#modificationProgressDailog").modal("hide");
+            }else{
+                growlAlert.danger(result.msg);
+            }
+        });
+    }
+
+    //内定
+    function isDesignated() {
+        let id = $("#internalizationId").val();
+        //新增
+        $.post("/customerLottery/modifyIsDesignated",{id: id, isDesignated: 1},function(result){
+            if(result.code == 200){
+                growlAlert.success("内定成功");
+                getCustomerLotteryList();
+                $("#internalizationDailog").modal("hide");
+            }else{
+                growlAlert.danger(result.msg);
+            }
+        });
     }
 
     //新建
@@ -978,19 +809,19 @@
             function () {
                 if (page > 1)
                     page--;
-                listLotteryProduct();
+                listLottery();
             });
         $(".next").click(
             function () {
                 if (page < Math.ceil(total / size))
                     page++;
-                listLotteryProduct();
+                listLottery();
             });
         $(".yeshu").click(
             function () {
                 if (!isNaN($(this).html().trim())) {
                     page = parseInt($(this).html());
-                    listLotteryProduct();
+                    listLottery();
                 }
             });
         $("#count").html(total);
@@ -1004,7 +835,87 @@
         let pageSizeTxt = $(currItem).text();
         $("#size").html(pageSizeTxt);
         page = 1;
-        listLotteryProduct();
+        listLottery();
+    }
+
+    //生成分页按钮及绑定事件
+    function showYema2() {
+        let str = '<li class="prev"><a href="#"><i class="ace-icon fa fa-angle-left"></i></a></li>';
+
+        if (page2 == 1) {
+            str += '<li class="active"><a class="yeshu"> 1 </a></li>';
+        } else {
+            str += '<li><a class="yeshu"> 1 </a></li>';
+        }
+        if (Math.ceil(total2 / size2) > 1) {
+            if (page2 > 4)
+                str += '<li class="paginItem"><a >...</a></li>';
+            for (var i = 2; i < Math.ceil(total2 / size2); i++) {
+                if (i > page2 - 3 && i < page2 + 3) {
+                    if (page2 == i) {
+                        str += '<li class="paginItem active"><a class="yeshu"> '
+                            + i + ' </a></li>';
+                    } else {
+                        str += '<li class="paginItem"><a class="yeshu"> ' + i + ' </a></li>';
+                    }
+                }
+            }
+            if (page2 < Math.ceil(total2 / size2) - 3)
+                str += '<li class="paginItem"><a >...</a></li>';
+
+            if (page2 == Math.ceil(total2 / size2)) {
+                str += '<li class="paginItem active"><a class="yeshu"> '
+                    + Math.ceil(total2 / size2) + ' </a></li>';
+            } else {
+                str += '<li class="paginItem"><a class="yeshu"> '
+                    + Math.ceil(total2 / size2) + ' </a></li>';
+            }
+        }
+        str += '<li class="next"><a href="#"><i class="ace-icon fa fa-angle-right"></i></a></li>';
+        $("#pagination2").html(str);
+        $(".prev").click(
+            function () {
+                if (page2 > 1)
+                    page2--;
+                getCustomerLotteryList();
+            });
+        $(".next").click(
+            function () {
+                if (page2 < Math.ceil(total2 / size2))
+                    page2++;
+                getCustomerLotteryList();
+            });
+        $(".yeshu").click(
+            function () {
+                if (!isNaN($(this).html().trim())) {
+                    page2 = parseInt($(this).html());
+                    getCustomerLotteryList();
+                }
+            });
+        $("#count2").html(total2);
+    }
+
+    //改变每页记录数
+    function changePageSize2(e) {
+        $(e).parent().addClass("active").siblings().removeClass("active");
+        let currItem = $(e).children();
+        size2 = $(currItem).attr("data-val");
+        let pageSizeTxt = $(currItem).text();
+        $("#size2").html(pageSizeTxt);
+        page2 = 1;
+        getCustomerLotteryList();
+    }
+
+    //清空日期
+    let blnfirst = true;//首次执行标识
+    function clearDate(input) {
+        if (blnfirst) {
+            //为避免与onchangeDate事件的冲突
+            return;
+        }
+        if (!$(input).val()) {
+            //日期清空时，重新查询
+        }
     }
 
 </script>

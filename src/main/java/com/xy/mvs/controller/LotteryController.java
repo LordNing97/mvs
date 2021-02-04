@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("app/lottery")
+@RequestMapping("lottery")
 @Validated
 @Api(tags = "抽奖接口", produces = "application/json")
 public class LotteryController {

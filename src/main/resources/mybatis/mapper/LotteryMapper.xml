@@ -19,7 +19,8 @@
             and lottery_product.name like concat('%',#{productName},'%')
         </if>
         <if test="startTime != null and startTime != ''">
-            and lottery.create_time between #{startTime} and #{endTime}
+            and DATE_FORMAT(lottery.create_time, '%Y-%m-%d %H:%i:%s') between DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%i:%s') and
+            DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s')
         </if>
     </select>
 
@@ -35,7 +36,8 @@
             and lottery_product.name like concat('%',#{productName},'%')
         </if>
         <if test="startTime != null and startTime != ''">
-            and lottery.create_time between #{startTime} and #{endTime}
+            and DATE_FORMAT(lottery.create_time, '%Y-%m-%d %H:%i:%s') between DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%i:%s') and
+            DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s')
         </if>
     </select>
 

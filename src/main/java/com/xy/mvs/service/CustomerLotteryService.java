@@ -25,6 +25,8 @@ public class CustomerLotteryService {
      * @return
      */
     public boolean saveCustomerLottery(CustomerLottery customerLottery){
+        customerLottery.setIsWin(0);
+        customerLottery.setIsDesignated(0);
         customerLottery.setCreateTime(LocalDateTime.now());
         return customerLotteryMapper.saveCustomerLottery(customerLottery) > 0;
     }

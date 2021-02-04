@@ -4,11 +4,15 @@ import com.xy.mvs.api.Result;
 import com.xy.mvs.api.ResultCode;
 import com.xy.mvs.model.CustomerLottery;
 import com.xy.mvs.service.CustomerLotteryService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
@@ -16,6 +20,10 @@ import javax.annotation.Resource;
  * @Date 2021/1/22 16:33
  * @Version 1.0
  */
+@RestController
+@RequestMapping("customerLottery")
+@Validated
+@Api(tags = "客户抽奖接口", produces = "application/json")
 public class CustomerLotteryController {
 
     @Resource
@@ -30,7 +38,7 @@ public class CustomerLotteryController {
         return Result.builder(ResultCode.OPERATION_ERROR).build();
     }
 
-    @ApiOperation(value = "根据抽奖Id获取所有积分", httpMethod = "GET")
+    @ApiOperation(value = "根据抽奖Id获取所有客户", httpMethod = "GET")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "lotteryId", value = "抽奖id",dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "page", value = "当前页",dataType = "int", paramType = "query", required = true),
@@ -45,8 +53,8 @@ public class CustomerLotteryController {
 
     @ApiOperation(value = "修改内定", httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id",dataType = "int", paramType = "query, required = true"),
-            @ApiImplicitParam(name = "isDesignated", value = ", required = true",dataType = "int", paramType = "query", required = true)
+            @ApiImplicitParam(name = "id", value = "id",dataType = "int", paramType = "query", required = true),
+            @ApiImplicitParam(name = "isDesignated", value = "是否内定(0:未内定 1:已内定)", required = true, dataType = "int", paramType = "query")
     })
     @PostMapping("modifyIsDesignated")
     public Result modifyIsDesignated(Integer id, Integer isDesignated){
