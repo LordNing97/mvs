@@ -666,8 +666,8 @@
     function listLottery() {
         let name = $("#name").val();
         let status = $("#status").val();
-        let startDate = $("#startDate").val() + " 00:00:00";
-        let endDate = $("#endDate").val() + " 00:00:00";
+        let startDate = $("#startDate").val();
+        let endDate = $("#endDate").val();
         $.get("/lottery/getLotteryList", {
             status: status,
             productName: name,

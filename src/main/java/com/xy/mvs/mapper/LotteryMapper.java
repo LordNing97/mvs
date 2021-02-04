@@ -22,7 +22,7 @@ public interface LotteryMapper {
     int saveLottery(Lottery lottery);
 
     int count(@Param("productName") String productName, @Param("status") Integer status,
-              @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
+              @Param("startTime") String startTime, @Param("endTime") String endTime);
 
     /**
      * 分页获取抽奖
@@ -34,7 +34,7 @@ public interface LotteryMapper {
      * @return
      */
     List<Lottery> getLotteryList(@Param("productName") String productName, @Param("status") Integer status,
-                                 @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime,
+                                 @Param("startTime") String startTime, @Param("endTime") String endTime,
                                  @Param("page") Integer page, @Param("size") Integer size);
 
     /**

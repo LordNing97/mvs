@@ -60,7 +60,7 @@ public class LotteryService {
      * @return
      */
     public LotteryList getLotteryList(String productName, Integer status,
-                                      LocalDateTime startTime, LocalDateTime endTime,
+                                      String startTime, String endTime,
                                       Integer page, Integer size){
         List<Lottery> lotteryList = lotteryMapper.getLotteryList(productName, status, startTime,
                 endTime, (page - 1) * size, size);

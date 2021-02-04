@@ -44,14 +44,14 @@ public class LotteryController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productName", value = "产品名称",dataType = "string", paramType = "query"),
             @ApiImplicitParam(name = "status", value = "状态(0:全部 1:未开奖 2:进行中 3:已结束)",dataType = "int", paramType = "query", required = true),
-            @ApiImplicitParam(name = "startTime", value = "开始时间",dataType = "date", paramType = "query"),
-            @ApiImplicitParam(name = "endTime", value = "结束时间",dataType = "date", paramType = "query"),
+            @ApiImplicitParam(name = "startTime", value = "开始时间",dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "endTime", value = "结束时间",dataType = "string", paramType = "query"),
             @ApiImplicitParam(name = "page", value = "当前页",dataType = "int", paramType = "query", required = true),
             @ApiImplicitParam(name = "size", value = "每页显示的数量",dataType = "int", paramType = "query", required = true)
     })
     @GetMapping("getLotteryList")
     public Result getLotteryList(String productName, Integer status,
-                                 LocalDateTime startTime, LocalDateTime endTime,
+                                 String startTime, String endTime,
                                  Integer page, Integer size){
         return Result.builder()
                 .data(lotteryService.getLotteryList(productName, status, startTime, endTime, page, size))
