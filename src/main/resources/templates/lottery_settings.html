@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>抽奖设置</title>
+    <title>所有抽奖</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
@@ -76,16 +76,16 @@
                                 <div class="side-menu-project-list" data-always-visible="1" data-rail-visible1="1" id="workView">
                                     <ul class="nav nav-pills nav-stacked esh-nav-pills">
                                         <li class=" active">
-                                            <a onclick="javascript:location.href='/lotterySettings'"><span>所有抽奖</span> <span class="badge badge-success">3</span></a>
+                                            <a onclick="javascript:location.href='/lotterySettings'"><span>所有抽奖</span></a>
                                         </li>
                                         <li class="">
-                                            <a onclick="javascript:location.href='/noprize'"><span>未开奖</span> <span class="badge badge-success">0</span></a>
+                                            <a onclick="javascript:location.href='/noprize'"><span>未开奖</span></a>
                                         </li>
                                         <li class="">
-                                            <a onclick="javascript:location.href='/isongoing'"><span>进行中</span> <span class="badge badge-success">2</span></a>
+                                            <a onclick="javascript:location.href='/isongoing'"><span>进行中</span></a>
                                         </li>
                                         <li class="">
-                                            <a onclick="javascript:location.href='/finished'"><span>已结束</span> <span class="badge badge-success">0</span></a>
+                                            <a onclick="javascript:location.href='/finished'"><span>已结束</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -102,10 +102,6 @@
                                     <a class="pull-right hidden clear-filter" href="javascript:void(0)" onclick="clearFilter()">
                                         清空筛选
                                     </a>
-                                </div>
-                                <div class="form-group">
-                                    <label>产品名称</label>
-                                    <input id="name" class="form-control" placeholder="请输入产品名称">
                                 </div>
                                 <div class="form-group">
                                     <label>抽奖状态</label>
@@ -142,7 +138,7 @@
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium " style= "width: 280px !important">
-                                        <input class="form-control" id="workOrderNumber" maxlength="50" name="workOrderNumber" placeholder="输入订单编号" type="text" value="" />
+                                        <input class="form-control" id="name" maxlength="50" placeholder="输入产品名称" type="text" value="" />
                                         <span class="input-group-btn">
                                             <button class="btn green" id="btnSearch" type="button">
                                                 <i class="fa fa-search"></i>

@@ -50,6 +50,15 @@ public class CustomerService {
      */
     public CustomerList getCustomerList(String name, Integer type, Integer page, Integer size){
         List<Customer> customerList = customerMapper.getCustomerList(name, type, (page - 1) * size, size);
+        for(int i = 0;i < customerList.size();i++){
+            if(customerList.get(i).getIsMail() == 1 && customerList.get(i).getIsLottery() == 0){
+                customerList.get(i).setType(0);
+            }else if(customerList.get(i).getIsLottery() == 1 && customerList.get(i).getIsMail() == 0){
+                customerList.get(i).setType(1);
+            }else if(customerList.get(i).getIsLottery() == 1 && customerList.get(i).getIsMail() == 1){
+                customerList.get(i).setType(-1);
+            }
+        }
         return CustomerList.builder()
                 .customerList(customerList)
                 .total(customerMapper.countCustomer(name, type))

@@ -60,7 +60,7 @@
     <div class="page-content-wrapper">
         <div class="page-content">
             <!-- BEGIN PAGE CONTENT-->
-            <div class="row">
+            <div id="customerList" v-cloak class="row">
 
                 <div class="col-md-12">
 
@@ -155,9 +155,9 @@
                                 </div>
                                 <div class="input-group pull-right">
                                     <div class="input-group input-medium ">
-                                        <input class="form-control" id="userName" maxlength="20" name="userName" placeholder="输入姓名..." type="text" value="" />
+                                        <input class="form-control" id="name" maxlength="20" name="name" placeholder="输入姓名..." type="text" value="" />
                                         <span class="input-group-btn">
-                                <button class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
+                                <button onclick="listCustomer()" class="btn green" id="btnSearch" type="button"><i class="fa fa-search"></i></button>
                             </span>
                                     </div>
                                 </div>
@@ -166,8 +166,8 @@
                             <div class="portlet-body">
                                 <div class="table-toolbar">
                                     <div class="col-xs-8 clear-padding-left">
-                                        <button class="btn green collapse" id="btnFilter">筛选</button>
-                                        <a class="filter-a clear-filter hidden" href="javascript:void(0)" onclick="clearFilter()"><i class="icon fa fa-trash"></i>清空筛选</a>
+<!--                                        <button class="btn green collapse" id="btnFilter">筛选</button>-->
+<!--                                        <a class="filter-a clear-filter hidden" href="javascript:void(0)" onclick="clearFilter()"><i class="icon fa fa-trash"></i>清空筛选</a>-->
 
                                     </div>
                                     <div class="col-xs-4  clear-padding-right">
@@ -206,82 +206,75 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX">
+                                            <tr v-for="(item,index) in customerList" class="odd gradeX">
                                                 <td>
-                                                    郝博闻
+                                                    {{item.name}}
                                                 </td>
                                                 <td>
-                                                    13000000000
+                                                    {{item.telephone}}
                                                 </td>
                                                 <td>
-                                                    0
+                                                    {{item.numberWinners}}
                                                 </td>
                                                 <td>
-                                                    0
+                                                    {{item.rechargePoints}}
                                                 </td>
                                                 <td>
-                                                    0
+                                                    {{item.consumptionPoints}}
                                                 </td>
                                                 <td>
-                                                    0
-                                                </td>
-                                            </tr>
-                                            <tr class="odd gradeX">
-                                                <td>
-                                                    小兰
-                                                </td>
-                                                <td>
-                                                    14723929929
-                                                </td>
-                                                <td>
-                                                    10
-                                                </td>
-                                                <td>
-                                                    1000
-                                                </td>
-                                                <td>
-                                                    1000
-                                                </td>
-                                                <td>
-                                                    0
+                                                    {{item.residualIntegral}}
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="row">
+
+                                    <div id="haveData" style="display: none" class="row">
                                         <div class="col-md-5 col-sm-5">
                                             <div class="dataTables_info" role="status" aria-live="polite">
-                                                <label style="vertical-align: middle;">共3条</label>
+                                                <label style="vertical-align: middle;">共<span
+                                                        id="count">3</span>条</label>
                                                 <div class="btn-group pagesize dropup">
-                                                    <a href="javascript:void(0)" class="link name-wrap" data-toggle="dropdown" aria-expanded="false">
-                                                        <span data-val="10">10条/页&nbsp;</span>
+                                                    <a href="javascript:void(0)" class="link name-wrap"
+                                                       data-toggle="dropdown" aria-expanded="false">
+                                                        <span id="size">10条/页&nbsp;</span>
                                                         <i class="fa fa-angle-down"></i>
                                                     </a>
                                                     <ul class="dropdown-menu esh-pub-menu">
                                                         <li class="clearfix active">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="10">10条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="10">10条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="20">20条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="20">20条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="30">30条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="30">30条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="40">40条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="40">40条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                         <li class="clearfix">
-                                                            <a href="javascript:void(0)" onclick="changePageSize(this)">
-                                                                <span class="esh-txtellipsis" data-val="50">50条/页&nbsp;</span>
+                                                            <a href="javascript:void(0)"
+                                                               onclick="changePageSize(this)">
+                                                                <span class="esh-txtellipsis"
+                                                                      data-val="50">50条/页&nbsp;</span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -290,39 +283,24 @@
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <div class="dataTables_paginate paging_bootstrap_full_number">
-                                                <ul class="pagination">
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled prev">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#" onclick="changePageIndex(1)">
-                                                            1
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-right"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="disabled next">
-                                                        <a href="javascript:void(0);">
-                                                            <i class="fa fa-angle-double-right"></i>
-                                                        </a>
-                                                    </li>
+                                                <ul id="pagination" class="pagination">
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div id="nullData" style="display: none" class="row">
+                                        <div class="col-md-5 col-sm-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite">
+                                                <label>没有查询到所需数据</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <div class="dataTables_paginate paging_bootstrap_full_number"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <form action="/servicespace/serviceperson/get" data-ajax="true" data-ajax-begin="showLoading" data-ajax-complete="hideLoading" data-ajax-failure="showException" data-ajax-mode="replace" data-ajax-success="initTable" data-ajax-update="#dataTable" id="searchByRequest" method="post"><input id="PageIndex" name="PageIndex" type="hidden" value="1" /><input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="The PageSize field is required." id="PageSize" name="PageSize" type="hidden" value="10" /><input id="Sort" name="Sort" type="hidden" value="" /><input id="Direction" name="Direction" type="hidden" value="" /><input id="Where" name="Where" type="hidden" value="" /></form>            </div>
                     </div>
                 </div>
 
@@ -393,11 +371,11 @@
 </script>
 <!-- BEGIN PAGE SELF SCRIPTS -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        initEvent();//事件绑定
-        initPageSize();
+    let page = 1, size = 10, total = 0;
 
-        //changeQueryCondition();
+    $(function () {
+        listCustomer();
+        initEvent();//事件绑定
     });
 
     //事件绑定
@@ -413,37 +391,7 @@
             }
         });
 
-        //Checkbox选择触发表单提交
-        $("ul.filter-option input[type=checkbox]").on("click", function () {
-            var attrName = $(this).attr('name');
-            var subData = $("#" + attrName + "_hide").val();
-            if ($(this).attr('checked')) {
-                subData += $(this).val() + ",";
-            } else {
-                var a = $(this).val() + ",";
-                subData = subData.replace(a, "");
-            }
-            $("#" + attrName + "_hide").val(subData);
-            changeQueryCondition();
-        })
-
-        //选择产品
-        $("#select-network").change(function () { changeQueryCondition(); });
-
-        //输入名称回车查询
-        $("#userName").keypress(function (e) {
-            if (e.which == 13) {
-                changeQueryCondition();
-                $("#btnSearch").focus();
-            }
-        });
-
-        //搜索按钮按下
-        $("#btnSearch").click(function () { changeQueryCondition(); })
     }
-
-    ///初始化列表
-    function initTable() { OperationTable.init("#tableList", "#Sort", "#Direction", changeSortCondition); }
 
     //清空筛选
     function clearFilter() {
@@ -451,108 +399,127 @@
         $("ul.filter-option input[type=checkbox]").attr("checked", false);
         $("ul.filter-option input[type=checkbox]").parent().removeClass("checked");
         changeQueryCondition();
-
     }
 
-    //初始化每页记录数
-    function initPageSize() {
-        if ($.cookie('system-setting-pagesize'))
-            $("#PageSize").val($.cookie('system-setting-pagesize'));
+    let vue = new Vue({
+        el: "#customerList",
+        data: {
+            customerList: []
+        },
+        filters: {
+            typeStrFilter: function (value) {
+                let str = "";
+                switch (value) {
+                    case -1:
+                        str = "全部";
+                        break;
+                    case 0:
+                        str = "商城";
+                        break;
+                    case 1:
+                        str = "抽奖";
+                        break;
+                }
+                return str;
+            }
+        }
+    });
+
+    //分页查询客户
+    function listCustomer() {
+        let name = $("#name").val();
+        $.get("/customer/getCustomerList", {
+            type: 1,
+            name: name,
+            page: page,
+            size: size
+        }, function (result) {
+            if (result.code == 200) {
+                vue.customerList = [];
+                vue.customerList = result.data.customerList;
+                total = result.data.total;
+                if(total != 0){
+                    showYema();
+                    $("#haveData").show();
+                    $("#nullData").hide();
+                }else{
+                    vue.lotteryList = [];
+                    $("#haveData").hide();
+                    $("#nullData").show();
+                }
+            } else {
+                growlAlert.danger(result.message);
+                showYema();
+            }
+        });
+    }
+
+    //生成分页按钮及绑定事件
+    function showYema() {
+        let str = '<li class="prev"><a href="#"><i class="ace-icon fa fa-angle-left"></i></a></li>';
+
+        if (page == 1) {
+            str += '<li class="active"><a class="yeshu"> 1 </a></li>';
+        } else {
+            str += '<li><a class="yeshu"> 1 </a></li>';
+        }
+        if (Math.ceil(total / size) > 1) {
+            if (page > 4)
+                str += '<li class="paginItem"><a >...</a></li>';
+            for (var i = 2; i < Math.ceil(total / size); i++) {
+                if (i > page - 3 && i < page + 3) {
+                    if (page == i) {
+                        str += '<li class="paginItem active"><a class="yeshu"> '
+                            + i + ' </a></li>';
+                    } else {
+                        str += '<li class="paginItem"><a class="yeshu"> ' + i + ' </a></li>';
+                    }
+                }
+            }
+            if (page < Math.ceil(total / size) - 3)
+                str += '<li class="paginItem"><a >...</a></li>';
+
+            if (page == Math.ceil(total / size)) {
+                str += '<li class="paginItem active"><a class="yeshu"> '
+                    + Math.ceil(total / size) + ' </a></li>';
+            } else {
+                str += '<li class="paginItem"><a class="yeshu"> '
+                    + Math.ceil(total / size) + ' </a></li>';
+            }
+        }
+        str += '<li class="next"><a href="#"><i class="ace-icon fa fa-angle-right"></i></a></li>';
+        $("#pagination").html(str);
+        $(".prev").click(
+            function () {
+                if (page > 1)
+                    page--;
+                listCustomer();
+            });
+        $(".next").click(
+            function () {
+                if (page < Math.ceil(total / size))
+                    page++;
+                listCustomer();
+            });
+        $(".yeshu").click(
+            function () {
+                if (!isNaN($(this).html().trim())) {
+                    page = parseInt($(this).html());
+                    listCustomer();
+                }
+            });
+        $("#count").html(total);
     }
 
     //改变每页记录数
     function changePageSize(e) {
         $(e).parent().addClass("active").siblings().removeClass("active");
-        var currItem = $(e).children();
-        var pageSize = $(currItem).attr("data-val");
-        var pageSizeTxt = $(currItem).text();
-
-        $("#currentPageSize").attr("data-val", pageSize).html(pageSizeTxt);
-        $("#PageSize").val(pageSize);
-        $("#PageIndex").val(1);
-
-        if ($.cookie('system-setting-pagesize'))
-            $.cookie('system-setting-pagesize', '', { expires: -1, path: '/' });
-        $.cookie('system-setting-pagesize', pageSize, { expires: 7, path: '/' });
-
-        $("#searchByRequest").submit();
-    }
-
-    //改变索引页
-    function changePageIndex(index) {
-        $("#PageIndex").val(index);
-        $("#searchByRequest").submit();
-    }
-
-    //改变查询条件
-    function changeQueryCondition() {
-        if ($("#select-network").val() == "" && $("#type_hide").val() == "") {
-            $(".clear-filter").addClass("hidden")
-        }
-        else {
-            $(".clear-filter").removeClass("hidden")
-        }
-
-        var userName = $("#userName").val();
-        if (userName.indexOf("输入") >= 0) {
-            userName = "";
-        }
-
-        var networType = $("#type_hide").val(); //组装网点类型
-        var network = $("#select-network").val();
-        var whereData = "{'name':'" + userName + "','servicenetworkid':'" + network + "','type':[" + trimEnd(networType) + "]" + "}";
-
-        $("#Where").val(whereData);
-        $("#PageIndex").val(1);//页索引置为1
-        $("#searchByRequest").submit();
-    }
-
-    //改变排序条件
-    function changeSortCondition(sort, direction) {
-        $("#Sort").val(sort);
-        $("#Direction").val(direction);
-        $("#PageIndex").val(1);//页索引置为1
-        $("#searchByRequest").submit();
-    }
-
-    //启动对话框
-    function startDialog(title) {
-        modalLoadding("#editDailog", title, 400)
-        $("#editDailog").modal();
-    }
-
-    //显示对话框
-    function showDialog(data) {
-        $("#editDailog .modal-content").html(data);//填充对话框
-        $("#editForm").removeData("validator");//删除验证器
-        $.validator.unobtrusive.parse("#editForm");//添加验证器
-
-        //角色选择
-        $("#ServicePersonRoleSel").change(function () {
-            $("#RoleID").val($(this).val()).blur();
-        })
-
-        $("#ServiceNetworkSel").change(function () {
-            var b = $(this).find("option:selected").attr("data-bind");
-            $("#ServiceNetworkID").val($(this).val());
-
-            GetRoleByNetwork(b, "#ServicePersonRoleSel");
-        })
-    }
-
-    //启动large对话框
-    function startLargeDialog(title) {
-        modalLoadding("#editLgDailog", title, 425)
-        $("#editLgDailog").modal();
-    }
-
-    //显示large对话框
-    function showLargeDialog(data) {
-
-        $("#editLgDailog .modal-content").html(data);//填充对话框
-        $("#importForm").removeData("validator");//删除验证器
-        $.validator.unobtrusive.parse("#importForm");//添加验证器
-        Metronic.initSlimScroll('.scroller');//滚动条
+        let currItem = $(e).children();
+        size = $(currItem).attr("data-val");
+        let pageSizeTxt = $(currItem).text();
+        $("#size").html(pageSizeTxt);
+        page = 1;
+        listCustomer();
     }
 
 </script>

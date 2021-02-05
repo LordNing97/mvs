@@ -102,7 +102,7 @@ public class LotteryService {
             Customer customer = new Customer();
             customer.setTelephone(telephoneList.get(telephoneSize) + IntegerUtils.telephoneNum());
             customer.setCode(IntegerUtils.random());
-            customer.setIsMail(1);
+            customer.setIsMail(0);
             customer.setIsLottery(1);
             customer.setIsAuto(1);
             customer.setIsDel(0);

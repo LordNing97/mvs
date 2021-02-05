@@ -32,8 +32,11 @@
         <if test="name != null and name != ''">
             and name = #{name}
         </if>
-        <if test="type != -1">
-            and type = #{type}
+        <if test="type == 0">
+            and is_mail = 1 and is_lottery = 0
+        </if>
+        <if test="type == 1">
+            and is_lottery = 1 and is_mail = 0
         </if>
     </select>
 
@@ -45,10 +48,10 @@
             and name = #{name}
         </if>
         <if test="type == 0">
-            and is_mail = 1
+            and is_mail = 1 and is_lottery = 0
         </if>
         <if test="type == 1">
-            and is_lottery = 1
+            and is_lottery = 1 and is_mail = 0
         </if>
         order by id
         limit #{page},#{size}

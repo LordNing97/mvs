@@ -39,4 +39,7 @@ public class Customer {
     @ApiModelProperty(name = "isDel", value = "是否删除(0:未删除 1:已删除)", dataType = "int")
     private Integer isDel;
 
+    @ApiModelProperty(name = "isDel", value = "类型(-1:全部 0:商城 1:抽奖)", dataType = "int")
+    private Integer type;
+
 }
